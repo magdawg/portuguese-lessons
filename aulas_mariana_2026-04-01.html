@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aula com a Mariana — Apresentar-se &amp; Pedir num Café — 2026-04-01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-light: #e8f1e9;
+    --red: #B71C1C;
+    --red-light: #fbeaea;
+    --gold: #F9A825;
+    --gold-light: #fdf3dc;
+    --blue: #1565C0;
+    --blue-light: #e7f0fa;
+    --ink: #20302a;
+    --muted: #5e6e66;
+    --paper: #fcfbf7;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --ok: #2e7d32;
+    --ok-bg: #e6f4e7;
+    --err: #c62828;
+    --err-bg: #fcebea;
+    --shadow: 0 2px 8px rgba(27,94,32,.06), 0 10px 30px rgba(27,94,32,.05);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--green) 0%, #2e7d32 55%, #388e3c 100%);
+    color: #fff;
+    padding: 48px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: "🇵🇹";
+    position: absolute;
+    right: -10px; bottom: -28px;
+    font-size: 140px; opacity: .12;
+    transform: rotate(-8deg);
+  }
+  .header-inner { max-width: 880px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+    padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+  .badge.real { background: var(--gold); color: #3a2a00; border-color: transparent; }
+  h1 {
+    font-family: 'Lora', serif; font-weight: 600;
+    font-size: clamp(26px, 4.5vw, 38px); line-height: 1.2;
+    margin: 6px 0 10px;
+  }
+  .subtitle { font-size: 16px; opacity: .92; max-width: 620px; }
+
+  /* Score bar */
+  .scorebar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(252,251,247,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+  }
+  .scorebar-inner {
+    max-width: 880px; margin: 0 auto; padding: 0 20px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .score-label { font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap; }
+  .progress-track { flex: 1; min-width: 140px; height: 10px; background: #e9e6dd; border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--green)); transition: width .5s ease; }
+  .score-num { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14px; color: var(--muted); white-space: nowrap; }
+  .btn-reset {
+    border: 1px solid var(--border); background: #fff; color: var(--muted);
+    border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer; font-weight: 600;
+  }
+  .btn-reset:hover { color: var(--red); border-color: var(--red); }
+
+  /* Sections */
+  section { margin-top: 36px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 26px 28px; box-shadow: var(--shadow);
+  }
+  h2 {
+    font-family: 'Lora', serif; font-size: 25px; color: var(--green);
+    margin: 0 0 4px; display: flex; align-items: center; gap: 10px;
+  }
+  h2 .num {
+    font-family: 'Inter'; font-size: 14px; font-weight: 700; color: #fff;
+    background: var(--green); width: 30px; height: 30px; border-radius: 9px;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+  }
+  h3 { font-size: 18px; color: var(--ink); margin: 22px 0 8px; }
+  h4 { margin: 18px 0 6px; color: var(--green); }
+  .lead { color: var(--muted); margin: 2px 0 18px; }
+  p { margin: 10px 0; }
+  .en { color: var(--blue); font-style: italic; }
+  .pt-ex { font-weight: 500; }
+
+  ul.goals { list-style: none; padding: 0; margin: 0; }
+  ul.goals li {
+    padding: 12px 14px 12px 44px; position: relative; margin-bottom: 8px;
+    background: var(--green-light); border-radius: 10px; border: 1px solid #d7e7d9;
+  }
+  ul.goals li::before {
+    content: "✓"; position: absolute; left: 14px; top: 12px;
+    color: var(--green); font-weight: 800;
+  }
+  ul.goals .t { color: var(--blue); font-style: italic; font-size: 14px; display: block; }
+
+  /* Tables */
+  .table-scroll { overflow-x: auto; margin: 14px 0; border-radius: 12px; border: 1px solid var(--border); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  th { background: var(--green-light); color: var(--green); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr { transition: background .15s; }
+  tbody tr:hover { background: var(--gold-light); }
+  td .ex { display: block; color: var(--muted); font-size: 13.5px; font-style: italic; margin-top: 2px; }
+  .end { color: var(--red); font-weight: 700; }
+  .stem { color: var(--ink); }
+
+  /* Callouts */
+  .callout { border-radius: 12px; padding: 16px 18px 16px 50px; position: relative; margin: 16px 0; font-size: 15.5px; }
+  .callout .ic { position: absolute; left: 16px; top: 15px; font-size: 20px; }
+  .callout.warn { background: var(--red-light); border: 1px solid #f0c9c9; }
+  .callout.warn strong { color: var(--red); }
+  .callout.culture { background: var(--blue-light); border: 1px solid #c9def5; }
+  .callout.culture strong { color: var(--blue); }
+  .callout.tip { background: var(--gold-light); border: 1px solid #f0dca8; }
+  .callout.tip strong { color: #9a6b00; }
+
+  /* Dialogue */
+  .dialogue { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .turn { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+  .turn:last-child { border-bottom: none; }
+  .turn .who { font-weight: 700; min-width: 92px; flex: none; }
+  .turn.m .who { color: var(--red); }
+  .turn.a .who { color: var(--blue); }
+  .turn .line .tr { color: var(--muted); font-style: italic; font-size: 14px; display: block; margin-top: 2px; }
+
+  .bonus-tag { font-size: 11px; font-weight: 700; background: var(--gold); color: #3a2a00; padding: 2px 8px; border-radius: 6px; vertical-align: middle; }
+
+  /* Exercises */
+  .exercise { margin-top: 22px; padding-top: 22px; border-top: 2px dashed var(--border); }
+  .exercise:first-of-type { border-top: none; padding-top: 0; }
+  .q { margin: 14px 0; padding: 14px 16px; background: #faf9f4; border: 1px solid var(--border); border-radius: 10px; }
+  .q .qnum { font-weight: 700; color: var(--green); margin-right: 6px; }
+  .q input[type="text"] {
+    font-family: inherit; font-size: 15px; padding: 7px 10px; border: 2px solid var(--border);
+    border-radius: 8px; min-width: 130px; margin: 0 4px; transition: border-color .2s, background .2s;
+  }
+  .q input[type="text"]:focus { outline: none; border-color: var(--blue); }
+  .q input.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .q input.incorrect { border-color: var(--err); background: var(--err-bg); }
+  .hint { display: none; font-size: 13.5px; color: var(--err); margin-top: 8px; }
+  .hint.show { display: block; }
+  .reveal { display: none; font-size: 14px; color: var(--ok); margin-top: 6px; font-weight: 600; }
+  .reveal.show { display: block; }
+  .feedback { font-size: 12px; margin-top: 4px; font-weight: 600; }
+  .feedback.ok { color: var(--ok); }
+  .feedback.no { color: var(--err); }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer;
+    border: 2px solid var(--border); border-radius: 10px; background: #fff; transition: all .15s; font-size: 15px;
+  }
+  .choice:hover { border-color: var(--blue); background: var(--blue-light); }
+  .choice input { accent-color: var(--green); width: 17px; height: 17px; }
+  .choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .choice.incorrect { border-color: var(--err); background: var(--err-bg); }
+
+  /* Matching */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
+  @media (max-width: 600px) { .match-grid { grid-template-columns: 1fr; } }
+  .match-col h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .match-item {
+    padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 8px;
+    background: #fff; cursor: pointer; transition: all .15s; font-size: 15px;
+  }
+  .match-item:hover { border-color: var(--blue); }
+  .match-item.selected { border-color: var(--blue); background: var(--blue-light); }
+  .match-item.matched { border-color: var(--ok); background: var(--ok-bg); cursor: default; opacity: .75; }
+  .match-item.matched::after { content: " ✓"; color: var(--ok); font-weight: 700; }
+  .match-item.incorrect { border-color: var(--err); background: var(--err-bg); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+    border-radius: 10px; padding: 10px 18px; border: none; transition: transform .1s, box-shadow .2s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-check { background: var(--green); color: #fff; }
+  .btn-check:hover { box-shadow: 0 4px 14px rgba(27,94,32,.3); }
+  .btn-show { background: #fff; color: var(--muted); border: 1px solid var(--border); }
+  .btn-show:hover { color: var(--gold); border-color: var(--gold); }
+  .result-pill { align-self: center; font-weight: 700; font-size: 14px; padding: 6px 14px; border-radius: 999px; display: none; }
+  .result-pill.show { display: inline-block; }
+  .result-pill.good { background: var(--ok-bg); color: var(--ok); }
+  .result-pill.partial { background: var(--gold-light); color: #9a6b00; }
+
+  textarea {
+    width: 100%; font-family: inherit; font-size: 15px; padding: 12px; border: 2px solid var(--border);
+    border-radius: 10px; resize: vertical; min-height: 120px; margin-top: 8px;
+  }
+  textarea:focus { outline: none; border-color: var(--blue); }
+  .writing-tips { font-size: 14px; color: var(--muted); }
+  .writing-tips li { margin: 4px 0; }
+
+  /* Summary */
+  .selfcheck { list-style: none; padding: 0; }
+  .selfcheck li { padding: 8px 0 8px 30px; position: relative; }
+  .selfcheck li::before { content: "☐"; position: absolute; left: 0; font-size: 18px; color: var(--green); }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 50px; }
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
+  .nav a { text-decoration: none; color: var(--green); font-weight: 600; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+  .nav a:hover { background: var(--green-light); }
+  .nav a.disabled { opacity: .4; pointer-events: none; }
+
+  .ipa { font-family: 'Lora', serif; color: var(--blue); font-style: normal; background: var(--blue-light); padding: 1px 6px; border-radius: 5px; font-size: 14px; }
+
+  @media print {
+    .scorebar, .actions, .btn, .nav, header::after { display: none !important; }
+    body { font-size: 12px; background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    .hint, .reveal { display: block !important; }
+    header { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badges">
+      <span class="badge real">📝 Baseada na aula real</span>
+      <span class="badge">Nível A2</span>
+      <span class="badge">🗓️ 1 de abril de 2026</span>
+      <span class="badge">👩‍🏫 Professora Mariana</span>
+      <span class="badge">👥 Aula de grupo</span>
+    </div>
+    <h1>Aula com a Mariana — Apresentar-se &amp; Pedir num Café</h1>
+    <p class="subtitle">A tua primeira aula em grupo (com a Amanda e a Gentine)! Apresentaste-te em português, e depois mergulharam no diálogo do café da página 74: a <em>bica</em>, o <em>galão</em>, como pedir, e o grande tabu do <em>"você"</em>.</p>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="scorebar-inner">
+    <span class="score-label">🏆 Pontuação</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="score-num" id="scoreNum">0 / 0</span>
+    <button class="btn-reset" onclick="resetAll()">Recomeçar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="nav" style="margin-top:24px">
+    <a href="aulas_mariana_2026-03-27.html">← Aula anterior (27 mar)</a>
+    <a href="index.html">🏠 Página principal</a>
+    <a href="aulas_mariana_2026-04-15.html">Próxima aula (15 abr) →</a>
+  </div>
+
+  <!-- 1. RECAP -->
+  <section>
+    <div class="card">
+      <h2><span class="num">1</span> Resumo da aula</h2>
+      <p class="lead">O que falaste com a Mariana (e as colegas) nesta aula.</p>
+      <p>Na aula anterior trabalhaste o <strong>presente contínuo</strong> e a família de verbos do dia a dia (<em>tomar, apanhar, levar…</em>). Hoje foi diferente: a <strong>primeira aula de grupo</strong>, com a <strong>Amanda</strong> (argentina) e a <strong>Gentine</strong> (holandesa). Começaram por <strong>apresentar-se em português</strong> — nome, idade, onde moram, o que fazem, porque estão em Portugal.</p>
+      <p>Depois leram o <strong>diálogo do café</strong> (página 74): aprendeste a <strong>pedir</strong> como uma nativa (<em>queria… / é… / era…</em>), o vocabulário do café (<em>bica, galão, meia de leite, tosta mista</em>) e a lidar com o <strong>troco</strong>. A Mariana corrigiu o <em>"creo que sim"</em>, explicou porque é que os portugueses <strong>evitam o "você"</strong>, e ensinou a diferença entre <em>brincar</em> e <em>gozar</em>. 🇵🇹</p>
+    </div>
+  </section>
+
+  <!-- 2. OBJECTIVES -->
+  <section>
+    <div class="card">
+      <h2><span class="num">2</span> O que vamos aprender hoje</h2>
+      <ul class="goals">
+        <li><strong>Apresentar-se</strong> em português: nome, idade (com <em>ter</em>!), nacionalidade, profissão, gostos.<span class="t">Introducing yourself in Portuguese.</span></li>
+        <li>Perceber o <strong>"você"</strong>: porque é que os portugueses o evitam, e como ser educado sem ele.<span class="t">Understanding the "você" taboo and how to be polite without it.</span></li>
+        <li><strong>Pedir num café</strong> à portuguesa: <em>queria / é / era</em>, e o vocabulário das bebidas e tostas.<span class="t">Ordering at a café like a local.</span></li>
+        <li>Usar <strong>"acho que sim"</strong>, <strong>"apetece-me"</strong>, e distinguir <em>brincar</em> de <em>gozar</em>.<span class="t">Key everyday expressions and a tricky verb pair.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. GRAMMAR -->
+  <section>
+    <div class="card">
+      <h2><span class="num">3</span> Gramática</h2>
+
+      <h3>A. Apresentar-se — e a idade vai com <em>ter</em>!</h3>
+      <p>Para te apresentares, juntas várias peças. Repara que a <strong>idade</strong> em português faz-se com o verbo <strong>ter</strong> (não "ser" nem "ter anos no plural errado"):</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>O quê</th><th>Estrutura</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>Nome</td><td>Sou + a/o + nome</td><td>Sou a Magda.</td></tr>
+            <tr><td>Nacionalidade</td><td>Sou + nacionalidade</td><td>Sou polaca. / Sou holandesa. / Sou argentina.</td></tr>
+            <tr><td>Idade</td><td><strong>Tenho</strong> + número + anos</td><td>Tenho trinta e dois anos.</td></tr>
+            <tr><td>Onde moras</td><td>Moro em / na…</td><td>Moro na Consolação.</td></tr>
+            <tr><td>Profissão</td><td>Sou + profissão</td><td>Sou programadora informática.</td></tr>
+            <tr><td>Gostos</td><td>Gosto de + nome/infinitivo</td><td>Gosto de surfar.</td></tr>
+            <tr><td>Há quanto tempo</td><td>Há + tempo + que…</td><td>Há dois anos que moro em Portugal.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — a idade!</strong> Disseste <em>"eu sou trinta e dois anos"</em> e <em>"temos anos"</em>. Em português a idade é com <strong>TER</strong>, na 1.ª pessoa do singular: <strong>"Tenho trinta e dois anos."</strong> 🎂 (Como em "I have 32 years", não "I am 32".)
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Pronome</th><th>TER (presente)</th><th>Pronome</th><th>TER (presente)</th></tr></thead>
+          <tbody>
+            <tr><td>eu</td><td><span class="end">tenho</span></td><td>nós</td><td><span class="end">temos</span></td></tr>
+            <tr><td>tu</td><td><span class="end">tens</span></td><td>—</td><td>—</td></tr>
+            <tr><td>ele/ela/você</td><td><span class="end">tem</span></td><td>eles/elas</td><td><span class="end">têm</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B. O grande tabu: <em>você</em></h3>
+      <p>Em Portugal, o <strong>"você"</strong> é delicado. Não é "errado" gramaticalmente, mas soa <strong>brasileiro</strong> ou até um bocadinho mal-educado. A regra prática:</p>
+      <ul>
+        <li>Com pessoas próximas (amigos, colegas) → usa <strong>tu</strong>.</li>
+        <li>Para ser formal/respeitoso → usa <strong>o senhor / a senhora</strong>, ou simplesmente <strong>omite o pronome</strong> e conjuga o verbo na 3.ª pessoa.</li>
+      </ul>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Em vez de…</th><th>Diz antes…</th><th>English</th></tr></thead>
+          <tbody>
+            <tr><td><span style="text-decoration:line-through">Você fala inglês?</span></td><td><span class="end">Fala</span> inglês? <span class="ex">(pronome omitido)</span></td><td>Do you speak English? (formal)</td></tr>
+            <tr><td><span style="text-decoration:line-through">Isto é para você?</span></td><td>É para <span class="end">a senhora</span>?</td><td>Is this for you, ma'am?</td></tr>
+            <tr><td><span style="text-decoration:line-through">Você quer um café?</span></td><td><span class="end">Quer</span> um café?</td><td>Would you like a coffee?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout culture"><span class="ic">🇵🇹</span>
+        <strong>Nota cultural — porquê este tabu?</strong> Há séculos, em Portugal podias ser rico por <em>família boa</em> (com títulos — duque, conde…) ou rico <em>de repente</em> (sem títulos, ex.: os que enriqueceram com o café e o açúcar do Brasil). O <em>"você"</em> nasceu para tratar esses novos-ricos <strong>sem título</strong> — por isso ficou com uma conotação negativa que dura até hoje. A maioria dos portugueses já nem sabe a história, mas o instinto de evitar a palavra ficou! 😄
+      </div>
+      <div class="callout tip"><span class="ic">💡</span>
+        <strong>Dica da Mariana:</strong> esta semana, pratica <strong>tirar o "você"</strong> das tuas frases. Conjuga o verbo na forma certa e deixa o pronome de fora — soa muito mais nativo. (Nas aulas usamos <em>"você fala"</em> só para mostrar a diferença formal/informal na gramática.)
+      </div>
+
+      <h3>C. Dar a tua opinião: <em>acho que sim</em> · <em>espero que sim</em></h3>
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — correção da aula!</strong> Disseste <em>"creo que sim"</em> — isso é espanhol! 🇪🇸 Em português diz-se <strong>"acho que sim"</strong> (I think so). A palavra <em>creio</em> existe, mas está ligada a <strong>fé/crença</strong> (<em>"creio em Deus"</em> = I believe in God), não a uma opinião casual.
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Português</th><th>English</th></tr></thead>
+          <tbody>
+            <tr><td>Acho que sim. / Acho que não.</td><td>I think so. / I don't think so.</td></tr>
+            <tr><td>Acho que o português é fácil.</td><td>I think Portuguese is easy.</td></tr>
+            <tr><td>Espero que sim!</td><td>I hope so!</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>D. <em>Apetece-me</em> &amp; o par traiçoeiro <em>brincar</em> / <em>gozar</em></h3>
+      <p>Já viste o <strong>apetecer</strong> (apetece-me = I feel like). Serve para coisas <u>e</u> para sair: <em>"Hoje não me apetece sair, fico em casa."</em></p>
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — brincar ≠ gozar!</strong><br>
+        ✔ <strong>brincar</strong> = to play (crianças a brincar; brincar com algo) <span class="ex">→ inofensivo</span><br>
+        ✘ <strong>gozar</strong> = to make fun of / mock <span class="ex">→ pode ofender!</span><br>
+        Quando alguém se ri do teu português, está a <em>brincar</em> (acha piada, com carinho), <u>não</u> a <em>gozar</em> contigo.
+      </div>
+
+      <h3>E. Pedir num café — <em>queria / é / era</em></h3>
+      <p>Há três registos para pedir, do mais formal ao mais descontraído. Os nativos usam-nos conforme a familiaridade com o café:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Forma</th><th>Quando</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Queria…</strong></td><td>1.ª vez, mais educado</td><td><span class="pt-ex">Queria uma bica, por favor.</span></td></tr>
+            <tr><td><strong>É…</strong> / <strong>E…</strong></td><td>a continuar o pedido, informal</td><td><span class="pt-ex">…e é uma tosta mista.</span></td></tr>
+            <tr><td><strong>Era…</strong></td><td>alternativa suave ("it'd be")</td><td><span class="pt-ex">Era um galão, faz favor.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>E para lidar com o dinheiro:</p>
+      <ul>
+        <li><span class="pt-ex">A conta é junta ou separada?</span> <span class="en">— Together or separate?</span></li>
+        <li><span class="pt-ex">Quanto é? — São seis euros e dez cêntimos.</span></li>
+        <li><span class="pt-ex">Aqui está, <span class="end">faz favor</span>. — Não <span class="end">faz mal</span>, fique com o <span class="end">troco</span>.</span></li>
+      </ul>
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — troco vs. trocar / nota vs. moeda:</strong><br>
+        • <strong>o troco</strong> = the change you get back · <strong>trocar</strong> = to break/exchange (<em>"trocar uma nota de 20 por duas de 10"</em>)<br>
+        • <strong>a nota</strong> = banknote · <strong>a moeda</strong> = coin
+      </div>
+      <div class="callout warn"><span class="ic">🥪</span>
+        <strong>Atenção — o erro clássico do estrangeiro!</strong> Uma <em>tosta mista</em> já é <strong>queijo + fiambre</strong> ("mista"). Por isso pedir <em>"uma tosta mista sem queijo"</em> faz os empregados rirem-se 😄 — o que tu queres é <strong>"uma tosta de fiambre"</strong> (só fiambre) ou <strong>"uma tosta de queijo"</strong> (só queijo).
+      </div>
+
+      <div class="callout tip"><span class="ic">🔊</span>
+        <strong>Pronúncia:</strong> <em>bica</em> <span class="ipa">['bi.kɐ]</span> · <em>galão</em> <span class="ipa">[gɐ'lɐ̃w̃]</span> (o <em>-ão</em> nasal!) · <em>queria</em> <span class="ipa">[kɨ'ɾi.ɐ]</span> · <em>troco</em> <span class="ipa">['tɾo.ku]</span> (ó fechado). Cuidado: <em>tenho</em> <span class="ipa">['tɐ.ɲu]</span> tem o <em>nh</em> = [ɲ], como em "espanha".
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. VOCABULARY -->
+  <section>
+    <div class="card">
+      <h2><span class="num">4</span> Vocabulário novo</h2>
+      <p class="lead">As palavras e expressões que apareceram na aula, organizadas por tema.</p>
+
+      <h3>☕ No café — bebidas &amp; comida</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>a bica (f.)</td><td>espresso (PT-PT slang)</td><td>Queria uma bica, por favor.</td></tr>
+            <tr><td>a bica cheia (f.)</td><td>espresso with more water</td><td>Para mim, uma bica cheia.</td></tr>
+            <tr><td>a meia de leite (f.)</td><td>coffee w/ milk (in a cup)</td><td>Uma meia de leite, faz favor.</td></tr>
+            <tr><td>o galão (m.)</td><td>milky coffee (tall glass)</td><td>Prefiro um galão bem quente.</td></tr>
+            <tr><td>a tosta mista (f.)</td><td>ham &amp; cheese toastie</td><td>Uma tosta mista para levar.</td></tr>
+            <tr><td>a tosta de fiambre / de queijo (f.)</td><td>ham-only / cheese-only toastie</td><td>Uma tosta de fiambre, por favor.</td></tr>
+            <tr><td>o pastel de nata (m.)</td><td>custard tart</td><td>Um pastel de nata e um galão.</td></tr>
+            <tr><td>o croissant simples (m.)</td><td>plain croissant</td><td>Um croissant simples, faz favor.</td></tr>
+            <tr><td>a água natural / fresca (f.)</td><td>room-temp / chilled water</td><td>Uma água fresca, com gelo.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>💶 Pagar &amp; dinheiro</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>a conta (f.)</td><td>the bill</td><td>A conta é junta ou separada?</td></tr>
+            <tr><td>o troco (m.)</td><td>change (money back)</td><td>Fique com o troco.</td></tr>
+            <tr><td>trocar</td><td>to change / break (a note)</td><td>Pode trocar uma nota de vinte?</td></tr>
+            <tr><td>a nota (f.)</td><td>banknote</td><td>Só tenho uma nota de vinte.</td></tr>
+            <tr><td>a moeda (f.)</td><td>coin</td><td>Não tenho moedas.</td></tr>
+            <tr><td>o cêntimo (m.)</td><td>cent</td><td>São seis euros e dez cêntimos.</td></tr>
+            <tr><td>faz favor</td><td>here you go / please</td><td>Aqui está, faz favor.</td></tr>
+            <tr><td>mais alguma coisa?</td><td>anything else?</td><td>— Mais alguma coisa? — Não, obrigada.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🏄 Surf — gíria portuguesa</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>apanhar ondas</td><td>to catch waves</td><td>Hoje não apanhei muitas ondas.</td></tr>
+            <tr><td>os quebracocos (m. pl.)</td><td>shore-break waves ("coconut-breakers")</td><td>Os quebracocos são bons para bodyboard.</td></tr>
+            <tr><td>ondas "Coca-Cola"</td><td>clean classic ~½m waves (longboard)</td><td>Hoje estava Coca-Cola, meio metro.</td></tr>
+            <tr><td>a prancha de bodyboard (f.)</td><td>bodyboard</td><td>Levei a prancha de bodyboard.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🗣️ Expressões &amp; opinião <span class="bonus-tag">+ BÓNUS</span></h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Expressão</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>acho que sim / que não</td><td>I think so / I don't think so</td><td>Achas que é fácil? — Acho que sim.</td></tr>
+            <tr><td>espero que sim</td><td>I hope so</td><td>Vais acabar o projeto? — Espero que sim!</td></tr>
+            <tr><td>não me apetece</td><td>I don't feel like it</td><td>Hoje não me apetece sair.</td></tr>
+            <tr><td>costumar + infinitivo</td><td>to usually (do)</td><td>O que costumas pedir no café?</td></tr>
+            <tr><td>cheguei na semana passada</td><td>I arrived last week</td><td>Cheguei na semana passada da Holanda.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> não faz mal</td><td>no problem / never mind</td><td>Só tenho nota de vinte. — Não faz mal!</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> andar a pé</td><td>to go on foot / walk</td><td>Andar a pé é a melhor forma de conhecer a cidade.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> ir beber um copo</td><td>to go for a drink</td><td>Hoje apetece-te ir beber um copo?</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> trabalhar remoto / em casa</td><td>to work remotely</td><td>Trabalho remoto em marketing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COMMUNICATION -->
+  <section>
+    <div class="card">
+      <h2><span class="num">5</span> Comunicação</h2>
+      <p class="lead">O diálogo do café da página 74, reconstruído e expandido — repara no <em>queria/é/era</em>, no <em>faz favor</em> e na ausência do "você".</p>
+      <div class="dialogue">
+        <div class="turn m"><span class="who">Empregado</span><span class="line">Boa tarde! Diga, faz favor.<span class="tr">Good afternoon! Go ahead, please.</span></span></div>
+        <div class="turn a"><span class="who">Magda</span><span class="line"><strong>Queria</strong> um pastel de nata e um galão, por favor. É para comer aqui.<span class="tr">I'd like a custard tart and a milky coffee, please. To have here.</span></span></div>
+        <div class="turn m"><span class="who">Empregado</span><span class="line">Com certeza. E para <strong>a senhora</strong>?<span class="tr">Of course. And for you (ma'am)?</span></span></div>
+        <div class="turn a"><span class="who">Amanda</span><span class="line">Para mim, <strong>era</strong> uma tosta de fiambre e uma água fresca, com gelo.<span class="tr">For me, it'd be a ham toastie and a chilled water, with ice.</span></span></div>
+        <div class="turn m"><span class="who">Empregado</span><span class="line"><strong>Mais alguma coisa?</strong><span class="tr">Anything else?</span></span></div>
+        <div class="turn a"><span class="who">Amanda</span><span class="line">Não, obrigada. A conta é separada, faz favor.<span class="tr">No, thanks. Separate bills, please.</span></span></div>
+        <div class="turn m"><span class="who">Empregado</span><span class="line">São três euros e cinquenta.<span class="tr">That's three euros fifty.</span></span></div>
+        <div class="turn a"><span class="who">Amanda</span><span class="line">Tem troco? Só tenho uma <strong>nota</strong> de vinte…<span class="tr">Do you have change? I only have a twenty…</span></span></div>
+        <div class="turn m"><span class="who">Empregado</span><span class="line"><strong>Não faz mal!</strong> Aqui está o seu <strong>troco</strong>.<span class="tr">No problem! Here's your change.</span></span></div>
+      </div>
+
+      <div class="callout culture"><span class="ic">🇵🇹</span>
+        <strong>Nota cultural:</strong> num <strong>café</strong> normal não te pedem o NIF / a fatura com contribuinte — isso é mais no supermercado, no restaurante ou no hotel (onde a conta é maior). E se vais sempre ao mesmo café, ao fim de uns dias deixas de dizer <em>"queria…"</em> e passas direto ao <em>"é um café e uma tosta"</em> — já se conhecem, é mais informal. ☕😉
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EXERCISES -->
+  <section>
+    <div class="card">
+      <h2><span class="num">6</span> Exercícios</h2>
+      <p class="lead">Tudo o que aqui se pratica saiu da tua aula de grupo. As respostas aceitam acentos ou não.</p>
+
+      <!-- EX 1 -->
+      <div class="exercise" data-ex="1">
+        <h3>Exercício 1 — Apresentar-se (completa as frases)</h3>
+        <p>Completa com a palavra certa. Lembra-te: a idade vai com <strong>ter</strong>!</p>
+        <div class="q"><span class="qnum">1.</span> Olá! Eu <input type="text" data-a="sou" size="6"> a Magda e <input type="text" data-a="sou" size="6"> polaca.
+          <div class="hint">Nome e nacionalidade → ser (eu sou).</div><div class="reveal">→ sou … sou</div></div>
+        <div class="q"><span class="qnum">2.</span> Eu <input type="text" data-a="tenho" size="7"> trinta e dois anos. <span class="ex">(idade)</span>
+          <div class="hint">Idade → ter (eu tenho).</div><div class="reveal">→ tenho</div></div>
+        <div class="q"><span class="qnum">3.</span> <input type="text" data-a="moro" size="6"> na Consolação e <input type="text" data-a="gosto" size="6"> de surfar.
+          <div class="hint">morar (eu moro) + gostar (eu gosto de).</div><div class="reveal">→ moro … gosto</div></div>
+        <div class="q"><span class="qnum">4.</span> A Gentine é holandesa e <input type="text" data-a="tem" size="6"> quarenta e um anos.
+          <div class="hint">Idade, ela → tem.</div><div class="reveal">→ tem</div></div>
+        <div class="q"><span class="qnum">5.</span> Achas que o português é fácil? — <input type="text" data-a="acho que sim|acho" size="14">. <span class="ex">(I think so — não "creo"!)</span>
+          <div class="hint">Opinião casual → acho que sim.</div><div class="reveal">→ Acho que sim</div></div>
+        <div class="q"><span class="qnum">6.</span> Há ano e meio que eu <input type="text" data-a="aprendo" size="9"> português. <span class="ex">(eu, presente)</span>
+          <div class="hint">aprender → eu aprendo.</div><div class="reveal">→ aprendo</div></div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkText(1)">Verificar</button>
+          <button class="btn btn-show" onclick="toggleReveal(1)">Ver respostas</button>
+          <span class="result-pill" id="res1"></span>
+        </div>
+      </div>
+
+      <!-- EX 2 -->
+      <div class="exercise" data-ex="2">
+        <h3>Exercício 2 — No café (matching)</h3>
+        <p>Clica na palavra em português e depois na descrição certa.</p>
+        <div class="match-grid" id="match2">
+          <div class="match-col" data-side="pt">
+            <h4>Português</h4>
+            <div class="match-item" data-key="bica">a bica</div>
+            <div class="match-item" data-key="galao">o galão</div>
+            <div class="match-item" data-key="mista">a tosta mista</div>
+            <div class="match-item" data-key="troco">o troco</div>
+            <div class="match-item" data-key="nata">o pastel de nata</div>
+            <div class="match-item" data-key="favor">faz favor</div>
+          </div>
+          <div class="match-col" data-side="en">
+            <h4>English</h4>
+            <div class="match-item" data-key="troco">the change (money back)</div>
+            <div class="match-item" data-key="bica">an espresso</div>
+            <div class="match-item" data-key="nata">a custard tart</div>
+            <div class="match-item" data-key="favor">here you go / please</div>
+            <div class="match-item" data-key="galao">milky coffee (tall glass)</div>
+            <div class="match-item" data-key="mista">ham &amp; cheese toastie</div>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="result-pill" id="res2"></span>
+        </div>
+      </div>
+
+      <!-- EX 3 -->
+      <div class="exercise" data-ex="3">
+        <h3>Exercício 3 — Conjugação do verbo TER (presente)</h3>
+        <p>Escreve a forma certa de <strong>ter</strong> — o verbo da idade e de tantas outras coisas.</p>
+        <div class="q"><span class="qnum">1.</span> eu <input type="text" data-a="tenho" size="7">
+          <div class="hint">eu tenho.</div><div class="reveal">→ tenho</div></div>
+        <div class="q"><span class="qnum">2.</span> tu <input type="text" data-a="tens" size="6">
+          <div class="hint">tu tens.</div><div class="reveal">→ tens</div></div>
+        <div class="q"><span class="qnum">3.</span> ela <input type="text" data-a="tem" size="6">
+          <div class="hint">ela tem.</div><div class="reveal">→ tem</div></div>
+        <div class="q"><span class="qnum">4.</span> nós <input type="text" data-a="temos" size="7">
+          <div class="hint">nós temos.</div><div class="reveal">→ temos</div></div>
+        <div class="q"><span class="qnum">5.</span> eles <input type="text" data-a="têm|tem" size="6"> <span class="ex">(com acento circunflexo no plural)</span>
+          <div class="hint">eles têm.</div><div class="reveal">→ têm</div></div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkText(3)">Verificar</button>
+          <button class="btn btn-show" onclick="toggleReveal(3)">Ver respostas</button>
+          <span class="result-pill" id="res3"></span>
+        </div>
+      </div>
+
+      <!-- EX 4 -->
+      <div class="exercise" data-ex="4">
+        <h3>Exercício 4 — Escolha múltipla (o registo certo)</h3>
+        <div class="q" data-mc="q1" data-correct="1">
+          <p><span class="qnum">1.</span> Para ser educada e formal, sem soar brasileira, pergunta:</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q1" value="0"> Você fala inglês?</label>
+            <label class="choice"><input type="radio" name="q1" value="1"> Fala inglês? / O senhor fala inglês?</label>
+            <label class="choice"><input type="radio" name="q1" value="2"> Tu falas inglês, você?</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q2" data-correct="2">
+          <p><span class="qnum">2.</span> Queres uma tosta só com fiambre. Pedes:</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q2" value="0"> uma tosta mista sem queijo</label>
+            <label class="choice"><input type="radio" name="q2" value="1"> uma tosta mista sem fiambre</label>
+            <label class="choice"><input type="radio" name="q2" value="2"> uma tosta de fiambre</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q3" data-correct="0">
+          <p><span class="qnum">3.</span> "Eu ____ trinta e dois anos." <span class="ex">(idade)</span></p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q3" value="0"> tenho</label>
+            <label class="choice"><input type="radio" name="q3" value="1"> sou</label>
+            <label class="choice"><input type="radio" name="q3" value="2"> estou</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q4" data-correct="1">
+          <p><span class="qnum">4.</span> Achas que vais acabar o projeto? Respondes (I hope so):</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q4" value="0"> Creo que sim.</label>
+            <label class="choice"><input type="radio" name="q4" value="1"> Espero que sim.</label>
+            <label class="choice"><input type="radio" name="q4" value="2"> Gozo que sim.</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q5" data-correct="2">
+          <p><span class="qnum">5.</span> As crianças estão a ____ no jardim. <span class="ex">(to play — inofensivo)</span></p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q5" value="0"> gozar</label>
+            <label class="choice"><input type="radio" name="q5" value="1"> tocar</label>
+            <label class="choice"><input type="radio" name="q5" value="2"> brincar</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q6" data-correct="0">
+          <p><span class="qnum">6.</span> No café, ao continuar o pedido de forma informal:</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q6" value="0"> …e é uma tosta mista.</label>
+            <label class="choice"><input type="radio" name="q6" value="1"> …eu desejaria adicionalmente uma tosta.</label>
+            <label class="choice"><input type="radio" name="q6" value="2"> …você quer uma tosta?</label>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkMC(4)">Verificar</button>
+          <span class="result-pill" id="res4"></span>
+        </div>
+      </div>
+
+      <!-- EX 5 -->
+      <div class="exercise" data-ex="5">
+        <h3>Exercício 5 — Escrita livre</h3>
+        <p>Como na aula, <strong>apresenta-te</strong> em português. Escreve <strong>5 a 8 frases</strong> e usa pelo menos:</p>
+        <ul class="writing-tips">
+          <li>✦ o teu <strong>nome</strong>, a tua <strong>nacionalidade</strong> e a tua <strong>profissão</strong> (com <em>ser</em>)</li>
+          <li>✦ a tua <strong>idade</strong> (com <em>ter</em>: <em>tenho… anos</em>)</li>
+          <li>✦ <strong>onde moras</strong> e <strong>o que gostas</strong> de fazer (<em>gosto de…</em>)</li>
+          <li>✦ uma frase com <em>acho que…</em> ou <em>há … anos que…</em></li>
+        </ul>
+        <textarea id="writing" placeholder="Olá! Sou a Magda, sou polaca e tenho trinta e dois anos. Moro na Consolação porque…"></textarea>
+        <div class="actions">
+          <button class="btn btn-check" onclick="saveWriting()">Guardar texto</button>
+          <button class="btn btn-show" onclick="document.getElementById('writingModel').classList.toggle('show')">Ver exemplo</button>
+          <span class="result-pill" id="res5"></span>
+        </div>
+        <div class="reveal" id="writingModel" style="margin-top:12px;line-height:1.6">
+          <strong>Exemplo:</strong> Olá, meninas! Sou a Magda e sou polaca. Tenho trinta e dois anos e sou programadora informática — trabalho remoto para uma empresa de fintech. Moro na Consolação há dois anos porque gosto muito de surfar e o mar está mesmo aqui ao lado. Há ano e meio que aprendo português. Acho que é mais difícil do que o espanhol, mas adoro! O meu café preferido é o Bar do Quebrado. 🏄☕
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SUMMARY -->
+  <section>
+    <div class="card">
+      <h2><span class="num">7</span> Resumo</h2>
+      <ul>
+        <li><strong>Apresentar-se:</strong> <em>sou + nome/nacionalidade/profissão</em>, mas a <strong>idade vai com TER</strong> (<em>tenho 32 anos</em>) e o tempo com <em>há … que…</em>.</li>
+        <li><strong>Evita o "você":</strong> usa <em>tu</em> com próximos, e <em>o senhor / a senhora</em> ou (melhor) <strong>omite o pronome</strong> para seres formal.</li>
+        <li><strong>No café:</strong> pede com <em>queria… / é… / era…</em>; vocabulário <em>bica, galão, meia de leite, tosta de fiambre</em>; e <em>troco</em> ≠ <em>trocar</em>, <em>nota</em> ≠ <em>moeda</em>.</li>
+        <li><strong>Expressões:</strong> <em>acho que sim</em> (não "creo"!), <em>espero que sim</em>, <em>não me apetece</em>; e <em>brincar</em> (play) ≠ <em>gozar</em> (mock).</li>
+      </ul>
+      <h3>Consigo…? (autoavaliação)</h3>
+      <ul class="selfcheck">
+        <li>Consigo apresentar-me em português com nome, idade (com <em>ter</em>!), profissão e gostos.</li>
+        <li>Consigo ser educada sem usar "você" (omitindo o pronome ou usando "a senhora").</li>
+        <li>Consigo pedir e pagar num café usando <em>queria / era / faz favor / troco</em>.</li>
+        <li>Consigo usar <em>acho que sim</em> e distinguir <em>brincar</em> de <em>gozar</em>.</li>
+      </ul>
+      <div class="callout tip"><span class="ic">🌟</span>
+        <strong>Muito bem, Magda!</strong> Primeira aula de grupo e arriscaste a falar à frente das colegas — isso é coragem! 💪 <em>Trabalhos de casa: parte azul + exercício A da parte amarela (pág. 74) e os áudios 58 e 59. Não há aula a 8 de abril (retiro de português) — voltamos a 15 de abril!</em> 🇵🇹
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="aulas_mariana_2026-03-27.html">← Aula anterior (27 mar)</a>
+      <a href="index.html">🏠 Página principal</a>
+      <a href="aulas_mariana_2026-04-15.html">Próxima aula (15 abr) →</a>
+    </div>
+  </section>
+
+  <footer>
+    📝 Lição gerada a partir da aula real com a Mariana · 1 de abril de 2026 · <em>Próxima aula: 15 de abril (sem aula a 8 — retiro de português)</em>
+  </footer>
+</div>
+
+<script>
+  // ---------- helpers ----------
+  const LS_KEY = 'pt_marianna_2026_04_01';
+  function norm(s){
+    return (s||'').toLowerCase().trim()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'') // strip accents
+      .replace(/\s+/g,' ');
+  }
+  function load(){ try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e){ return {}; } }
+  function save(state){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+  let state = load();
+
+  // Total points = all text inputs + matching pairs + MC questions + writing(1)
+  function totalPoints(){
+    let t = 0;
+    document.querySelectorAll('.exercise[data-ex] input[type="text"]').forEach(()=>t++);
+    t += document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length; // 6
+    t += document.querySelectorAll('.q[data-mc]').length; // MC
+    t += 1; // writing
+    return t;
+  }
+  function earnedPoints(){
+    let e = 0;
+    for (const k in state){ if(k.startsWith('pt:')&&state[k]) e++; }
+    for (const k in state){ if(k.startsWith('mc:')&&state[k]) e++; }
+    if (state['match']) e += state['match'];
+    if (state['writing']) e += 1;
+    return e;
+  }
+  function refreshScore(){
+    const tot = totalPoints();
+    const earned = Math.min(earnedPoints(), tot);
+    document.getElementById('scoreNum').textContent = earned + ' / ' + tot;
+    document.getElementById('progressFill').style.width = (tot? (earned/tot*100):0) + '%';
+  }
+
+  // ---------- text exercises ----------
+  function checkText(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const inputs = box.querySelectorAll('input[type="text"]');
+    let ok = 0;
+    inputs.forEach((inp,i)=>{
+      const accepted = inp.dataset.a.split('|').map(norm);
+      const val = norm(inp.value);
+      const id = 'pt:'+ex+':'+i;
+      if (val && accepted.includes(val)){
+        inp.classList.add('correct'); inp.classList.remove('incorrect');
+        state[id]=true; ok++;
+      } else {
+        inp.classList.add('incorrect'); inp.classList.remove('correct');
+        state[id]=false;
+        const hint = inp.closest('.q').querySelector('.hint');
+        if(hint) hint.classList.add('show');
+      }
+    });
+    save(state); refreshScore();
+    const pill = document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+inputs.length+' certas';
+    pill.className = 'result-pill show ' + (ok===inputs.length?'good':'partial');
+  }
+  function toggleReveal(ex){
+    document.querySelectorAll('.exercise[data-ex="'+ex+'"] .reveal').forEach(r=>r.classList.toggle('show'));
+  }
+
+  // ---------- matching ----------
+  let selected = null;
+  function setupMatch(){
+    const wrap = document.getElementById('match2');
+    wrap.querySelectorAll('.match-item').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        if(item.classList.contains('matched')) return;
+        const side = item.parentElement.dataset.side;
+        if(!selected){ selected = item; item.classList.add('selected'); return; }
+        if(selected === item){ item.classList.remove('selected'); selected=null; return; }
+        const sameSide = selected.parentElement.dataset.side === side;
+        if(sameSide){ selected.classList.remove('selected'); selected=item; item.classList.add('selected'); return; }
+        // attempt match
+        if(selected.dataset.key === item.dataset.key){
+          selected.classList.add('matched'); item.classList.add('matched');
+          selected.classList.remove('selected');
+          countMatches();
+        } else {
+          const a=selected, b=item;
+          a.classList.add('incorrect'); b.classList.add('incorrect');
+          setTimeout(()=>{ a.classList.remove('incorrect','selected'); b.classList.remove('incorrect'); }, 700);
+        }
+        selected=null;
+      });
+    });
+  }
+  function countMatches(){
+    const pairs = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item.matched').length;
+    state['match'] = pairs; save(state); refreshScore();
+    const total = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length;
+    const pill = document.getElementById('res2');
+    pill.textContent = pairs+' / '+total+' ligações';
+    pill.className = 'result-pill show ' + (pairs===total?'good':'partial');
+  }
+
+  // ---------- multiple choice ----------
+  function checkMC(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const qs = box.querySelectorAll('.q[data-mc]');
+    let ok=0;
+    qs.forEach(q=>{
+      const correct = q.dataset.correct;
+      const chosen = q.querySelector('input[type="radio"]:checked');
+      q.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','incorrect'));
+      const id='mc:'+q.dataset.mc;
+      if(chosen){
+        const label = chosen.closest('.choice');
+        if(chosen.value===correct){ label.classList.add('correct'); state[id]=true; ok++; }
+        else {
+          label.classList.add('incorrect'); state[id]=false;
+          // highlight the right one
+          q.querySelector('input[value="'+correct+'"]').closest('.choice').classList.add('correct');
+        }
+      } else { state[id]=false; }
+    });
+    save(state); refreshScore();
+    const pill=document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+qs.length+' certas';
+    pill.className='result-pill show '+(ok===qs.length?'good':'partial');
+  }
+
+  // ---------- writing ----------
+  function saveWriting(){
+    const txt = document.getElementById('writing').value.trim();
+    state['writingText'] = txt;
+    state['writing'] = txt.length > 40; // counts as done if substantial
+    save(state); refreshScore();
+    const pill=document.getElementById('res5');
+    if(state['writing']){ pill.textContent='Texto guardado ✓'; pill.className='result-pill show good'; }
+    else { pill.textContent='Escreve um pouco mais!'; pill.className='result-pill show partial'; }
+  }
+
+  // ---------- restore ----------
+  function restore(){
+    // text inputs
+    document.querySelectorAll('.exercise[data-ex]').forEach(box=>{
+      const ex = box.dataset.ex;
+      box.querySelectorAll('input[type="text"]').forEach((inp,i)=>{
+        const id='pt:'+ex+':'+i;
+        if(state[id]===true){ inp.classList.add('correct'); }
+      });
+    });
+    // writing
+    if(state['writingText']) document.getElementById('writing').value = state['writingText'];
+    refreshScore();
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{ setupMatch(); restore(); });
+
+  function resetAll(){
+    if(!confirm('Recomeçar esta aula? A tua pontuação e respostas serão apagadas.')) return;
+    localStorage.removeItem(LS_KEY); state={};
+    location.reload();
+  }
+</script>
+</body>
+</html>

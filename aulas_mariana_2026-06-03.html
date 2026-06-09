@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aula com a Mariana — Saúde, Casa e Viagens — 2026-06-03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-light: #e8f1e9;
+    --red: #B71C1C;
+    --red-light: #fbeaea;
+    --gold: #F9A825;
+    --gold-light: #fdf3dc;
+    --blue: #1565C0;
+    --blue-light: #e7f0fa;
+    --ink: #20302a;
+    --muted: #5e6e66;
+    --paper: #fcfbf7;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --ok: #2e7d32;
+    --ok-bg: #e6f4e7;
+    --err: #c62828;
+    --err-bg: #fcebea;
+    --shadow: 0 2px 8px rgba(27,94,32,.06), 0 10px 30px rgba(27,94,32,.05);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--green) 0%, #2e7d32 55%, #388e3c 100%);
+    color: #fff;
+    padding: 48px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: "🇵🇹";
+    position: absolute;
+    right: -10px; bottom: -28px;
+    font-size: 140px; opacity: .12;
+    transform: rotate(-8deg);
+  }
+  .header-inner { max-width: 880px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+    padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+  .badge.real { background: var(--gold); color: #3a2a00; border-color: transparent; }
+  h1 {
+    font-family: 'Lora', serif; font-weight: 600;
+    font-size: clamp(26px, 4.5vw, 38px); line-height: 1.2;
+    margin: 6px 0 10px;
+  }
+  .subtitle { font-size: 16px; opacity: .92; max-width: 620px; }
+
+  /* Score bar */
+  .scorebar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(252,251,247,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+  }
+  .scorebar-inner {
+    max-width: 880px; margin: 0 auto; padding: 0 20px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .score-label { font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap; }
+  .progress-track { flex: 1; min-width: 140px; height: 10px; background: #e9e6dd; border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--green)); transition: width .5s ease; }
+  .score-num { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14px; color: var(--muted); white-space: nowrap; }
+  .btn-reset {
+    border: 1px solid var(--border); background: #fff; color: var(--muted);
+    border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer; font-weight: 600;
+  }
+  .btn-reset:hover { color: var(--red); border-color: var(--red); }
+
+  /* Sections */
+  section { margin-top: 36px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 26px 28px; box-shadow: var(--shadow);
+  }
+  h2 {
+    font-family: 'Lora', serif; font-size: 25px; color: var(--green);
+    margin: 0 0 4px; display: flex; align-items: center; gap: 10px;
+  }
+  h2 .num {
+    font-family: 'Inter'; font-size: 14px; font-weight: 700; color: #fff;
+    background: var(--green); width: 30px; height: 30px; border-radius: 9px;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+  }
+  h3 { font-size: 18px; color: var(--ink); margin: 22px 0 8px; }
+  .lead { color: var(--muted); margin: 2px 0 18px; }
+  p { margin: 10px 0; }
+  .en { color: var(--blue); font-style: italic; }
+  .pt-ex { font-weight: 500; }
+
+  ul.goals { list-style: none; padding: 0; margin: 0; }
+  ul.goals li {
+    padding: 12px 14px 12px 44px; position: relative; margin-bottom: 8px;
+    background: var(--green-light); border-radius: 10px; border: 1px solid #d7e7d9;
+  }
+  ul.goals li::before {
+    content: "✓"; position: absolute; left: 14px; top: 12px;
+    color: var(--green); font-weight: 800;
+  }
+  ul.goals .t { color: var(--blue); font-style: italic; font-size: 14px; display: block; }
+
+  /* Tables */
+  .table-scroll { overflow-x: auto; margin: 14px 0; border-radius: 12px; border: 1px solid var(--border); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  th { background: var(--green-light); color: var(--green); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr { transition: background .15s; }
+  tbody tr:hover { background: var(--gold-light); }
+  td .ex { display: block; color: var(--muted); font-size: 13.5px; font-style: italic; margin-top: 2px; }
+  .end { color: var(--red); font-weight: 700; }
+  .stem { color: var(--ink); }
+
+  /* Callouts */
+  .callout { border-radius: 12px; padding: 16px 18px 16px 50px; position: relative; margin: 16px 0; font-size: 15.5px; }
+  .callout .ic { position: absolute; left: 16px; top: 15px; font-size: 20px; }
+  .callout.warn { background: var(--red-light); border: 1px solid #f0c9c9; }
+  .callout.warn strong { color: var(--red); }
+  .callout.culture { background: var(--blue-light); border: 1px solid #c9def5; }
+  .callout.culture strong { color: var(--blue); }
+  .callout.tip { background: var(--gold-light); border: 1px solid #f0dca8; }
+  .callout.tip strong { color: #9a6b00; }
+
+  /* Dialogue */
+  .dialogue { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .turn { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+  .turn:last-child { border-bottom: none; }
+  .turn .who { font-weight: 700; min-width: 78px; flex: none; }
+  .turn.m .who { color: var(--red); }
+  .turn.a .who { color: var(--blue); }
+  .turn .line .tr { color: var(--muted); font-style: italic; font-size: 14px; display: block; margin-top: 2px; }
+
+  .bonus-tag { font-size: 11px; font-weight: 700; background: var(--gold); color: #3a2a00; padding: 2px 8px; border-radius: 6px; vertical-align: middle; }
+
+  /* Exercises */
+  .exercise { margin-top: 22px; padding-top: 22px; border-top: 2px dashed var(--border); }
+  .exercise:first-of-type { border-top: none; padding-top: 0; }
+  .q { margin: 14px 0; padding: 14px 16px; background: #faf9f4; border: 1px solid var(--border); border-radius: 10px; }
+  .q .qnum { font-weight: 700; color: var(--green); margin-right: 6px; }
+  .q input[type="text"] {
+    font-family: inherit; font-size: 15px; padding: 7px 10px; border: 2px solid var(--border);
+    border-radius: 8px; min-width: 130px; margin: 0 4px; transition: border-color .2s, background .2s;
+  }
+  .q input[type="text"]:focus { outline: none; border-color: var(--blue); }
+  .q input.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .q input.incorrect { border-color: var(--err); background: var(--err-bg); }
+  .hint { display: none; font-size: 13.5px; color: var(--err); margin-top: 8px; }
+  .hint.show { display: block; }
+  .reveal { display: none; font-size: 14px; color: var(--ok); margin-top: 6px; font-weight: 600; }
+  .reveal.show { display: block; }
+  .feedback { font-size: 12px; margin-top: 4px; font-weight: 600; }
+  .feedback.ok { color: var(--ok); }
+  .feedback.no { color: var(--err); }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer;
+    border: 2px solid var(--border); border-radius: 10px; background: #fff; transition: all .15s; font-size: 15px;
+  }
+  .choice:hover { border-color: var(--blue); background: var(--blue-light); }
+  .choice input { accent-color: var(--green); width: 17px; height: 17px; }
+  .choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .choice.incorrect { border-color: var(--err); background: var(--err-bg); }
+
+  /* Matching */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
+  @media (max-width: 600px) { .match-grid { grid-template-columns: 1fr; } }
+  .match-col h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .match-item {
+    padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 8px;
+    background: #fff; cursor: pointer; transition: all .15s; font-size: 15px;
+  }
+  .match-item:hover { border-color: var(--blue); }
+  .match-item.selected { border-color: var(--blue); background: var(--blue-light); }
+  .match-item.matched { border-color: var(--ok); background: var(--ok-bg); cursor: default; opacity: .75; }
+  .match-item.matched::after { content: " ✓"; color: var(--ok); font-weight: 700; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+    border-radius: 10px; padding: 10px 18px; border: none; transition: transform .1s, box-shadow .2s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-check { background: var(--green); color: #fff; }
+  .btn-check:hover { box-shadow: 0 4px 14px rgba(27,94,32,.3); }
+  .btn-show { background: #fff; color: var(--muted); border: 1px solid var(--border); }
+  .btn-show:hover { color: var(--gold); border-color: var(--gold); }
+  .result-pill { align-self: center; font-weight: 700; font-size: 14px; padding: 6px 14px; border-radius: 999px; display: none; }
+  .result-pill.show { display: inline-block; }
+  .result-pill.good { background: var(--ok-bg); color: var(--ok); }
+  .result-pill.partial { background: var(--gold-light); color: #9a6b00; }
+
+  textarea {
+    width: 100%; font-family: inherit; font-size: 15px; padding: 12px; border: 2px solid var(--border);
+    border-radius: 10px; resize: vertical; min-height: 120px; margin-top: 8px;
+  }
+  textarea:focus { outline: none; border-color: var(--blue); }
+  .writing-tips { font-size: 14px; color: var(--muted); }
+  .writing-tips li { margin: 4px 0; }
+
+  /* Summary */
+  .selfcheck { list-style: none; padding: 0; }
+  .selfcheck li { padding: 8px 0 8px 30px; position: relative; }
+  .selfcheck li::before { content: "☐"; position: absolute; left: 0; font-size: 18px; color: var(--green); }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 50px; }
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
+  .nav a { text-decoration: none; color: var(--green); font-weight: 600; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+  .nav a:hover { background: var(--green-light); }
+  .nav a.disabled { opacity: .4; pointer-events: none; }
+
+  .ipa { font-family: 'Lora', serif; color: var(--blue); font-style: normal; background: var(--blue-light); padding: 1px 6px; border-radius: 5px; font-size: 14px; }
+
+  @media print {
+    .scorebar, .actions, .btn, .nav, header::after { display: none !important; }
+    body { font-size: 12px; background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    .hint, .reveal { display: block !important; }
+    header { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badges">
+      <span class="badge real">📝 Baseada na aula real</span>
+      <span class="badge">Nível A2 → B1</span>
+      <span class="badge">🗓️ 3 de junho de 2026</span>
+      <span class="badge">👩‍🏫 Professora Mariana</span>
+    </div>
+    <h1>Aula com a Mariana — Saúde, Casa &amp; Viagens à Madeira</h1>
+    <p class="subtitle">Uma aula de conversa real, transformada num guia de estudo completo: passado contínuo vs. pontual, quantificadores, e o vocabulário todo que apareceu na vossa conversa.</p>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="scorebar-inner">
+    <span class="score-label">🏆 Pontuação</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="score-num" id="scoreNum">0 / 0</span>
+    <button class="btn-reset" onclick="resetAll()">Recomeçar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="nav" style="margin-top:24px">
+    <a href="aulas_mariana_2026-04-29.html">← Aula anterior (29 abr)</a>
+    <a href="index.html">🏠 Página principal</a>
+    <a class="disabled" href="#">Próxima aula →</a>
+  </div>
+
+  <!-- 1. RECAP -->
+  <section>
+    <div class="card">
+      <h2><span class="num">1</span> Resumo da aula</h2>
+      <p class="lead">O que falaste com a Mariana nesta aula.</p>
+      <p>Esta foi uma <strong>aula de conversa</strong> — falaste muito e muito bem! 🎉 Conversaram sobre a <strong>saúde da Mariana</strong> (as alergias respiratórias e o tratamento), sobre <strong>a casa dela</strong> (a renovação da cozinha e a estratégia de alugar quartos para poupar e viajar), sobre o <strong>projeto da caravana</strong>, e sobre a <strong>viagem à Madeira</strong> com o Jeremy (o jardim botânico, os carrinhos de verga, as estradas verticais 😅).</p>
+      <p>Como foi conversa livre, apareceram naturalmente alguns pontos de gramática e a Mariana corrigiu-te algumas coisas. Vamos consolidar tudo isso aqui, com calma e por escrito.</p>
+    </div>
+  </section>
+
+  <!-- 2. OBJECTIVES -->
+  <section>
+    <div class="card">
+      <h2><span class="num">2</span> O que vamos aprender hoje</h2>
+      <ul class="goals">
+        <li>Distinguir o <strong>pretérito imperfeito</strong> do <strong>pretérito perfeito</strong> — o passado "de fundo" vs. o passado "que aconteceu uma vez".<span class="t">Telling apart the "background" past from the "one-off" past.</span></li>
+        <li>Usar o <strong>presente contínuo à portuguesa</strong>: <em>estar a + infinitivo</em>.<span class="t">Using the European Portuguese present continuous.</span></li>
+        <li>Dominar os <strong>quantificadores</strong> <em>tanto/tanta/tantos/tantas</em> e <em>tão</em>.<span class="t">Mastering "so much / so many" and "so".</span></li>
+        <li>Fixar o <strong>vocabulário e os verbos</strong> da aula: <em>poupar, gastar, alugar, demorar, tomar conta de, comprometer-se</em>.<span class="t">Locking in the words and verbs from class.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. GRAMMAR -->
+  <section>
+    <div class="card">
+      <h2><span class="num">3</span> Gramática</h2>
+
+      <h3>A. Pretérito imperfeito vs. pretérito perfeito</h3>
+      <p>Esta é <em>a</em> grande questão do passado em português, e apareceu imensas vezes na vossa conversa. Olha estas duas frases tuas e da Mariana:</p>
+      <div class="callout tip"><span class="ic">💡</span>
+        <strong>Antes eu <u>trabalhava</u> no Baleal</strong> (imperfeito — situação que durava, repetia-se) → mas <strong>há dois anos eu <u>deixei</u> de fumar</strong> (perfeito — aconteceu, terminou, é um facto).</p>
+      </div>
+
+      <p><strong>Pretérito imperfeito</strong> — o "pano de fundo". Usa-se para:</p>
+      <ul>
+        <li><strong>Hábitos no passado</strong>: <span class="pt-ex">Antes eu <span class="end">fumava</span> dez cigarros por dia.</span> <span class="en">— I used to smoke ten a day.</span></li>
+        <li><strong>Descrições no passado</strong>: <span class="pt-ex">O Funchal <span class="end">estava</span> cheio de turistas.</span> <span class="en">— Funchal was full of tourists.</span></li>
+        <li><strong>Idade, tempo, estados</strong>: <span class="pt-ex">Quando <span class="end">era</span> criança…</span> <span class="en">— When I was a child…</span></li>
+      </ul>
+
+      <p><strong>Pretérito perfeito</strong> — a "ação principal". Usa-se para:</p>
+      <ul>
+        <li><strong>Ações concluídas e pontuais</strong>: <span class="pt-ex">Na sexta-feira <span class="end">fiz</span> o raio-x.</span> <span class="en">— On Friday I did the x-ray.</span></li>
+        <li><strong>Sequências de eventos</strong>: <span class="pt-ex">Fomos ao Funchal, <span class="end">vimos</span> o jardim e <span class="end">voltámos</span>.</span> <span class="en">— We went to Funchal, saw the garden and came back.</span></li>
+      </ul>
+
+      <p>Muitas vezes aparecem <strong>juntos</strong>: o imperfeito dá o cenário, o perfeito conta o que aconteceu nesse cenário:</p>
+      <p class="pt-ex">"<span class="end">Estava</span> sol na Ericeira, por isso eu <span class="end">fui</span> lá no sábado."<br><span class="en">It was sunny in Ericeira, so I went there on Saturday.</span></p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Pronome</th><th>falar → falava <span style="font-weight:400">(imperf.)</span></th><th>comer → comia</th><th>partir → partia</th><th>ser → era*</th><th>ir → ia*</th></tr></thead>
+          <tbody>
+            <tr><td>eu</td><td>fal<span class="end">ava</span></td><td>com<span class="end">ia</span></td><td>part<span class="end">ia</span></td><td>era</td><td>ia</td></tr>
+            <tr><td>tu</td><td>fal<span class="end">avas</span></td><td>com<span class="end">ias</span></td><td>part<span class="end">ias</span></td><td>eras</td><td>ias</td></tr>
+            <tr><td>ele/ela/você</td><td>fal<span class="end">ava</span></td><td>com<span class="end">ia</span></td><td>part<span class="end">ia</span></td><td>era</td><td>ia</td></tr>
+            <tr><td>nós</td><td>fal<span class="end">ávamos</span></td><td>com<span class="end">íamos</span></td><td>part<span class="end">íamos</span></td><td>éramos</td><td>íamos</td></tr>
+            <tr><td>eles/elas/vocês</td><td>fal<span class="end">avam</span></td><td>com<span class="end">iam</span></td><td>part<span class="end">iam</span></td><td>eram</td><td>iam</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:14px;color:var(--muted)">*<em>Ser</em> e <em>ir</em> são os principais irregulares do imperfeito (e também <em>ter → tinha</em>, <em>vir → vinha</em>, <em>pôr → punha</em>).</p>
+
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção!</strong> Cuidado com a 1.ª pessoa do plural no <em>perfeito</em>: em PT-PT diz-se <strong>nós voltámos</strong> / <strong>ficámos</strong> (com acento, /á/ fechado) no passado, e <strong>voltamos / ficamos</strong> no presente. O acento muda o tempo!
+      </div>
+
+      <h3>B. Estar a + infinitivo (o presente contínuo à portuguesa)</h3>
+      <p>Disseste muitas vezes formas como <em>"estou a tomar"</em>, <em>"estou a fazer tudo o que posso"</em> — perfeito! 👏 Em <strong>PT-PT</strong> a ação em progresso faz-se com <strong>estar a + infinitivo</strong>, e <u>não</u> com o gerúndio (isso é PT-BR).</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>🇵🇹 PT-PT (correto aqui)</th><th>🇧🇷 PT-BR (evitar)</th><th>English</th></tr></thead>
+          <tbody>
+            <tr><td>Estou <span class="end">a tomar</span> oito coisas.</td><td>Estou tomando…</td><td>I'm taking eight things.</td></tr>
+            <tr><td>Estou <span class="end">a poupar</span> para a caravana.</td><td>Estou poupando…</td><td>I'm saving for the van.</td></tr>
+            <tr><td>Ela está <span class="end">a tomar conta</span> da gata.</td><td>Está tomando conta…</td><td>She's taking care of the cat.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>C. Quantificadores: <em>tanto</em> vs. <em>tão</em></h3>
+      <p>A Mariana corrigiu-te o <em>"tantas coisas"</em> e o <em>"tanto"</em>. Aqui está a regra simples:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>Vai com…</th><th>Concorda?</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>tão</strong></td><td>adjetivo / advérbio</td><td>nunca muda</td><td><span class="pt-ex">A estrada é <span class="end">tão</span> estreita!</span> <span class="ex">— so narrow</span></td></tr>
+            <tr><td><strong>tanto/-a/-os/-as</strong></td><td>substantivo (nome)</td><td>concorda em género e número</td><td><span class="pt-ex"><span class="end">tantas</span> coisas, <span class="end">tanto</span> dinheiro, <span class="end">tantos</span> turistas</span></td></tr>
+            <tr><td><strong>tanto</strong> (invariável)</td><td>verbo</td><td>fica igual</td><td><span class="pt-ex">Ele demora <span class="end">tanto</span>!</span> <span class="ex">— he takes so long</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>D. Verbos e expressões úteis da aula</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Verbo</th><th>Significado</th><th>Exemplo da aula</th></tr></thead>
+          <tbody>
+            <tr><td><strong>poupar</strong></td><td>to save (money)</td><td>Estou a poupar para uma caravana.</td></tr>
+            <tr><td><strong>gastar</strong></td><td>to spend</td><td>Gasto duzentos euros por mês.</td></tr>
+            <tr><td><strong>alugar</strong> <span class="ex">(alugo, não "rento")</span></td><td>to rent (out)</td><td>Posso alugar dois quartos.</td></tr>
+            <tr><td><strong>demorar</strong></td><td>to take time / to be slow</td><td>Ele demora muito tempo para tudo.</td></tr>
+            <tr><td><strong>tomar conta de</strong></td><td>to take care of</td><td>Ela fica para tomar conta da gata.</td></tr>
+            <tr><td><strong>comprometer-se</strong></td><td>to commit oneself</td><td>Não quero comprometer-me com aulas semanais.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — falso amigo!</strong> Em italiano <em>giusto</em> = "certo/correto". Mas em português <strong>justo/justa</strong> = <em>fair</em> (justiça), <u>não</u> "correto". <br>✔ <em>Tem de ser uma coisa <strong>justa</strong> para os dois.</em> (fair) · ✔ <em>A resposta está <strong>certa</strong>.</em> (correct)
+      </div>
+
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>Atenção — "sempre que":</strong> significa <em>every time / whenever</em>. Para um hábito geral, usa o <strong>presente</strong>: <em>"<u>Sempre que surfo</u>, há muita gente na água."</em> Para uma ocasião concreta no passado, usa o passado: <em>"<u>Sempre que surfei lá</u>, estava bom."</em>
+      </div>
+
+      <div class="callout tip"><span class="ic">🔊</span>
+        <strong>Pronúncia:</strong> <em>alojamento</em> <span class="ipa">[ɐ.lu.ʒɐ'mẽtu]</span> · <em>miradouro</em> <span class="ipa">[mi.ɾɐ'do(w).ɾu]</span> · <em>brônquios</em> <span class="ipa">['bɾõ.kjuʃ]</span>. Repara no <em>-ão</em> nasal de <em>renovação</em> e no <em>lh</em> de <em>Funchal</em> não — aqui é <em>ch</em> = [ʃ], como em "chave".
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. VOCABULARY -->
+  <section>
+    <div class="card">
+      <h2><span class="num">4</span> Vocabulário novo</h2>
+      <p class="lead">As palavras e expressões que apareceram na aula, organizadas por tema.</p>
+
+      <h3>🩺 Saúde</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>a alergia (f.)</td><td>allergy</td><td>Tenho alergias respiratórias.</td></tr>
+            <tr><td>os brônquios (m. pl.)</td><td>bronchi</td><td>Tenho reatividade nos brônquios.</td></tr>
+            <tr><td>o muco (m.)</td><td>mucus</td><td>Tinha muito muco no raio-x.</td></tr>
+            <tr><td>a tosse (f.)</td><td>cough</td><td>Comecei com mais tosse.</td></tr>
+            <tr><td>a bomba (f.)</td><td>inhaler</td><td>Preciso de usar a bomba.</td></tr>
+            <tr><td>o raio-x / o raio-X ao tórax</td><td>chest x-ray</td><td>Fiz o raio-x na sexta-feira.</td></tr>
+            <tr><td>a comichão (f.)</td><td>itch</td><td>Tinha comichão nos olhos.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🏠 Casa &amp; dinheiro</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>os móveis (m. pl.)</td><td>furniture</td><td>Os móveis da cozinha estão renovados.</td></tr>
+            <tr><td>a renovação (f.)</td><td>renovation</td><td>Invisto na renovação da casa.</td></tr>
+            <tr><td>a renda (f.)</td><td>rent (payment)</td><td>Ela paga uma renda pelo quarto.</td></tr>
+            <tr><td>poupar</td><td>to save (money)</td><td>Estou a poupar para viajar.</td></tr>
+            <tr><td>gastar</td><td>to spend</td><td>Não quero gastar tanto.</td></tr>
+            <tr><td>alugar</td><td>to rent (out)</td><td>Alugo dois quartos no verão.</td></tr>
+            <tr><td>o subsídio de desemprego</td><td>unemployment benefit</td><td>Ele recebe subsídio de desemprego.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>✈️ Viagens &amp; lugares</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Palavra</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>o alojamento (m.)</td><td>accommodation</td><td>O alojamento é barato fora de época.</td></tr>
+            <tr><td>a época (f.) / a época baixa</td><td>season / low season</td><td>Em fevereiro é época baixa.</td></tr>
+            <tr><td>o miradouro (m.)</td><td>viewpoint / lookout</td><td>O jardim tem um miradouro lindo.</td></tr>
+            <tr><td>a caravana (f.)</td><td>caravan / camper van</td><td>Quero comprar uma caravana.</td></tr>
+            <tr><td>a estrada estreita (f.)</td><td>narrow road</td><td>As estradas são muito estreitas.</td></tr>
+            <tr><td>os carrinhos de verga (m. pl.)</td><td>wicker toboggans (Madeira)</td><td>Os carrinhos de verga custam 30€.</td></tr>
+            <tr><td>a fila (f.)</td><td>queue / line</td><td>A fila de espera era de três horas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🗣️ Expressões &amp; conectores <span class="bonus-tag">+ BÓNUS</span></h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Expressão</th><th>English</th><th>Exemplo</th></tr></thead>
+          <tbody>
+            <tr><td>mesmo assim</td><td>even so / nonetheless</td><td>Mesmo assim, gasto bastante.</td></tr>
+            <tr><td>por isso</td><td>therefore / that's why</td><td>Trabalho muito, por isso posso viajar.</td></tr>
+            <tr><td>sempre que</td><td>every time / whenever</td><td>Sempre que reduzo, fico ansiosa.</td></tr>
+            <tr><td>achei que…</td><td>I thought (that)…</td><td>Achei que tinha mais turistas.</td></tr>
+            <tr><td>esporádico/-a</td><td>occasional / sporadic</td><td>Faço aulas esporádicas.</td></tr>
+            <tr><td>pontual</td><td>punctual / one-off</td><td>É uma coisa pontual, não semanal.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> menos mal</td><td>just as well / not bad</td><td>Está tranquilo? Ah, menos mal!</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> dar para</td><td>to be possible / to manage</td><td>Dá para fazer muita coisa na Europa.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> uma mina de ouro</td><td>a gold mine</td><td>Aquele negócio é uma mina de ouro.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> depressa e bem, não há quem</td><td>"fast AND good? nobody can"</td><td>Provérbio: pressa estraga o trabalho.</td></tr>
+            <tr><td><span class="bonus-tag">BÓNUS</span> fora de época</td><td>off-season</td><td>Viajar fora de época é mais barato.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COMMUNICATION -->
+  <section>
+    <div class="card">
+      <h2><span class="num">5</span> Comunicação</h2>
+      <p class="lead">Uma reconstrução natural da vossa conversa sobre a Madeira — repara no imperfeito (cenário) e no perfeito (ações).</p>
+      <div class="dialogue">
+        <div class="turn m"><span class="who">Mariana</span><span class="line">Em fevereiro fomos à Madeira, eu e o Jeremy. O bilhete <strong>era</strong> baratíssimo — setenta euros!<span class="tr">In February we went to Madeira. The ticket was super cheap — seventy euros!</span></span></div>
+        <div class="turn a"><span class="who">Magda</span><span class="line">Setenta? Que bom! E o Funchal <strong>estava</strong> cheio de turistas?<span class="tr">Seventy? Nice! And was Funchal full of tourists?</span></span></div>
+        <div class="turn m"><span class="who">Mariana</span><span class="line">Estava, mesmo em época baixa! Mas nós <strong>ficámos</strong> na costa norte, em São Vicente. <strong>Era</strong> tão tranquilo. De manhã <strong>via</strong> só uns dez turistas na pastelaria.<span class="tr">It was, even in low season! But we stayed on the north coast, in São Vicente. It was so peaceful. In the morning I'd only see about ten tourists at the bakery.</span></span></div>
+        <div class="turn a"><span class="who">Magda</span><span class="line">E o que <strong>fizeram</strong> no Funchal?<span class="tr">And what did you do in Funchal?</span></span></div>
+        <div class="turn m"><span class="who">Mariana</span><span class="line">Fomos ao jardim botânico — é o sétimo melhor do mundo! Mas a estrada <strong>era</strong> tão íngreme que o Jeremy <strong>estava</strong> a suar a conduzir. 😅 Chegámos lá acima e ele <strong>disse</strong>: "Não conduzo mais!"<span class="tr">We went to the botanical garden — it's the 7th best in the world! But the road was so steep that Jeremy was sweating as he drove. We got up there and he said: "I'm not driving anymore!"</span></span></div>
+        <div class="turn a"><span class="who">Magda</span><span class="line">E os carrinhos de verga? <strong>Fizeram</strong>?<span class="tr">And the wicker toboggans? Did you do them?</span></span></div>
+        <div class="turn m"><span class="who">Mariana</span><span class="line">Não! A fila <strong>era</strong> de três horas e <strong>custava</strong> trinta euros por pessoa. Não <strong>esperámos</strong>. Mesmo assim, o jardim <strong>valeu</strong> a pena.<span class="tr">No! The queue was three hours and it cost thirty euros each. We didn't wait. Even so, the garden was worth it.</span></span></div>
+      </div>
+
+      <div class="callout culture"><span class="ic">🇵🇹</span>
+        <strong>Nota cultural:</strong> Os <em>carrinhos de cesto / de verga</em> do Monte (Funchal) são um ícone da Madeira: dois <em>carreiros</em> de fato branco e chapéu de palha empurram um cesto de vime por uma rua a descer, travando com as botas. Já lá vão mais de 150 anos! E sim — Lisboa é "a cidade das sete colinas", por isso tem tantos <em>miradouros</em>. 🌅
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EXERCISES -->
+  <section>
+    <div class="card">
+      <h2><span class="num">6</span> Exercícios</h2>
+      <p class="lead">Tudo o que aqui se pratica saiu da tua aula. As respostas aceitam acentos ou não — concentra-te na palavra certa.</p>
+
+      <!-- EX 1 -->
+      <div class="exercise" data-ex="1">
+        <h3>Exercício 1 — Imperfeito ou perfeito?</h3>
+        <p>Completa com a forma correta do verbo entre parênteses.</p>
+        <div class="q"><span class="qnum">1.</span> Antes eu <input type="text" data-a="fumava" size="9"> (fumar) dez cigarros por dia; agora fumo três.
+          <div class="hint">Hábito repetido no passado → imperfeito.</div><div class="reveal">→ fumava</div></div>
+        <div class="q"><span class="qnum">2.</span> Na sexta-feira eu <input type="text" data-a="fiz" size="7"> (fazer) o raio-x no hospital.
+          <div class="hint">Ação única e concluída → perfeito.</div><div class="reveal">→ fiz</div></div>
+        <div class="q"><span class="qnum">3.</span> O Funchal <input type="text" data-a="estava" size="9"> (estar) cheio de turistas em fevereiro.
+          <div class="hint">Descrição/cenário no passado → imperfeito.</div><div class="reveal">→ estava</div></div>
+        <div class="q"><span class="qnum">4.</span> Há dois anos, eu <input type="text" data-a="deixei" size="9"> (deixar) de fumar durante um ano.
+          <div class="hint">Acontecimento concluído → perfeito.</div><div class="reveal">→ deixei</div></div>
+        <div class="q"><span class="qnum">5.</span> Nós <input type="text" data-a="ficámos|ficamos" size="10"> (ficar) na costa norte, em São Vicente. <span class="ex">(perfeito, nós)</span>
+          <div class="hint">PT-PT: nós ficámos (com acento no passado).</div><div class="reveal">→ ficámos</div></div>
+        <div class="q"><span class="qnum">6.</span> Quando eu <input type="text" data-a="era" size="7"> (ser) criança, não <input type="text" data-a="tinha" size="8"> (ter) alergias.
+          <div class="hint">Idade e estado no passado → imperfeito (era / tinha).</div><div class="reveal">→ era … tinha</div></div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkText(1)">Verificar</button>
+          <button class="btn btn-show" onclick="toggleReveal(1)">Ver respostas</button>
+          <span class="result-pill" id="res1"></span>
+        </div>
+      </div>
+
+      <!-- EX 2 -->
+      <div class="exercise" data-ex="2">
+        <h3>Exercício 2 — Liga o vocabulário (matching)</h3>
+        <p>Clica numa palavra em português e depois na tradução correta.</p>
+        <div class="match-grid" id="match2">
+          <div class="match-col" data-side="pt">
+            <h4>Português</h4>
+            <div class="match-item" data-key="poupar">poupar</div>
+            <div class="match-item" data-key="alojamento">o alojamento</div>
+            <div class="match-item" data-key="miradouro">o miradouro</div>
+            <div class="match-item" data-key="epoca">a época baixa</div>
+            <div class="match-item" data-key="demorar">demorar</div>
+            <div class="match-item" data-key="tomarconta">tomar conta de</div>
+          </div>
+          <div class="match-col" data-side="en">
+            <h4>English</h4>
+            <div class="match-item" data-key="tomarconta">to take care of</div>
+            <div class="match-item" data-key="miradouro">viewpoint</div>
+            <div class="match-item" data-key="poupar">to save (money)</div>
+            <div class="match-item" data-key="demorar">to take time / be slow</div>
+            <div class="match-item" data-key="epoca">low season</div>
+            <div class="match-item" data-key="alojamento">accommodation</div>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="result-pill" id="res2"></span>
+        </div>
+      </div>
+
+      <!-- EX 3 -->
+      <div class="exercise" data-ex="3">
+        <h3>Exercício 3 — Conjugação no imperfeito</h3>
+        <p>Escreve a forma do <strong>pretérito imperfeito</strong> pedida.</p>
+        <div class="q"><span class="qnum">1.</span> trabalhar — <em>eu</em> <input type="text" data-a="trabalhava" size="11">
+          <div class="hint">-ar regular: radical + -ava.</div><div class="reveal">→ trabalhava</div></div>
+        <div class="q"><span class="qnum">2.</span> ter — <em>eu</em> <input type="text" data-a="tinha" size="8">
+          <div class="hint">Irregular: tinha.</div><div class="reveal">→ tinha</div></div>
+        <div class="q"><span class="qnum">3.</span> ir — <em>nós</em> <input type="text" data-a="íamos|iamos" size="8">
+          <div class="hint">Irregular: íamos.</div><div class="reveal">→ íamos</div></div>
+        <div class="q"><span class="qnum">4.</span> comer — <em>ela</em> <input type="text" data-a="comia" size="8">
+          <div class="hint">-er regular: radical + -ia.</div><div class="reveal">→ comia</div></div>
+        <div class="q"><span class="qnum">5.</span> ser — <em>eles</em> <input type="text" data-a="eram" size="7">
+          <div class="hint">Irregular: eram.</div><div class="reveal">→ eram</div></div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkText(3)">Verificar</button>
+          <button class="btn btn-show" onclick="toggleReveal(3)">Ver respostas</button>
+          <span class="result-pill" id="res3"></span>
+        </div>
+      </div>
+
+      <!-- EX 4 -->
+      <div class="exercise" data-ex="4">
+        <h3>Exercício 4 — Escolha múltipla (tanto / tão / e o resto)</h3>
+        <div class="q" data-mc="q1" data-correct="1">
+          <p><span class="qnum">1.</span> A estrada da Madeira é ____ íngreme!</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q1" value="0"> tanta</label>
+            <label class="choice"><input type="radio" name="q1" value="1"> tão</label>
+            <label class="choice"><input type="radio" name="q1" value="2"> tantos</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q2" data-correct="2">
+          <p><span class="qnum">2.</span> Tenho ____ coisas para fazer em casa!</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q2" value="0"> tão</label>
+            <label class="choice"><input type="radio" name="q2" value="1"> tanto</label>
+            <label class="choice"><input type="radio" name="q2" value="2"> tantas</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q3" data-correct="1">
+          <p><span class="qnum">3.</span> Tem de ser uma coisa ____ para os dois. <span class="ex">(fair)</span></p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q3" value="0"> certa</label>
+            <label class="choice"><input type="radio" name="q3" value="1"> justa</label>
+            <label class="choice"><input type="radio" name="q3" value="2"> direita</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q4" data-correct="0">
+          <p><span class="qnum">4.</span> No verão, ____ dois quartos da minha casa. <span class="ex">(I rent out)</span></p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q4" value="0"> alugo</label>
+            <label class="choice"><input type="radio" name="q4" value="1"> rento</label>
+            <label class="choice"><input type="radio" name="q4" value="2"> poupo</label>
+          </div>
+        </div>
+        <div class="q" data-mc="q5" data-correct="2">
+          <p><span class="qnum">5.</span> Em PT-PT: "Neste momento ____ um antibiótico."</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q5" value="0"> estou tomando</label>
+            <label class="choice"><input type="radio" name="q5" value="1"> tomo de</label>
+            <label class="choice"><input type="radio" name="q5" value="2"> estou a tomar</label>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkMC(4)">Verificar</button>
+          <span class="result-pill" id="res4"></span>
+        </div>
+      </div>
+
+      <!-- EX 5 -->
+      <div class="exercise" data-ex="5">
+        <h3>Exercício 5 — Escrita livre</h3>
+        <p>Escreve <strong>5 a 8 frases</strong> a contar uma viagem que fizeste (real ou imaginária). Usa pelo menos:</p>
+        <ul class="writing-tips">
+          <li>✦ 2 verbos no <strong>imperfeito</strong> (o cenário: <em>estava, era, havia…</em>)</li>
+          <li>✦ 2 verbos no <strong>perfeito</strong> (o que aconteceu: <em>fui, vi, fiquei…</em>)</li>
+          <li>✦ 1 expressão: <em>mesmo assim</em>, <em>por isso</em> ou <em>fora de época</em></li>
+          <li>✦ as palavras <em>alojamento</em> e <em>época baixa</em></li>
+        </ul>
+        <textarea id="writing" placeholder="No ano passado fui a… O tempo estava… Mesmo assim,…"></textarea>
+        <div class="actions">
+          <button class="btn btn-check" onclick="saveWriting()">Guardar texto</button>
+          <button class="btn btn-show" onclick="document.getElementById('writingModel').classList.toggle('show')">Ver exemplo</button>
+          <span class="result-pill" id="res5"></span>
+        </div>
+        <div class="reveal" id="writingModel" style="margin-top:12px;line-height:1.6">
+          <strong>Exemplo:</strong> No ano passado fui à Madeira em fevereiro, fora de época. O tempo estava ótimo e o alojamento era muito barato porque era época baixa. Fiquei em São Vicente, na costa norte. Um dia fomos ao jardim botânico do Funchal — a estrada era tão íngreme! Mesmo assim, valeu a pena: vi um miradouro lindo. Por isso, recomendo a Madeira a toda a gente.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SUMMARY -->
+  <section>
+    <div class="card">
+      <h2><span class="num">7</span> Resumo</h2>
+      <ul>
+        <li><strong>Imperfeito = cenário/hábito</strong> (estava, era, fumava); <strong>perfeito = ação concluída</strong> (fiz, fui, deixei). Aparecem juntos numa história.</li>
+        <li>Em PT-PT a ação em progresso é <strong>estar a + infinitivo</strong> — nunca o gerúndio.</li>
+        <li><strong>tão</strong> + adjetivo (invariável); <strong>tanto/-a/-os/-as</strong> + nome (concorda).</li>
+        <li>Verbos-chave: <strong>poupar, gastar, alugar, demorar, tomar conta de, comprometer-se</strong>; e cuidado: <strong>justo = fair</strong>, não "correto".</li>
+      </ul>
+      <h3>Consigo…? (autoavaliação)</h3>
+      <ul class="selfcheck">
+        <li>Consigo contar uma viagem passada usando imperfeito <em>e</em> perfeito na mesma frase.</li>
+        <li>Consigo descrever o que estou a fazer agora à maneira portuguesa.</li>
+        <li>Consigo escolher entre <em>tão</em> e <em>tanto</em> sem hesitar.</li>
+        <li>Consigo usar <em>alugar, poupar, gastar, tomar conta de</em> com naturalidade.</li>
+      </ul>
+      <div class="callout tip"><span class="ic">🌟</span>
+        <strong>Muito bem, Magda!</strong> Falaste imenso nesta aula e arriscaste estruturas difíceis — é exatamente assim que se aprende. <em>Boa viagem nos estudos!</em> 🇵🇹
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="aulas_mariana_2026-04-29.html">← Aula anterior (29 abr)</a>
+      <a href="index.html">🏠 Página principal</a>
+      <a class="disabled" href="#">Próxima aula →</a>
+    </div>
+  </section>
+
+  <footer>
+    📝 Lição gerada a partir da aula real com a Mariana · 3 de junho de 2026 · <em>Próxima aula: quarta-feira, 17 de junho</em>
+  </footer>
+</div>
+
+<script>
+  // ---------- helpers ----------
+  const LS_KEY = 'pt_marianna_2026_06_03';
+  function norm(s){
+    return (s||'').toLowerCase().trim()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'') // strip accents
+      .replace(/\s+/g,' ');
+  }
+  function load(){ try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e){ return {}; } }
+  function save(state){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+  let state = load();
+
+  // Total points = all text inputs + matching pairs + MC questions + writing(1)
+  function totalPoints(){
+    let t = 0;
+    document.querySelectorAll('.exercise[data-ex] input[type="text"]').forEach(()=>t++);
+    t += document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length; // 6
+    t += document.querySelectorAll('.q[data-mc]').length; // MC
+    t += 1; // writing
+    return t;
+  }
+  function earnedPoints(){
+    let e = 0;
+    for (const k in state){ if(k.startsWith('pt:')&&state[k]) e++; }
+    for (const k in state){ if(k.startsWith('mc:')&&state[k]) e++; }
+    if (state['match']) e += state['match'];
+    if (state['writing']) e += 1;
+    return e;
+  }
+  function refreshScore(){
+    const tot = totalPoints();
+    const earned = Math.min(earnedPoints(), tot);
+    document.getElementById('scoreNum').textContent = earned + ' / ' + tot;
+    document.getElementById('progressFill').style.width = (tot? (earned/tot*100):0) + '%';
+  }
+
+  // ---------- text exercises ----------
+  function checkText(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const inputs = box.querySelectorAll('input[type="text"]');
+    let ok = 0;
+    inputs.forEach((inp,i)=>{
+      const accepted = inp.dataset.a.split('|').map(norm);
+      const val = norm(inp.value);
+      const id = 'pt:'+ex+':'+i;
+      if (val && accepted.includes(val)){
+        inp.classList.add('correct'); inp.classList.remove('incorrect');
+        state[id]=true; ok++;
+      } else {
+        inp.classList.add('incorrect'); inp.classList.remove('correct');
+        state[id]=false;
+        const hint = inp.closest('.q').querySelector('.hint');
+        if(hint) hint.classList.add('show');
+      }
+    });
+    save(state); refreshScore();
+    const pill = document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+inputs.length+' certas';
+    pill.className = 'result-pill show ' + (ok===inputs.length?'good':'partial');
+  }
+  function toggleReveal(ex){
+    document.querySelectorAll('.exercise[data-ex="'+ex+'"] .reveal').forEach(r=>r.classList.toggle('show'));
+  }
+
+  // ---------- matching ----------
+  let selected = null;
+  function setupMatch(){
+    const wrap = document.getElementById('match2');
+    wrap.querySelectorAll('.match-item').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        if(item.classList.contains('matched')) return;
+        const side = item.parentElement.dataset.side;
+        if(!selected){ selected = item; item.classList.add('selected'); return; }
+        if(selected === item){ item.classList.remove('selected'); selected=null; return; }
+        const sameSide = selected.parentElement.dataset.side === side;
+        if(sameSide){ selected.classList.remove('selected'); selected=item; item.classList.add('selected'); return; }
+        // attempt match
+        if(selected.dataset.key === item.dataset.key){
+          selected.classList.add('matched'); item.classList.add('matched');
+          selected.classList.remove('selected');
+          countMatches();
+        } else {
+          const a=selected, b=item;
+          a.classList.add('incorrect'); b.classList.add('incorrect');
+          setTimeout(()=>{ a.classList.remove('incorrect','selected'); b.classList.remove('incorrect'); }, 700);
+        }
+        selected=null;
+      });
+    });
+  }
+  function countMatches(){
+    const pairs = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item.matched').length;
+    state['match'] = pairs; save(state); refreshScore();
+    const total = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length;
+    const pill = document.getElementById('res2');
+    pill.textContent = pairs+' / '+total+' ligações';
+    pill.className = 'result-pill show ' + (pairs===total?'good':'partial');
+  }
+
+  // ---------- multiple choice ----------
+  function checkMC(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const qs = box.querySelectorAll('.q[data-mc]');
+    let ok=0;
+    qs.forEach(q=>{
+      const correct = q.dataset.correct;
+      const chosen = q.querySelector('input[type="radio"]:checked');
+      q.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','incorrect'));
+      const id='mc:'+q.dataset.mc;
+      if(chosen){
+        const label = chosen.closest('.choice');
+        if(chosen.value===correct){ label.classList.add('correct'); state[id]=true; ok++; }
+        else {
+          label.classList.add('incorrect'); state[id]=false;
+          // highlight the right one
+          q.querySelector('input[value="'+correct+'"]').closest('.choice').classList.add('correct');
+        }
+      } else { state[id]=false; }
+    });
+    save(state); refreshScore();
+    const pill=document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+qs.length+' certas';
+    pill.className='result-pill show '+(ok===qs.length?'good':'partial');
+  }
+
+  // ---------- writing ----------
+  function saveWriting(){
+    const txt = document.getElementById('writing').value.trim();
+    state['writingText'] = txt;
+    state['writing'] = txt.length > 40; // counts as done if substantial
+    save(state); refreshScore();
+    const pill=document.getElementById('res5');
+    if(state['writing']){ pill.textContent='Texto guardado ✓'; pill.className='result-pill show good'; }
+    else { pill.textContent='Escreve um pouco mais!'; pill.className='result-pill show partial'; }
+  }
+
+  // ---------- restore ----------
+  function restore(){
+    // text inputs
+    document.querySelectorAll('.exercise[data-ex]').forEach(box=>{
+      const ex = box.dataset.ex;
+      box.querySelectorAll('input[type="text"]').forEach((inp,i)=>{
+        const id='pt:'+ex+':'+i;
+        if(state[id]===true){ inp.classList.add('correct'); }
+      });
+    });
+    // writing
+    if(state['writingText']) document.getElementById('writing').value = state['writingText'];
+    refreshScore();
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{ setupMatch(); restore(); });
+
+  function resetAll(){
+    if(!confirm('Recomeçar esta aula? A tua pontuação e respostas serão apagadas.')) return;
+    localStorage.removeItem(LS_KEY); state={};
+    location.reload();
+  }
+</script>
+</body>
+</html>

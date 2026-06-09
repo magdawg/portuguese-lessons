@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula com a Marianna — Preposições, Casa, Perguntas de Confirmação e Demonstrativos — 15 abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1B5E20;
+  --green-light: #E8F5E9;
+  --green-medium: #4CAF50;
+  --red: #B71C1C;
+  --red-light: #FFEBEE;
+  --gold: #F9A825;
+  --gold-light: #FFF8E1;
+  --blue: #1565C0;
+  --blue-light: #E3F2FD;
+  --bg: #FEFCF8;
+  --text: #2D2D2D;
+  --text-light: #666;
+  --border: #E0D8CC;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* Progress bar */
+.progress-bar-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.progress-bar-container span { font-size: 13px; font-weight: 600; color: var(--green); white-space: nowrap; }
+.progress-track {
+  flex: 1;
+  height: 8px;
+  background: var(--green-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-medium), var(--green));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.score-display { font-size: 13px; font-weight: 600; color: var(--green); white-space: nowrap; }
+
+/* Header */
+.lesson-header {
+  background: linear-gradient(135deg, var(--green) 0%, #2E7D32 100%);
+  color: white;
+  padding: 50px 20px 40px;
+  text-align: center;
+}
+.badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  backdrop-filter: blur(4px);
+}
+.lesson-header h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.lesson-header .subtitle {
+  font-size: 15px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+.level-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--text);
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* Main content */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 40px;
+}
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  color: var(--green);
+  border-bottom: 3px solid var(--green);
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin: 20px 0 10px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--green);
+}
+.card.attention {
+  border-left-color: var(--red);
+  background: var(--red-light);
+}
+.card.attention .card-title { color: var(--red); }
+.card.tip {
+  border-left-color: var(--gold);
+  background: var(--gold-light);
+}
+.card.cultural {
+  border-left-color: var(--blue);
+  background: var(--blue-light);
+}
+.card-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--green);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+th {
+  background: var(--green);
+  color: white;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0ece4;
+  font-size: 14px;
+}
+tr:hover td { background: var(--green-light); transition: background 0.2s; }
+tr:last-child td { border-bottom: none; }
+.conj-ending { color: var(--red); font-weight: 700; }
+
+/* Dialogue */
+.dialogue {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin: 16px 0;
+}
+.dialogue-line {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+.dialogue-line.speaker-a { background: var(--green-light); margin-right: 15%; }
+.dialogue-line.speaker-b { background: var(--blue-light); margin-left: 15%; }
+.speaker-name { font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
+.speaker-a .speaker-name { color: var(--green); }
+.speaker-b .speaker-name { color: var(--blue); }
+.dialogue-translation { font-size: 12px; color: var(--text-light); font-style: italic; margin-top: 4px; }
+
+/* Objectives list */
+.objectives-list {
+  list-style: none;
+  padding: 0;
+}
+.objectives-list li {
+  padding: 10px 0 10px 30px;
+  position: relative;
+  border-bottom: 1px solid #f0ece4;
+}
+.objectives-list li:last-child { border-bottom: none; }
+.objectives-list li::before {
+  content: '>';
+  position: absolute;
+  left: 8px;
+  color: var(--green);
+  font-weight: 700;
+}
+.obj-en { font-size: 13px; color: var(--text-light); font-style: italic; }
+
+/* Exercises */
+.exercise-block {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.exercise-block h3 {
+  color: var(--green);
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+.exercise-item {
+  margin-bottom: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #FAFAF5;
+}
+.exercise-item label { display: block; margin-bottom: 6px; font-size: 14px; }
+.exercise-item input[type="text"] {
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 200px;
+  max-width: 100%;
+  transition: border-color 0.3s;
+}
+.exercise-item input[type="text"]:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+.exercise-item input.correct { border-color: var(--green-medium); background: var(--green-light); }
+.exercise-item input.incorrect { border-color: var(--red); background: var(--red-light); }
+.hint { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+.hint.visible { display: block; }
+
+/* Multiple choice */
+.mc-options { list-style: none; padding: 0; }
+.mc-options li {
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+.mc-options li:hover { border-color: var(--blue); background: var(--blue-light); }
+.mc-options li.selected { border-color: var(--blue); background: var(--blue-light); font-weight: 600; }
+.mc-options li.correct-answer { border-color: var(--green-medium); background: var(--green-light); }
+.mc-options li.wrong-answer { border-color: var(--red); background: var(--red-light); }
+.mc-explanation { font-size: 13px; color: var(--text-light); margin-top: 8px; display: none; font-style: italic; }
+.mc-explanation.visible { display: block; }
+
+/* Matching exercise */
+.match-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+.match-column { flex: 1; min-width: 200px; }
+.match-column h4 { text-align: center; font-size: 14px; color: var(--text-light); margin-bottom: 10px; }
+.match-item {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  user-select: none;
+}
+.match-item:hover { border-color: var(--blue); }
+.match-item.selected { border-color: var(--gold); background: var(--gold-light); font-weight: 600; }
+.match-item.matched { border-color: var(--green-medium); background: var(--green-light); cursor: default; opacity: 0.7; }
+.match-item.wrong { border-color: var(--red); background: var(--red-light); animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 4px;
+}
+.btn-primary { background: var(--green); color: white; }
+.btn-primary:hover { background: #2E7D32; }
+.btn-secondary { background: var(--blue-light); color: var(--blue); }
+.btn-secondary:hover { background: #BBDEFB; }
+.btn-small { padding: 6px 14px; font-size: 12px; }
+
+/* Writing area */
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+textarea:focus { outline: none; border-color: var(--blue); }
+
+/* Summary checklist */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 15px;
+}
+.checklist li::before {
+  content: '?';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Navigation */
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: 2px solid var(--green);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.nav-link:hover { background: var(--green); color: white; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 20px 14px 40px; }
+  .lesson-header { padding: 30px 14px 25px; }
+  .card, .exercise-block { padding: 16px; }
+  .match-container { flex-direction: column; gap: 16px; }
+  .dialogue-line.speaker-a { margin-right: 5%; }
+  .dialogue-line.speaker-b { margin-left: 5%; }
+  table { font-size: 13px; }
+  th, td { padding: 8px 10px; }
+}
+
+/* Print */
+@media print {
+  .progress-bar-container, .btn, .nav-footer { display: none; }
+  .lesson-header { background: white; color: var(--green); border-bottom: 3px solid var(--green); }
+  .level-badge { border: 1px solid var(--gold); }
+  body { font-size: 12pt; }
+  .card, .exercise-block, .dialogue { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar-container">
+  <span>Progresso</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="score-display" id="scoreDisplay">0 / 38 pontos</span>
+</div>
+
+<!-- Header -->
+<header class="lesson-header">
+  <div class="badge">Baseada na aula real</div>
+  <h1>Aula com a Marianna</h1>
+  <p class="subtitle">Preposições de transporte, "casa", perguntas de confirmação e demonstrativos</p>
+  <p class="subtitle">15 de abril de 2026</p>
+  <span class="level-badge">A2</span>
+</header>
+
+<div class="container">
+
+  <nav class="nav-footer" style="margin-top:0;margin-bottom:24px">
+    <a href="aulas_mariana_2026-04-01.html" class="nav-link">&larr; Aula anterior (1 abr)</a>
+    <a href="index.html" class="nav-link">🏠 Página principal</a>
+    <a href="aulas_mariana_2026-04-22.html" class="nav-link">Próxima aula (22 abr) &rarr;</a>
+  </nav>
+
+  <!-- 1. Opening -->
+  <section class="section">
+    <h2 class="section-title">Resumo da última aula</h2>
+    <p>Na última aula com a Marianna, praticaste <strong>estar com + estados físicos</strong>, o verbo <strong>conseguir</strong>, o verbo <strong>costumar</strong>, <strong>importar-se</strong> e <strong>ter de + infinitivo</strong>. Também aprendeste a responder com verbos em vez de só "sim" e descobriste se és cotovia ou coruja!</p>
+    <p style="margin-top:10px;">Hoje, a Marianna focou-se nas <strong>pequenas palavras</strong> que fazem toda a diferença em português: preposições com transportes, a exceção da palavra "casa", perguntas de confirmação e demonstrativos com palavras de localização.</p>
+  </section>
+
+  <!-- 2. Objectives -->
+  <section class="section">
+    <h2 class="section-title">O que vamos aprender hoje</h2>
+    <ul class="objectives-list">
+      <li>Usar as preposições corretas com transportes: <strong>andar de</strong> vs <strong>andar no/na</strong><br><span class="obj-en">Use the correct prepositions with transport: general vs specific</span></li>
+      <li>Perceber a exceção da palavra <strong>casa</strong> com preposições<br><span class="obj-en">Understand the exception of the word "casa" (home) with prepositions</span></li>
+      <li>Fazer <strong>perguntas de confirmação</strong> de três maneiras diferentes<br><span class="obj-en">Make confirmation questions in three different ways</span></li>
+      <li>Usar corretamente <strong>isto/isso/aquilo</strong> com <strong>aqui/aí/ali</strong> e distinguir <strong>cá/lá</strong><br><span class="obj-en">Correctly use demonstratives with location words, and distinguish cá/lá from aqui/ali</span></li>
+    </ul>
+  </section>
+
+  <!-- 3. Grammar -->
+  <section class="section">
+    <h2 class="section-title">Gramática</h2>
+
+    <!-- 3A: Prepositions with transport -->
+    <h3 class="section-subtitle">A. Preposições com transportes</h3>
+
+    <div class="card">
+      <div class="card-title">Regra geral: andar de + transporte</div>
+      <p>Quando falas de um transporte <strong>em geral</strong> (não específico), usas sempre <strong>andar de</strong>. É como em inglês: "go by car".</p>
+      <table>
+        <tr><th>Português</th><th>Inglês</th></tr>
+        <tr><td>Eu <strong>ando de</strong> carro todos os dias.</td><td>I go by car every day.</td></tr>
+        <tr><td>Ela <strong>anda de</strong> bicicleta ao fim de semana.</td><td>She rides a bicycle on weekends.</td></tr>
+        <tr><td>Nós <strong>andamos de</strong> avião para Paris.</td><td>We fly to Paris.</td></tr>
+        <tr><td>Eles <strong>andam de</strong> autocarro para o trabalho.</td><td>They take the bus to work.</td></tr>
+      </table>
+      <p style="margin-top:12px;">Esta regra funciona com todos os verbos de movimento: <strong>ir de</strong>, <strong>vir de</strong>, <strong>voltar de</strong>.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Transporte específico: andar no / na / nos / nas</div>
+      <p>Quando especificas <strong>qual</strong> transporte (o meu carro, a bicicleta azul, o autocarro 15), usas <strong>em</strong> + artigo definido = <strong>no/na/nos/nas</strong>.</p>
+      <table>
+        <tr><th>Geral (de)</th><th>Específico (no/na)</th></tr>
+        <tr><td>Eu ando <strong>de</strong> carro.</td><td>Eu vou <strong>no</strong> meu carro.</td></tr>
+        <tr><td>Ela anda <strong>de</strong> bicicleta.</td><td>Ela anda <strong>na</strong> bicicleta azul.</td></tr>
+        <tr><td>Vamos <strong>de</strong> avião.</td><td>Vamos <strong>no</strong> avião das 14h.</td></tr>
+        <tr><td>Ando <strong>de</strong> autocarro.</td><td>Ando <strong>no</strong> autocarro 15.</td></tr>
+      </table>
+      <p style="margin-top:10px;"><strong>Pronúncia:</strong> no = /nu/, na = /nɐ/, nos = /nuʃ/, nas = /nɐʃ/</p>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title">Exceção: a pé</div>
+      <p>Quando andas <strong>a pé</strong>, não usas "de" — usas a preposição <strong>a</strong>:</p>
+      <p style="margin-top:8px;"><strong>Eu ando a pé.</strong> / <strong>Eu vou a pé.</strong> = I go on foot / I walk.</p>
+      <p style="margin-top:6px;font-size:13px;color:var(--text-light);">Nota: "andar" sozinho já significa "caminhar", então "andar a pé" é um bocadinho redundante — mas diz-se assim!</p>
+    </div>
+
+    <div class="card attention">
+      <div class="card-title">Atenção! Quando usar "em" puro?</div>
+      <p>A preposição <strong>em</strong> sem contrações aparece quando a palavra seguinte <strong>não tem género</strong>:</p>
+      <ul style="margin-top:8px;">
+        <li>Verbos: <em>pensar <strong>em</strong> viajar</em></li>
+        <li>Meses: <em><strong>em</strong> janeiro, <strong>em</strong> maio</em></li>
+        <li>Certos países/cidades: <em><strong>em</strong> Portugal, <strong>em</strong> Lisboa</em></li>
+        <li>Números: <em>o cão anda <strong>em</strong> quatro patas</em></li>
+      </ul>
+    </div>
+
+    <!-- 3B: Casa exception -->
+    <h3 class="section-subtitle">B. A exceção da palavra "casa"</h3>
+
+    <div class="card">
+      <div class="card-title">Casa = home (sem artigo!)</div>
+      <p>Em inglês dizes "I go <strong>home</strong>" e não "I go <strong>to the</strong> home". Em português acontece o mesmo! Quando "casa" significa <strong>o teu lar</strong>, não adaptamos a preposição ao género:</p>
+      <table>
+        <tr><th>Expressão</th><th>Inglês</th><th>Nota</th></tr>
+        <tr><td><strong>Estou em casa</strong></td><td>I'm at home</td><td>NÃO "na casa"</td></tr>
+        <tr><td><strong>Fico em casa</strong></td><td>I stay at home</td><td>NÃO "na casa"</td></tr>
+        <tr><td><strong>Saio de casa</strong></td><td>I leave home</td><td>NÃO "da casa"</td></tr>
+        <tr><td><strong>Fora de casa</strong></td><td>Out of the house</td><td>Expressão fixa</td></tr>
+        <tr><td><strong>Volto para casa</strong></td><td>I go back home</td><td>NÃO "para a casa"</td></tr>
+      </table>
+      <p style="margin-top:12px;">Mas todos os outros lugares adaptam normalmente:</p>
+      <table>
+        <tr><th>Lugar</th><th>Correto</th></tr>
+        <tr><td>cidade (f.)</td><td>Estou <strong>na</strong> cidade.</td></tr>
+        <tr><td>supermercado (m.)</td><td>Estou <strong>no</strong> supermercado.</td></tr>
+        <tr><td>praia (f.)</td><td>Fico <strong>na</strong> praia.</td></tr>
+        <tr><td>restaurante (m.)</td><td>Estou <strong>no</strong> restaurante.</td></tr>
+      </table>
+    </div>
+
+    <div class="card attention">
+      <div class="card-title">Atenção! "Casa" com artigo = a casa de alguém</div>
+      <p>Se falas da casa de <strong>outra pessoa</strong>, já não é "home" — é "the house". Aí sim, adaptas:</p>
+      <p style="margin-top:8px;">Vou <strong>à casa da</strong> Maria. = I go to Maria's house.</p>
+      <p>Estou <strong>na casa do</strong> meu amigo. = I'm at my friend's house.</p>
+    </div>
+
+    <!-- 3C: Confirmation questions -->
+    <h3 class="section-subtitle">C. Perguntas de confirmação</h3>
+
+    <div class="card">
+      <div class="card-title">Três maneiras de confirmar</div>
+      <p>Em português, temos três tipos de perguntas sim/não e três maneiras de pedir confirmação:</p>
+
+      <p style="margin-top:14px;"><strong>1. Perguntas sim/não simples</strong> — frase normal + entoação de pergunta:</p>
+      <p style="padding-left:20px;"><em>Ela mora em Peniche?</em> (Does she live in Peniche?)</p>
+      <p style="font-size:13px;color:var(--text-light);padding-left:20px;">A mais neutra — simplesmente queres saber.</p>
+
+      <p style="margin-top:14px;"><strong>2. Afirmativa + não + verbo?</strong> — começas com o que acreditas e confirmas:</p>
+      <p style="padding-left:20px;"><em>Ela trabalha no hotel, <strong>não trabalha?</strong></em></p>
+      <p style="padding-left:20px;"><em>Tu gostas de café, <strong>não gostas?</strong></em></p>
+      <p style="font-size:13px;color:var(--text-light);padding-left:20px;">Mais pessoal — tu acreditas que sim e queres confirmação.</p>
+
+      <p style="margin-top:14px;"><strong>3. Negativa + pois não?</strong> — quando a tua crença é negativa:</p>
+      <p style="padding-left:20px;"><em>Ela <strong>não</strong> trabalha muito, <strong>pois não?</strong></em></p>
+      <p style="padding-left:20px;"><em>Tu <strong>não</strong> gostas de chuva, <strong>pois não?</strong></em></p>
+      <p style="font-size:13px;color:var(--text-light);padding-left:20px;">Começas com a ideia negativa que queres confirmar.</p>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title">A versão "preguiçosa": não é?</div>
+      <p>Na conversa do dia a dia, muitos portugueses usam <strong>"não é?"</strong> para tudo:</p>
+      <p style="margin-top:8px;"><em>Hoje está calor, <strong>não é?</strong></em></p>
+      <p><em>Tu moras em Peniche, <strong>não é?</strong></em></p>
+      <p><em>Eles gostam de praia, <strong>não é?</strong></em></p>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-light);">Funciona sempre, mas a forma com o verbo é mais elegante e mostra melhor domínio da língua!</p>
+    </div>
+
+    <div class="card cultural">
+      <div class="card-title">Nota cultural: A palavra "pois"</div>
+      <p><strong>Pois</strong> é uma das palavras mais portuguesas que existem! Usa-se como:</p>
+      <ul style="margin-top:8px;">
+        <li><strong>Feedback na conversa:</strong> "Pois, pois..." (= sim, concordo, estou a ouvir)</li>
+        <li><strong>Confirmação:</strong> "Pois é!" (= That's right!)</li>
+        <li><strong>Perguntas de confirmação negativas:</strong> "...pois não?"</li>
+      </ul>
+      <p style="margin-top:8px;font-size:13px;">Se começares a usar "pois" na conversa, os portugueses vão pensar que já falas português há muito tempo!</p>
+    </div>
+
+    <!-- 3D: Demonstratives + Location -->
+    <h3 class="section-subtitle">D. Demonstrativos + localização</h3>
+
+    <div class="card">
+      <div class="card-title">As combinações obrigatórias</div>
+      <p>Em português, os demonstrativos (isto/isso/aquilo) <strong>combinam-se sempre</strong> com as palavras de lugar corretas. Não podes misturar!</p>
+      <table>
+        <tr><th>Demonstrativo</th><th>+ Lugar</th><th>Distância</th><th>Inglês</th></tr>
+        <tr><td><strong>isto</strong> (this)</td><td><strong>aqui</strong> (here)</td><td>Perto de <strong>mim</strong></td><td>this here</td></tr>
+        <tr><td><strong>isso</strong> (that)</td><td><strong>aí</strong> (there)</td><td>Perto de <strong>ti</strong></td><td>that there (near you)</td></tr>
+        <tr><td><strong>aquilo</strong> (that)</td><td><strong>ali</strong> (over there)</td><td>Longe de <strong>ambos</strong></td><td>that over there</td></tr>
+      </table>
+    </div>
+
+    <div class="card attention">
+      <div class="card-title">Atenção! Não mistures direções!</div>
+      <p>NÃO podes dizer:</p>
+      <ul style="margin-top:8px;">
+        <li><s>"isto ali"</s> — isto é perto de mim, ali é longe!</li>
+        <li><s>"aquilo aqui"</s> — aquilo é longe, aqui é perto!</li>
+        <li><s>"isto lá"</s> — a Marianna corrigiu isto na aula!</li>
+      </ul>
+      <p style="margin-top:10px;">Os pares são <strong>fixos</strong>: isto+aqui, isso+aí, aquilo+ali.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Cá/lá vs aqui/ali — qual é a diferença?</div>
+      <table>
+        <tr><th></th><th>Aqui / Ali</th><th>Cá / Lá</th></tr>
+        <tr><td><strong>Precisão</strong></td><td>Preciso, área pequena</td><td>Geral, área grande</td></tr>
+        <tr><td><strong>Exemplo "perto"</strong></td><td>Estou <strong>aqui</strong> no escritório.</td><td>Cá em Portugal, temos bom tempo.</td></tr>
+        <tr><td><strong>Exemplo "longe"</strong></td><td>O livro está <strong>ali</strong> na mesa.</td><td><strong>Lá</strong> em Espanha, falam espanhol.</td></tr>
+        <tr><td><strong>Visibilidade</strong></td><td><strong>Ali</strong> = consigo ver o lugar</td><td><strong>Lá</strong> = não consigo ver daqui</td></tr>
+      </table>
+      <p style="margin-top:12px;"><strong>Regra prática:</strong></p>
+      <ul>
+        <li><strong>Aqui</strong> = "right here" (preciso) / <strong>Cá</strong> = "around here" (geral)</li>
+        <li><strong>Ali</strong> = "over there" (consigo ver) / <strong>Lá</strong> = "there" (longe, não vejo)</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title">Com demonstrativos: SEMPRE aqui/aí/ali (nunca cá/lá)</div>
+      <p>Quando usas <strong>isto, isso, aquilo</strong>, combina sempre com <strong>aqui, aí, ali</strong>:</p>
+      <p style="margin-top:8px;">Isto <strong>aqui</strong> é o meu telemóvel. (nunca "isto cá")</p>
+      <p>O que é isso <strong>aí</strong>? (nunca "isso lá")</p>
+      <p>Aquilo <strong>ali</strong> é bonito. (nunca "aquilo lá")</p>
+    </div>
+  </section>
+
+  <!-- 4. Vocabulary -->
+  <section class="section">
+    <h2 class="section-title">Vocabulário novo</h2>
+
+    <h3 class="section-subtitle">Transportes e movimento</h3>
+    <table>
+      <tr><th>Palavra</th><th>Género</th><th>Inglês</th><th>Exemplo</th></tr>
+      <tr><td>o carro</td><td>m.</td><td>car</td><td>Eu ando de carro para o trabalho.</td></tr>
+      <tr><td>a bicicleta</td><td>f.</td><td>bicycle</td><td>Ela anda de bicicleta ao fim de semana.</td></tr>
+      <tr><td>o avião <span style="font-size:12px;color:var(--text-light);">/ɐviˈɐ̃w̃/</span></td><td>m.</td><td>airplane</td><td>Vamos de avião para o Algarve.</td></tr>
+      <tr><td>o autocarro</td><td>m.</td><td>bus (PT-PT)</td><td>O autocarro passa às oito.</td></tr>
+      <tr><td>o barco</td><td>m.</td><td>boat</td><td>Andamos de barco no rio Tejo.</td></tr>
+      <tr><td>a pé</td><td>—</td><td>on foot</td><td>Eu vou a pé para a escola.</td></tr>
+      <tr><td>o ciclismo</td><td>m.</td><td>cycling</td><td>Ela gosta muito de fazer ciclismo.</td></tr>
+    </table>
+
+    <h3 class="section-subtitle">Casa e lugares</h3>
+    <table>
+      <tr><th>Palavra</th><th>Género</th><th>Inglês</th><th>Exemplo</th></tr>
+      <tr><td>em casa</td><td>—</td><td>at home</td><td>Hoje fico em casa.</td></tr>
+      <tr><td>fora de casa</td><td>—</td><td>out of the house</td><td>Passo muito tempo fora de casa.</td></tr>
+      <tr><td>o supermercado</td><td>m.</td><td>supermarket</td><td>Vou ao supermercado comprar fruta.</td></tr>
+      <tr><td>a farmácia</td><td>f.</td><td>pharmacy</td><td>Preciso de ir à farmácia.</td></tr>
+      <tr><td>a gruta</td><td>f.</td><td>cave</td><td>Visitámos as grutas mais profundas de Portugal.</td></tr>
+    </table>
+
+    <h3 class="section-subtitle">Demonstrativos e localização</h3>
+    <table>
+      <tr><th>Palavra</th><th>Inglês</th><th>Uso</th></tr>
+      <tr><td><strong>isto</strong> / <strong>aqui</strong></td><td>this / here</td><td>Perto de mim: <em>Isto aqui é o meu livro.</em></td></tr>
+      <tr><td><strong>isso</strong> / <strong>aí</strong></td><td>that / there</td><td>Perto de ti: <em>O que é isso aí?</em></td></tr>
+      <tr><td><strong>aquilo</strong> / <strong>ali</strong></td><td>that / over there</td><td>Longe de ambos: <em>Aquilo ali é bonito.</em></td></tr>
+      <tr><td><strong>cá</strong></td><td>around here (general)</td><td><em>Cá em Portugal, comemos bacalhau.</em></td></tr>
+      <tr><td><strong>lá</strong></td><td>there (far, can't see)</td><td><em>Lá em Espanha, falam espanhol.</em></td></tr>
+    </table>
+
+    <h3 class="section-subtitle">Bónus — da conversa</h3>
+    <table>
+      <tr><th>Palavra</th><th>Género</th><th>Inglês</th><th>Exemplo</th></tr>
+      <tr><td>o retiro</td><td>m.</td><td>retreat</td><td>A Marianna foi a um retiro de ioga.</td></tr>
+      <tr><td>esgotado/a</td><td>adj.</td><td>sold out / exhausted</td><td>O retiro de maio está esgotado.</td></tr>
+      <tr><td>bronzeado/a</td><td>adj.</td><td>tanned</td><td>Pareces bronzeada!</td></tr>
+      <tr><td>fresco/a</td><td>adj.</td><td>cool, fresh (weather)</td><td>O tempo está fresco hoje.</td></tr>
+      <tr><td>agradável <span style="font-size:12px;color:var(--text-light);">/ɐɡɾɐˈdavɛl/</span></td><td>adj.</td><td>pleasant</td><td>O clima está muito agradável.</td></tr>
+      <tr><td>a quinta</td><td>f.</td><td>farm / country estate</td><td>O retiro é numa quinta histórica.</td></tr>
+      <tr><td>o mergulho</td><td>m.</td><td>dive / plunge</td><td>Decidi dar um mergulho na piscina.</td></tr>
+      <tr><td>corrigir</td><td>v.</td><td>to correct</td><td>A professora vai corrigir as frases.</td></tr>
+    </table>
+  </section>
+
+  <!-- 5. Communication -->
+  <section class="section">
+    <h2 class="section-title">Comunicação</h2>
+    <p>Diálogo baseado nos temas da aula — a Sofia e o Pedro falam sobre os seus fins de semana e praticam perguntas de confirmação.</p>
+
+    <div class="dialogue">
+      <div class="dialogue-line speaker-a">
+        <span class="speaker-name">Sofia</span>
+        Olá Pedro! Então, foste de carro para o Algarve no fim de semana, não foste?
+        <div class="dialogue-translation">Hi Pedro! So, you drove to the Algarve this weekend, didn't you?</div>
+      </div>
+      <div class="dialogue-line speaker-b">
+        <span class="speaker-name">Pedro</span>
+        Não, desta vez fui de avião. Encontrei um voo muito barato!
+        <div class="dialogue-translation">No, this time I went by plane. I found a really cheap flight!</div>
+      </div>
+      <div class="dialogue-line speaker-a">
+        <span class="speaker-name">Sofia</span>
+        A sério? E lá no Algarve, andaste de bicicleta como sempre?
+        <div class="dialogue-translation">Really? And down there in the Algarve, did you cycle as usual?</div>
+      </div>
+      <div class="dialogue-line speaker-b">
+        <span class="speaker-name">Pedro</span>
+        Sim, aluguei uma bicicleta e andei na bicicleta azul mais bonita que já vi! E tu, ficaste em casa?
+        <div class="dialogue-translation">Yes, I rented a bike and rode the most beautiful blue bicycle I've ever seen! And you, did you stay at home?</div>
+      </div>
+      <div class="dialogue-line speaker-a">
+        <span class="speaker-name">Sofia</span>
+        Não, passei muito tempo fora de casa. Fui a pé até à praia — é aqui perto, sabes.
+        <div class="dialogue-translation">No, I spent a lot of time out of the house. I walked to the beach — it's nearby here, you know.</div>
+      </div>
+      <div class="dialogue-line speaker-b">
+        <span class="speaker-name">Pedro</span>
+        Que bom! O que é isso aí na tua mão? Trouxeste algo da praia?
+        <div class="dialogue-translation">How nice! What's that there in your hand? Did you bring something from the beach?</div>
+      </div>
+      <div class="dialogue-line speaker-a">
+        <span class="speaker-name">Sofia</span>
+        Isto aqui? É uma concha! E olha aquilo ali na mesa — é um livro sobre as grutas de Portugal.
+        <div class="dialogue-translation">This here? It's a shell! And look at that over there on the table — it's a book about the caves of Portugal.</div>
+      </div>
+      <div class="dialogue-line speaker-b">
+        <span class="speaker-name">Pedro</span>
+        Tu não gostas de grutas, pois não?
+        <div class="dialogue-translation">You don't like caves, do you?</div>
+      </div>
+      <div class="dialogue-line speaker-a">
+        <span class="speaker-name">Sofia</span>
+        Gosto sim! Lá no interior, há grutas incríveis. Mas são longe — tenho de ir de carro.
+        <div class="dialogue-translation">I do! There in the interior, there are incredible caves. But they're far away — I have to go by car.</div>
+      </div>
+      <div class="dialogue-line speaker-b">
+        <span class="speaker-name">Pedro</span>
+        O tempo está agradável, não está? Nem quente nem frio — perfeito para passear.
+        <div class="dialogue-translation">The weather is pleasant, isn't it? Neither hot nor cold — perfect for strolling.</div>
+      </div>
+    </div>
+
+    <div class="card cultural">
+      <div class="card-title">Nota cultural: O clima em Portugal</div>
+      <p>Os portugueses adoram falar do tempo! Palavras essenciais para a conversa:</p>
+      <ul style="margin-top:8px;">
+        <li><strong>Fresco</strong> — não é frio a sério, é só "fresquinho". Usa-se muito na primavera.</li>
+        <li><strong>Agradável</strong> — o tempo ideal: sol, sem demasiado calor. Os portugueses ficam felizes!</li>
+        <li>O interior de Portugal (perto de Fátima, Serra de Candeeiros) tem sol forte e paisagens lindas — perfeito para ciclismo e grutas!</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. Exercises -->
+  <section class="section">
+    <h2 class="section-title">Exercícios</h2>
+
+    <!-- Exercise 1: Fill in the blank — Prepositions -->
+    <div class="exercise-block">
+      <h3>Exercício 1 — Completa com a preposição correta</h3>
+      <p style="margin-bottom:14px;font-size:14px;color:var(--text-light);">Preenche com: <strong>de</strong>, <strong>no</strong>, <strong>na</strong>, <strong>a</strong>, <strong>em</strong>, <strong>num</strong></p>
+
+      <div class="exercise-item">
+        <label>1. Eu ando <input type="text" id="ex1_1" size="8" aria-label="preposição 1"> carro todos os dias.</label>
+        <div class="hint" id="hint1_1">Transporte geral = "de"</div>
+      </div>
+      <div class="exercise-item">
+        <label>2. Ela vai <input type="text" id="ex1_2" size="8" aria-label="preposição 2"> avião das 14 horas.</label>
+        <div class="hint" id="hint1_2">Avião específico (das 14h) = "no"</div>
+      </div>
+      <div class="exercise-item">
+        <label>3. O Pedro vai <input type="text" id="ex1_3" size="8" aria-label="preposição 3"> pé para a escola.</label>
+        <div class="hint" id="hint1_3">A pé = on foot (exceção!)</div>
+      </div>
+      <div class="exercise-item">
+        <label>4. Nós andamos <input type="text" id="ex1_4" size="8" aria-label="preposição 4"> bicicleta ao fim de semana.</label>
+        <div class="hint" id="hint1_4">Bicicleta em geral = "de"</div>
+      </div>
+      <div class="exercise-item">
+        <label>5. Eu estou <input type="text" id="ex1_5" size="8" aria-label="preposição 5"> casa.</label>
+        <div class="hint" id="hint1_5">Casa (= home) não adapta: "em casa"</div>
+      </div>
+      <div class="exercise-item">
+        <label>6. Ele trabalha <input type="text" id="ex1_6" size="8" aria-label="preposição 6"> hotel perto da praia.</label>
+        <div class="hint" id="hint1_6">Um hotel (não específico) = "num"</div>
+      </div>
+      <div class="exercise-item">
+        <label>7. Eu moro <input type="text" id="ex1_7" size="8" aria-label="preposição 7"> Lisboa.</label>
+        <div class="hint" id="hint1_7">Cidades sem artigo = "em" puro</div>
+      </div>
+      <div class="exercise-item">
+        <label>8. Ela anda <input type="text" id="ex1_8" size="8" aria-label="preposição 8"> bicicleta vermelha da mãe.</label>
+        <div class="hint" id="hint1_8">Bicicleta específica = "na"</div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-primary" onclick="checkExercise1()">Verificar</button>
+        <button class="btn btn-secondary" onclick="showAnswers1()">Ver respostas</button>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Matching — Demonstratives + Location -->
+    <div class="exercise-block">
+      <h3>Exercício 2 — Liga os pares corretos</h3>
+      <p style="margin-bottom:14px;font-size:14px;color:var(--text-light);">Clica num item da esquerda e depois no par correto da direita.</p>
+
+      <div class="match-container">
+        <div class="match-column">
+          <h4>Português</h4>
+          <div class="match-item" data-match="a" data-side="left" onclick="selectMatch(this)">isto + ___</div>
+          <div class="match-item" data-match="b" data-side="left" onclick="selectMatch(this)">isso + ___</div>
+          <div class="match-item" data-match="c" data-side="left" onclick="selectMatch(this)">aquilo + ___</div>
+          <div class="match-item" data-match="d" data-side="left" onclick="selectMatch(this)">cá (geral, perto)</div>
+          <div class="match-item" data-match="e" data-side="left" onclick="selectMatch(this)">lá (geral, longe)</div>
+          <div class="match-item" data-match="f" data-side="left" onclick="selectMatch(this)">fora de casa</div>
+          <div class="match-item" data-match="g" data-side="left" onclick="selectMatch(this)">andar de carro</div>
+          <div class="match-item" data-match="h" data-side="left" onclick="selectMatch(this)">andar no meu carro</div>
+        </div>
+        <div class="match-column">
+          <h4>Resposta</h4>
+          <div class="match-item" data-match="h" data-side="right" onclick="selectMatch(this)">specific transport</div>
+          <div class="match-item" data-match="c" data-side="right" onclick="selectMatch(this)">ali (longe de ambos)</div>
+          <div class="match-item" data-match="f" data-side="right" onclick="selectMatch(this)">out of the house</div>
+          <div class="match-item" data-match="a" data-side="right" onclick="selectMatch(this)">aqui (perto de mim)</div>
+          <div class="match-item" data-match="e" data-side="right" onclick="selectMatch(this)">lugar invisível daqui</div>
+          <div class="match-item" data-match="g" data-side="right" onclick="selectMatch(this)">general transport</div>
+          <div class="match-item" data-match="d" data-side="right" onclick="selectMatch(this)">around here (big area)</div>
+          <div class="match-item" data-match="b" data-side="right" onclick="selectMatch(this)">aí (perto de ti)</div>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-light);" id="matchScore">Pares corretos: 0 / 8</p>
+    </div>
+
+    <!-- Exercise 3: Confirmation questions -->
+    <div class="exercise-block">
+      <h3>Exercício 3 — Completa as perguntas de confirmação</h3>
+      <p style="margin-bottom:14px;font-size:14px;color:var(--text-light);">Escreve a parte que falta para fazer uma pergunta de confirmação.</p>
+
+      <div class="exercise-item">
+        <label>1. Ela mora em Lisboa, _____________?</label>
+        <input type="text" id="ex3_1" size="22" placeholder="não + verbo">
+        <div class="hint" id="hint3_1">não mora</div>
+      </div>
+      <div class="exercise-item">
+        <label>2. Tu gostas de praia, _____________?</label>
+        <input type="text" id="ex3_2" size="22" placeholder="não + verbo">
+        <div class="hint" id="hint3_2">não gostas</div>
+      </div>
+      <div class="exercise-item">
+        <label>3. Ele não fala português, _____________?</label>
+        <input type="text" id="ex3_3" size="22" placeholder="expressão fixa">
+        <div class="hint" id="hint3_3">pois não</div>
+      </div>
+      <div class="exercise-item">
+        <label>4. Vocês não moram em Peniche, _____________?</label>
+        <input type="text" id="ex3_4" size="22" placeholder="expressão fixa">
+        <div class="hint" id="hint3_4">pois não</div>
+      </div>
+      <div class="exercise-item">
+        <label>5. O Pedro anda de bicicleta, _____________?</label>
+        <input type="text" id="ex3_5" size="22" placeholder="não + verbo">
+        <div class="hint" id="hint3_5">não anda</div>
+      </div>
+      <div class="exercise-item">
+        <label>6. Hoje está calor, _____________?</label>
+        <input type="text" id="ex3_6" size="22" placeholder="versão preguiçosa ou verbo">
+        <div class="hint" id="hint3_6">"não está" ou "não é"</div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-primary" onclick="checkExercise3()">Verificar</button>
+        <button class="btn btn-secondary" onclick="showAnswers3()">Ver respostas</button>
+      </div>
+    </div>
+
+    <!-- Exercise 4: Multiple choice — Demonstratives -->
+    <div class="exercise-block">
+      <h3>Exercício 4 — Escolhe a opção correta</h3>
+      <p style="margin-bottom:14px;font-size:14px;color:var(--text-light);">Demonstrativos, localização e preposições — escolhe a resposta certa.</p>
+
+      <div class="exercise-item" id="mc1">
+        <label><strong>1.</strong> [Apontas para o telemóvel na tua mão] O meu telemóvel é ___.</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">aquilo ali</li>
+          <li data-value="b" onclick="selectMC(this)">isto aqui</li>
+          <li data-value="c" onclick="selectMC(this)">isso aí</li>
+          <li data-value="d" onclick="selectMC(this)">isto lá</li>
+        </ul>
+        <div class="mc-explanation" id="mc1_exp">Correto: <strong>isto aqui</strong> — o objeto está na TUA mão, perto de ti (quem fala).</div>
+      </div>
+
+      <div class="exercise-item" id="mc2">
+        <label><strong>2.</strong> [Perguntas ao teu amigo sobre algo que ele tem] O que é ___ que tens?</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">aquilo ali</li>
+          <li data-value="b" onclick="selectMC(this)">isto aqui</li>
+          <li data-value="c" onclick="selectMC(this)">isso aí</li>
+          <li data-value="d" onclick="selectMC(this)">isso ali</li>
+        </ul>
+        <div class="mc-explanation" id="mc2_exp">Correto: <strong>isso aí</strong> — o objeto está perto do teu amigo (a pessoa com quem falas).</div>
+      </div>
+
+      <div class="exercise-item" id="mc3">
+        <label><strong>3.</strong> Eu saio ___ casa às 8 da manhã.</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">da</li>
+          <li data-value="b" onclick="selectMC(this)">de</li>
+          <li data-value="c" onclick="selectMC(this)">na</li>
+          <li data-value="d" onclick="selectMC(this)">a</li>
+        </ul>
+        <div class="mc-explanation" id="mc3_exp">Correto: <strong>de</strong> — "casa" quando significa "home" não adapta a preposição. Sair <strong>de</strong> casa.</div>
+      </div>
+
+      <div class="exercise-item" id="mc4">
+        <label><strong>4.</strong> ___ em Espanha, o clima é diferente.</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">Ali</li>
+          <li data-value="b" onclick="selectMC(this)">Aí</li>
+          <li data-value="c" onclick="selectMC(this)">Lá</li>
+          <li data-value="d" onclick="selectMC(this)">Aqui</li>
+        </ul>
+        <div class="mc-explanation" id="mc4_exp">Correto: <strong>Lá</strong> — Espanha é um lugar longe, que não conseguimos ver daqui. "Lá" é para dimensões grandes e lugares invisíveis.</div>
+      </div>
+
+      <div class="exercise-item" id="mc5">
+        <label><strong>5.</strong> Ela trabalha ___ hotel cinco estrelas no centro.</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">em</li>
+          <li data-value="b" onclick="selectMC(this)">no</li>
+          <li data-value="c" onclick="selectMC(this)">num</li>
+          <li data-value="d" onclick="selectMC(this)">de</li>
+        </ul>
+        <div class="mc-explanation" id="mc5_exp">Correto: <strong>num</strong> — "um hotel" (não sabemos qual especificamente) → em + um = <strong>num</strong>.</div>
+      </div>
+
+      <div class="exercise-item" id="mc6">
+        <label><strong>6.</strong> Eu vou ___ autocarro 28 para Alfama.</label>
+        <ul class="mc-options">
+          <li data-value="a" onclick="selectMC(this)">de autocarro</li>
+          <li data-value="b" onclick="selectMC(this)">no</li>
+          <li data-value="c" onclick="selectMC(this)">num</li>
+          <li data-value="d" onclick="selectMC(this)">em</li>
+        </ul>
+        <div class="mc-explanation" id="mc6_exp">Correto: <strong>no</strong> — o autocarro 28 é um autocarro específico → em + o = <strong>no</strong>.</div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-primary" onclick="checkExercise4()">Verificar</button>
+        <button class="btn btn-secondary" onclick="showAnswers4()">Ver respostas</button>
+      </div>
+    </div>
+
+    <!-- Exercise 5: Free writing -->
+    <div class="exercise-block">
+      <h3>Exercício 5 — Escrita livre</h3>
+      <p style="margin-bottom:14px;">Descreve como vais de casa até ao trabalho (ou à escola, ou a um lugar que gostes). Usa:</p>
+      <ul style="margin-bottom:14px;font-size:14px;">
+        <li>Pelo menos <strong>2 transportes</strong> diferentes (com preposições corretas!)</li>
+        <li>A expressão <strong>"em casa"</strong> ou <strong>"fora de casa"</strong></li>
+        <li>Uma <strong>pergunta de confirmação</strong></li>
+        <li><strong>Isto/isso/aquilo</strong> com <strong>aqui/aí/ali</strong> pelo menos uma vez</li>
+      </ul>
+      <textarea id="freeWriting" placeholder="Exemplo: Eu saio de casa às 8 da manhã. Normalmente ando de autocarro, mas hoje vou no carro do meu amigo..." aria-label="Escrita livre"></textarea>
+      <div style="margin-top:10px;">
+        <button class="btn btn-primary" onclick="saveWriting()">Guardar</button>
+        <span id="writingSaved" style="font-size:13px;color:var(--green);margin-left:10px;display:none;">Guardado!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Summary -->
+  <section class="section">
+    <h2 class="section-title">Resumo</h2>
+
+    <div class="card">
+      <div class="card-title">O que aprendemos hoje:</div>
+      <ul style="margin-top:8px;">
+        <li><strong>Transportes gerais</strong> = andar <strong>de</strong> + transporte; <strong>específicos</strong> = andar <strong>no/na</strong> + transporte</li>
+        <li><strong>A pé</strong> é a exceção — usa preposição <strong>a</strong></li>
+        <li><strong>Casa</strong> (= home) nunca adapta a preposição: em casa, de casa, fora de casa</li>
+        <li><strong>Perguntas de confirmação:</strong> afirmativa + não + verbo? / não é? / negativa + pois não?</li>
+        <li><strong>Demonstrativos fixos:</strong> isto+aqui, isso+aí, aquilo+ali (nunca misturar!)</li>
+        <li><strong>Cá/lá</strong> = geral, grande; <strong>aqui/ali</strong> = preciso, pequeno; <strong>lá</strong> = não vejo daqui</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Consigo...?</div>
+      <ul class="checklist">
+        <li>Usar "andar de" e "andar no/na" corretamente com transportes?</li>
+        <li>Dizer "em casa", "fora de casa", "saio de casa" sem artigo?</li>
+        <li>Fazer perguntas de confirmação de três maneiras?</li>
+        <li>Usar "pois não?" no final de perguntas negativas?</li>
+        <li>Combinar isto+aqui, isso+aí, aquilo+ali sem misturar?</li>
+        <li>Distinguir quando usar "cá/lá" em vez de "aqui/ali"?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="nav-footer">
+    <a href="aulas_mariana_2026-04-01.html" class="nav-link">&larr; Aula anterior (1 abr)</a>
+    <a href="index.html" class="nav-link">🏠 Página principal</a>
+    <a href="aulas_mariana_2026-04-22.html" class="nav-link">Próxima aula (22 abr) &rarr;</a>
+  </nav>
+
+</div>
+
+<script>
+// ============ STATE ============
+const STORAGE_KEY = 'marianna_2026-04-15';
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+  score: 0,
+  maxScore: 38,
+  ex1Done: false,
+  ex2Matches: 0,
+  ex3Done: false,
+  ex4Done: false,
+  writing: ''
+};
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = Math.round((state.score / state.maxScore) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('scoreDisplay').textContent = state.score + ' / ' + state.maxScore + ' pontos';
+}
+
+// ============ EXERCISE 1: Fill in the blank ============
+const ex1Answers = {
+  ex1_1: ['de'],
+  ex1_2: ['no'],
+  ex1_3: ['a'],
+  ex1_4: ['de'],
+  ex1_5: ['em'],
+  ex1_6: ['num'],
+  ex1_7: ['em'],
+  ex1_8: ['na']
+};
+
+function checkExercise1() {
+  if (state.ex1Done) return;
+  let correct = 0;
+  for (const [id, answers] of Object.entries(ex1Answers)) {
+    const input = document.getElementById(id);
+    const val = input.value.trim().toLowerCase();
+    const hintEl = document.getElementById('hint' + id.substring(2));
+    if (answers.includes(val)) {
+      input.className = 'correct';
+      if (hintEl) hintEl.classList.remove('visible');
+      correct++;
+    } else {
+      input.className = 'incorrect';
+      if (hintEl) hintEl.classList.add('visible');
+    }
+  }
+  state.score += correct;
+  state.ex1Done = true;
+  saveState();
+}
+
+function showAnswers1() {
+  const display = { ex1_1:'de', ex1_2:'no', ex1_3:'a', ex1_4:'de', ex1_5:'em', ex1_6:'num', ex1_7:'em', ex1_8:'na' };
+  for (const [id, ans] of Object.entries(display)) {
+    const input = document.getElementById(id);
+    input.value = ans;
+    input.className = 'correct';
+    const hintEl = document.getElementById('hint' + id.substring(2));
+    if (hintEl) hintEl.classList.remove('visible');
+  }
+}
+
+// ============ EXERCISE 2: Matching ============
+let selectedLeft = null;
+let matchedCount = 0;
+
+function selectMatch(el) {
+  if (el.classList.contains('matched')) return;
+  const side = el.dataset.side;
+
+  if (side === 'left') {
+    document.querySelectorAll('.match-item[data-side="left"]').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedLeft = el;
+  } else if (side === 'right' && selectedLeft) {
+    if (selectedLeft.dataset.match === el.dataset.match) {
+      selectedLeft.classList.remove('selected');
+      selectedLeft.classList.add('matched');
+      el.classList.add('matched');
+      matchedCount++;
+      if (!state.ex2Done) {
+        state.score++;
+        state.ex2Matches = matchedCount;
+        saveState();
+      }
+      document.getElementById('matchScore').textContent = 'Pares corretos: ' + matchedCount + ' / 8';
+      if (matchedCount === 8) {
+        document.getElementById('matchScore').textContent = 'Todos corretos! Muito bem!';
+        state.ex2Done = true;
+        saveState();
+      }
+    } else {
+      el.classList.add('wrong');
+      setTimeout(() => el.classList.remove('wrong'), 500);
+    }
+    selectedLeft.classList.remove('selected');
+    selectedLeft = null;
+  }
+}
+
+// ============ EXERCISE 3: Confirmation questions ============
+const ex3Answers = {
+  ex3_1: ['nao mora', 'não mora'],
+  ex3_2: ['nao gostas', 'não gostas'],
+  ex3_3: ['pois nao', 'pois não', 'pois nao?', 'pois não?'],
+  ex3_4: ['pois nao', 'pois não', 'pois nao?', 'pois não?'],
+  ex3_5: ['nao anda', 'não anda'],
+  ex3_6: ['nao esta', 'não está', 'não esta', 'nao está', 'nao e', 'não é', 'não e', 'nao é']
+};
+
+function checkExercise3() {
+  if (state.ex3Done) return;
+  let correct = 0;
+  for (const [id, answers] of Object.entries(ex3Answers)) {
+    const input = document.getElementById(id);
+    const val = input.value.trim().toLowerCase().replace(/[?]/g, '');
+    const hintEl = document.getElementById('hint' + id.substring(2));
+    const cleanAnswers = answers.map(a => a.replace(/[?]/g, ''));
+    if (cleanAnswers.includes(val)) {
+      input.className = 'correct';
+      if (hintEl) hintEl.classList.remove('visible');
+      correct++;
+    } else {
+      input.className = 'incorrect';
+      if (hintEl) hintEl.classList.add('visible');
+    }
+  }
+  state.score += correct;
+  state.ex3Done = true;
+  saveState();
+}
+
+function showAnswers3() {
+  const display = { ex3_1:'não mora', ex3_2:'não gostas', ex3_3:'pois não', ex3_4:'pois não', ex3_5:'não anda', ex3_6:'não está' };
+  for (const [id, ans] of Object.entries(display)) {
+    const input = document.getElementById(id);
+    input.value = ans;
+    input.className = 'correct';
+    const hintEl = document.getElementById('hint' + id.substring(2));
+    if (hintEl) hintEl.classList.remove('visible');
+  }
+}
+
+// ============ EXERCISE 4: Multiple choice ============
+const mcAnswers = { mc1:'b', mc2:'c', mc3:'b', mc4:'c', mc5:'c', mc6:'b' };
+const mcSelected = {};
+
+function selectMC(li) {
+  const parent = li.closest('.exercise-item');
+  const qId = parent.id;
+  if (state.ex4Done) return;
+  parent.querySelectorAll('.mc-options li').forEach(el => el.classList.remove('selected'));
+  li.classList.add('selected');
+  mcSelected[qId] = li.dataset.value;
+}
+
+function checkExercise4() {
+  if (state.ex4Done) return;
+  let correct = 0;
+  for (const [qId, correctAns] of Object.entries(mcAnswers)) {
+    const parent = document.getElementById(qId);
+    const expEl = document.getElementById(qId + '_exp');
+    parent.querySelectorAll('.mc-options li').forEach(li => {
+      li.style.pointerEvents = 'none';
+      if (li.dataset.value === correctAns) {
+        li.classList.add('correct-answer');
+      } else if (li.classList.contains('selected') && li.dataset.value !== correctAns) {
+        li.classList.add('wrong-answer');
+      }
+    });
+    if (mcSelected[qId] === correctAns) correct++;
+    if (expEl) expEl.classList.add('visible');
+  }
+  state.score += correct;
+  state.ex4Done = true;
+  saveState();
+}
+
+function showAnswers4() {
+  for (const [qId, correctAns] of Object.entries(mcAnswers)) {
+    const parent = document.getElementById(qId);
+    const expEl = document.getElementById(qId + '_exp');
+    parent.querySelectorAll('.mc-options li').forEach(li => {
+      li.style.pointerEvents = 'none';
+      if (li.dataset.value === correctAns) li.classList.add('correct-answer');
+    });
+    if (expEl) expEl.classList.add('visible');
+  }
+}
+
+// ============ EXERCISE 5: Writing ============
+function saveWriting() {
+  const text = document.getElementById('freeWriting').value;
+  state.writing = text;
+  if (text.trim().length > 30 && !state.writingDone) {
+    state.score += 2;
+    state.writingDone = true;
+  }
+  saveState();
+  const saved = document.getElementById('writingSaved');
+  saved.style.display = 'inline';
+  setTimeout(() => saved.style.display = 'none', 2000);
+}
+
+// Load saved writing
+if (state.writing) {
+  document.getElementById('freeWriting').value = state.writing;
+}
+
+// ============ INIT ============
+updateProgress();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Local lesson-tracker state — contains private Granola share-links.
+# Not needed by the website; kept out of the public repo on purpose.
+progression.json
+
+# Tooling / local agent files (in case any land here)
+.claude/
+memory/
+node_modules/

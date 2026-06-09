@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>As Minhas Aulas de Português 🇵🇹 — Página Principal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-light: #e8f1e9;
+    --red: #B71C1C;
+    --gold: #F9A825;
+    --gold-light: #fdf3dc;
+    --blue: #1565C0;
+    --blue-light: #e7f0fa;
+    --ink: #20302a;
+    --muted: #5e6e66;
+    --paper: #fcfbf7;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --shadow: 0 2px 8px rgba(27,94,32,.06), 0 10px 30px rgba(27,94,32,.05);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 90px; }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--green) 0%, #2e7d32 55%, #388e3c 100%);
+    color: #fff;
+    padding: 56px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: "🇵🇹";
+    position: absolute;
+    right: -10px; bottom: -34px;
+    font-size: 170px; opacity: .12;
+    transform: rotate(-8deg);
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .kicker { font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  h1 {
+    font-family: 'Lora', serif; font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px); line-height: 1.15;
+    margin: 8px 0 12px;
+  }
+  .subtitle { font-size: 17px; opacity: .94; max-width: 640px; }
+  .stats { display: flex; gap: 26px; margin-top: 24px; flex-wrap: wrap; }
+  .stat .n { font-family: 'Lora', serif; font-size: 30px; font-weight: 700; line-height: 1; }
+  .stat .l { font-size: 13px; opacity: .85; }
+
+  /* Section heads */
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin: 44px 0 6px; }
+  .section-head h2 { font-family: 'Lora', serif; font-size: 27px; color: var(--green); margin: 0; }
+  .section-head .count { font-size: 14px; color: var(--muted); font-weight: 600; }
+  .section-sub { color: var(--muted); margin: 0 0 18px; font-size: 15.5px; }
+
+  /* Cards grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+  .lesson {
+    display: flex; flex-direction: column;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px 22px 20px; box-shadow: var(--shadow);
+    text-decoration: none; color: inherit;
+    transition: transform .14s ease, box-shadow .2s ease, border-color .2s;
+    position: relative; overflow: hidden;
+  }
+  .lesson::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+    background: var(--accent, var(--green));
+  }
+  .lesson:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(27,94,32,.16); border-color: var(--accent, var(--green)); }
+  .lesson .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pill {
+    font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    background: var(--green-light); color: var(--green);
+  }
+  .pill.real { background: var(--gold-light); color: #9a6b00; }
+  .pill.date { background: var(--blue-light); color: var(--blue); }
+  .pill.started { background: #ede4fb; color: #6a3bb0; }
+  .lesson h3 { font-family: 'Lora', serif; font-size: 20px; margin: 0 0 6px; line-height: 1.25; color: var(--ink); }
+  .lesson .topics { font-size: 14.5px; color: var(--muted); margin: 0 0 16px; flex: 1; }
+  .lesson .go {
+    align-self: flex-start; font-weight: 700; font-size: 14px; color: var(--accent, var(--green));
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .lesson .go .arrow { transition: transform .15s; }
+  .lesson:hover .go .arrow { transform: translateX(4px); }
+
+  .note { background: var(--gold-light); border: 1px solid #f0dca8; border-radius: 12px; padding: 14px 18px; margin-top: 30px; font-size: 14.5px; color: #6b4d00; }
+  .note strong { color: #9a6b00; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 50px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="kicker">Português Europeu · A2 → B1</p>
+    <h1>As Minhas Aulas de Português</h1>
+    <p class="subtitle">Bem-vinda, Magda! 🌟 Aqui estão todas as tuas lições num só lugar. Escolhe uma aula para começar — ou continuar de onde paraste.</p>
+    <div class="stats">
+      <div class="stat"><div class="n" id="statTotal">8</div><div class="l">aulas disponíveis</div></div>
+      <div class="stat"><div class="n" id="statMariana">8</div><div class="l">com a Mariana</div></div>
+      <div class="stat"><div class="n" id="statStarted">0</div><div class="l">já começadas</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- AULAS COM A MARIANA -->
+  <div class="section-head">
+    <h2>👩‍🏫 Aulas com a Mariana</h2>
+    <span class="count">aulas reais transformadas em guias de estudo</span>
+  </div>
+  <p class="section-sub">Cada uma foi gerada a partir de uma aula real que tiveste — da mais recente para a mais antiga.</p>
+
+  <div class="grid">
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-06-03.html"
+       data-keys="pt_marianna_2026_06_03">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">3 jun 2026</span>
+      </div>
+      <h3>Saúde, Casa &amp; Viagens à Madeira</h3>
+      <p class="topics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-04-29.html"
+       data-keys="pt_marianna_2026_04_29">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">29 abr 2026</span>
+      </div>
+      <h3>Este/Esse/Aquele, Ser vs. Estar &amp; Apanhar Sol</h3>
+      <p class="topics">Demonstrativos vs. advérbios de lugar, <em>como é</em> vs. <em>como está</em>, vocabulário do sol e da família, e gíria (<em>bife/bifa</em>).</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-04-22.html"
+       data-keys="pt_marianna_2026_04_22">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">22 abr 2026</span>
+      </div>
+      <h3><em>A</em> vs. <em>Para</em>, Demonstrativos &amp; Artigos</h3>
+      <p class="topics">Preposições de movimento (curto prazo vs. destino final), <em>isto/isso/aquilo</em> vs. <em>este/esse/aquele</em>, artigos e palavras interrogativas.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-04-15.html"
+       data-keys="marianna_2026-04-15">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">15 abr 2026</span>
+      </div>
+      <h3>Preposições, Casa &amp; Perguntas de Confirmação</h3>
+      <p class="topics">Preposições de transporte, vocabulário de "casa", perguntas de confirmação (<em>não é?</em>) e demonstrativos.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-04-01.html"
+       data-keys="pt_marianna_2026_04_01">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">1 abr 2026</span>
+      </div>
+      <h3>Apresentar-se &amp; Pedir num Café</h3>
+      <p class="topics">Primeira aula de grupo! Apresentações (idade com <em>ter</em>), o tabu do <em>você</em>, e o diálogo do café: <em>bica, galão, queria/era</em> e o troco.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-03-27.html"
+       data-keys="pt_marianna_2026_03_27">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">27 mar 2026</span>
+      </div>
+      <h3>Estar a + Infinitivo &amp; os Verbos do Dia a Dia</h3>
+      <p class="topics">Presente contínuo PT-PT (<em>estou a fazer</em>), <em>estar a</em> vs. <em>andar a</em>, e a família de verbos <em>tomar, apanhar, levar, tocar, ligar</em>. Mais <em>faz parte</em> e <em>vai-se andando</em>.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-03-23.html"
+       data-keys="pt_marianna_2026_03_23">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">23 mar 2026</span>
+      </div>
+      <h3>Ser vs. Estar, Apetece-me &amp; Condições Físicas</h3>
+      <p class="topics">A grande questão do A2: <em>característica</em> vs. <em>condição</em>. Mais o verbo <em>apetecer</em>, <em>estar com fome/sono</em>, e <em>a mala é/está pesada</em>.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+    <a class="lesson" style="--accent: var(--gold)" href="aulas_mariana_2026-03-19.html"
+       data-keys="marianna_2026-03-19,marianna_2026-03-19_score">
+      <div class="top">
+        <span class="pill real">📝 Aula real</span>
+        <span class="pill date">19 mar 2026</span>
+      </div>
+      <h3>Cotovia ou Coruja? Hábitos &amp; Estados Físicos</h3>
+      <p class="topics">Rotinas e hábitos, expressões com <em>estar com</em> (fome, sono, calor), e falar de manhãs vs. noites.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+  </div>
+
+  <!-- CURSO ESTRUTURADO -->
+  <div class="section-head">
+    <h2>📚 Curso estruturado A2 → B1</h2>
+    <span class="count">progressão numerada</span>
+  </div>
+  <p class="section-sub">As lições do plano de curso, na ordem certa para construíres bases sólidas.</p>
+
+  <div class="grid">
+
+    <a class="lesson" style="--accent: var(--green)" href="aula-1.html"
+       data-keys="pt-lesson-1,pt-lesson-">
+      <div class="top">
+        <span class="pill">Lição 1</span>
+        <span class="pill date">Nível A2</span>
+      </div>
+      <h3>Presente do Indicativo — Revisão</h3>
+      <p class="topics">Verbos regulares e irregulares comuns (<em>ser, estar, ter, ir</em>), apresentar-se e falar da rotina diária.</p>
+      <span class="go">Abrir aula <span class="arrow">→</span></span>
+    </a>
+
+  </div>
+
+  <div class="note">
+    💡 <strong>Dica:</strong> a tua pontuação e respostas ficam guardadas no teu navegador (<em>localStorage</em>), por isso podes fechar uma aula e voltar mais tarde sem perder o progresso. As aulas marcadas como <span class="pill started" style="margin:0">Começada</span> são as que já abriste e respondeste.
+  </div>
+
+  <footer>
+    🇵🇹 Bons estudos, Magda! · Página principal das aulas de Português · <span id="todayNote"></span>
+  </footer>
+</div>
+
+<script>
+  // Mark lessons that have saved progress, and count them.
+  (function(){
+    let started = 0;
+    document.querySelectorAll('.lesson[data-keys]').forEach(card => {
+      const keys = card.dataset.keys.split(',').map(s => s.trim()).filter(Boolean);
+      let hit = false;
+      for (const k of keys){
+        // exact key, or any localStorage key that starts with the given prefix
+        if (localStorage.getItem(k) !== null){ hit = true; break; }
+        for (let i = 0; i < localStorage.length; i++){
+          if (localStorage.key(i).startsWith(k)){ hit = true; break; }
+        }
+        if (hit) break;
+      }
+      if (hit){
+        started++;
+        const badge = document.createElement('span');
+        badge.className = 'pill started';
+        badge.textContent = '✓ Começada';
+        card.querySelector('.top').appendChild(badge);
+      }
+    });
+    document.getElementById('statStarted').textContent = started;
+    const total = document.querySelectorAll('.lesson').length;
+    document.getElementById('statTotal').textContent = total;
+  })();
+</script>
+</body>
+</html>
