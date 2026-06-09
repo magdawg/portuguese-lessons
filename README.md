@@ -20,10 +20,10 @@ Start from **`index.html`** — the hub that links to every lesson.
 
 ```
 .
-├── index.html                     # Home page (lesson hub)
-├── aula-1.html                    # Structured A2→B1 course — Lesson 1
-├── aulas_mariana_YYYY-MM-DD.html  # Lessons generated from real classes
-└── README.md
+├── index.html                         # Home page (lesson hub) — stays at root
+└── aulas/                             # All lesson pages
+    ├── aula-1.html                    # Structured A2→B1 course — Lesson 1
+    └── aulas_mariana_YYYY-MM-DD.html  # Lessons generated from real classes
 ```
 
 - Every page is **fully self-contained** — inline CSS + vanilla JS, no build
