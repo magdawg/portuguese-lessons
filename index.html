@@ -48,8 +48,30 @@
     background: var(--green);
     color: #fff;
     padding: clamp(48px, 8vw, 80px) 0 clamp(40px, 6vw, 64px);
+    position: relative;
+    overflow: hidden;
   }
-  .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  header::after {
+    content: "🇵🇹";
+    position: absolute;
+    right: -10px; bottom: -34px;
+    font-size: 170px; line-height: 1; opacity: .14;
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+  .header-pastel {
+    position: absolute;
+    right: 175px; bottom: 8px;
+    width: 150px; height: auto;
+    opacity: .22;
+    transform: rotate(-6deg);
+    pointer-events: none;
+  }
+  @media (max-width: 640px) {
+    header::after { font-size: 120px; bottom: -22px; }
+    .header-pastel { width: 105px; right: 120px; bottom: 6px; }
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
   h1 {
     font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
     font-size: clamp(30px, 5vw, 46px); line-height: 1.15;
@@ -58,70 +80,42 @@
   }
   .subtitle { font-size: 1.0625rem; opacity: .92; max-width: 60ch; margin: 0; text-wrap: pretty; }
 
-  /* Continuar — the page's primary action */
-  .continue {
-    display: block;
-    text-decoration: none; color: inherit;
-    padding: clamp(28px, 4vw, 44px) 0 clamp(36px, 5vw, 56px);
-    border-bottom: 1px solid var(--border);
-  }
-  .continue .label {
-    font-size: 13px; font-weight: 700; letter-spacing: .02em;
-    color: var(--green); margin: 0 0 var(--space-3);
-    display: inline-flex; align-items: center; gap: var(--space-2);
-  }
-  .continue .label::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold);
-  }
-  .continue h2 {
-    font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
-    font-size: clamp(26px, 3.8vw, 38px); line-height: 1.2;
-    margin: 0 0 var(--space-3); color: var(--ink); text-wrap: balance;
-  }
-  .continue .topics {
-    font-size: 16px; color: var(--muted); margin: 0 0 var(--space-5);
-    max-width: 60ch; text-wrap: pretty;
-  }
-  .continue .go {
-    font-weight: 700; font-size: 15px; color: var(--green);
-    display: inline-flex; align-items: center; gap: var(--space-2);
-  }
-  .continue .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); }
-  .continue:hover .arrow { transform: translateX(6px); }
-
   /* Section heads */
   .section-head { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-8) 0 var(--space-2); }
   .section-head h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 26px; font-weight: 600; color: var(--ink); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
   .section-head .count { font-size: 13px; color: var(--muted); font-weight: 500; }
   .section-sub { color: var(--muted); margin: 0 0 var(--space-5); font-size: 15px; max-width: 60ch; text-wrap: pretty; }
 
-  /* Cards grid */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  /* Mariana lessons — vertical stack of wide horizontal tiles */
+  .lessons-list { display: flex; flex-direction: column; gap: var(--space-3); }
   .lesson {
-    display: flex; flex-direction: column;
+    display: grid; grid-template-columns: 1fr auto; gap: var(--space-5);
+    align-items: center;
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: var(--space-5); box-shadow: var(--shadow);
+    border-radius: 14px; padding: var(--space-4) var(--space-5);
+    box-shadow: var(--shadow);
     text-decoration: none; color: inherit;
     transition: border-color .18s ease, box-shadow .18s ease;
   }
   .lesson:hover { border-color: var(--accent, var(--green)); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
   .lesson .date {
-    font-size: 14px; color: var(--muted); margin: 0 0 var(--space-3);
+    font-size: 13px; color: var(--muted); margin: 0 0 4px;
     font-variant-numeric: tabular-nums;
   }
   .lesson .date .status {
-    color: var(--accent, var(--green));
-    font-weight: 600;
+    color: var(--accent, var(--green)); font-weight: 600;
   }
-  .lesson h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; font-weight: 600; margin: 0 0 var(--space-2); line-height: 1.2; color: var(--ink); text-wrap: balance; }
-  .lesson .topics { font-size: 15px; color: var(--muted); margin: 0 0 var(--space-4); flex: 1; text-wrap: pretty; }
+  .lesson h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 21px; font-weight: 600; margin: 0 0 4px; line-height: 1.25; color: var(--ink); text-wrap: balance; }
+  .lesson .topics { font-size: 14.5px; color: var(--muted); margin: 0; max-width: 70ch; text-wrap: pretty; }
   .lesson .go {
-    align-self: flex-start; font-weight: 700; font-size: 14px; color: var(--accent, var(--green));
-    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 700; font-size: 14px; color: var(--accent, var(--green)); white-space: nowrap;
+    display: inline-flex; align-items: center; gap: var(--space-2);
   }
   .lesson .go .arrow { transition: transform .15s; }
   .lesson:hover .go .arrow { transform: translateX(4px); }
+  @media (max-width: 520px) {
+    .lesson { grid-template-columns: 1fr; gap: var(--space-3); }
+  }
 
   /* Course callout — featured singleton, not a grid */
   .course-callout {
@@ -188,20 +182,33 @@
     outline: 2px solid var(--green);
     outline-offset: 3px;
   }
-  .continue:focus-visible {
-    outline: 2px solid var(--green);
-    outline-offset: 4px;
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .continue .arrow, .course-callout .arrow, .lesson .go .arrow,
-    .continue, .course-callout, .lesson { transition: none; }
+    .course-callout .arrow, .lesson .go .arrow,
+    .course-callout, .lesson { transition: none; }
   }
 </style>
 </head>
 <body>
 
 <header>
+  <svg class="header-pastel" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <!-- Pastry cup body -->
+    <path d="M 20 28 L 22 72 Q 50 78 78 72 L 80 28 Z" fill="#b87a3e"/>
+    <!-- Fluted ridges -->
+    <path d="M 28 29 L 29 74" stroke="#7a4c1a" stroke-width="0.9" opacity=".55" fill="none"/>
+    <path d="M 37 29 L 38 76" stroke="#7a4c1a" stroke-width="0.9" opacity=".55" fill="none"/>
+    <path d="M 50 29 L 50 77" stroke="#7a4c1a" stroke-width="0.9" opacity=".55" fill="none"/>
+    <path d="M 63 29 L 62 76" stroke="#7a4c1a" stroke-width="0.9" opacity=".55" fill="none"/>
+    <path d="M 72 29 L 71 74" stroke="#7a4c1a" stroke-width="0.9" opacity=".55" fill="none"/>
+    <!-- Custard top -->
+    <ellipse cx="50" cy="28" rx="30" ry="6" fill="#f5c54e"/>
+    <ellipse cx="42" cy="25.5" rx="14" ry="1.8" fill="#fae29a" opacity=".55"/>
+    <!-- Burnt caramelized spots -->
+    <ellipse cx="38" cy="27" rx="4" ry="1.8" fill="#2a1606"/>
+    <ellipse cx="56" cy="29" rx="5" ry="2.2" fill="#2a1606"/>
+    <ellipse cx="68" cy="27" rx="3" ry="1.5" fill="#2a1606"/>
+    <ellipse cx="46" cy="30" rx="2.5" ry="1" fill="#2a1606" opacity=".7"/>
+  </svg>
   <div class="header-inner">
     <h1>As Minhas Aulas de Português</h1>
     <p class="subtitle">Bem-vinda, Magda. Aqui estão todas as tuas lições, prontas para começar ou continuar de onde paraste.</p>
@@ -210,15 +217,20 @@
 
 <div class="wrap">
 
-  <!-- CONTINUAR — primary action. Server-side default is the most recent
-       lesson; JS swaps in a started one if localStorage shows progress. -->
-  <a class="continue" id="continueBlock" href="aulas/aulas_mariana_2026-06-03.html">
-    <span class="label" id="continueLabel">A tua próxima aula</span>
-    <h2 id="continueTitle">Saúde, Casa &amp; Viagens à Madeira</h2>
-    <p class="topics" id="continueTopics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
-    <span class="go">
-      <span id="continueCta">Começar a aula</span> <span class="arrow">→</span>
-    </span>
+  <!-- CHEAT SHEET — quick verb conjugation reference -->
+  <div class="section-head">
+    <h2>Referência rápida</h2>
+    <span class="count">para tirar dúvidas em segundos</span>
+  </div>
+  <p class="section-sub">As conjugações dos verbos mais usados, num só sítio.</p>
+
+  <a class="course-callout" href="verbos.html">
+    <div>
+      <p class="meta">Cheat sheet</p>
+      <h3>Verbos &amp; Conjugações</h3>
+      <p class="topics">Presente, perfeito, imperfeito, futuro e condicional dos verbos essenciais. Pesquisável, com pílulas clicáveis.</p>
+    </div>
+    <span class="go">Abrir <span class="arrow">→</span></span>
   </a>
 
   <!-- AULAS COM A MARIANA -->
@@ -226,71 +238,87 @@
     <h2>Aulas com a Mariana</h2>
     <span class="count">aulas reais transformadas em guias de estudo</span>
   </div>
-  <p class="section-sub">Cada uma foi gerada a partir de uma aula que tiveste com a Mariana, da mais recente para a mais antiga.</p>
+  <p class="section-sub">Da mais recente para a mais antiga.</p>
 
-  <div class="grid">
+  <div class="lessons-list">
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-06-03.html"
        data-keys="pt_marianna_2026_06_03">
-      <p class="date"><time datetime="2026-06-03">3 de junho de 2026</time></p>
-      <h3>Saúde, Casa &amp; Viagens à Madeira</h3>
-      <p class="topics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
+      <div>
+        <p class="date"><time datetime="2026-06-03">3 de junho de 2026</time></p>
+        <h3>Saúde, Casa &amp; Viagens à Madeira</h3>
+        <p class="topics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-29.html"
        data-keys="pt_marianna_2026_04_29">
-      <p class="date"><time datetime="2026-04-29">29 de abril de 2026</time></p>
-      <h3>Este/Esse/Aquele, Ser vs. Estar &amp; Apanhar Sol</h3>
-      <p class="topics">Demonstrativos vs. advérbios de lugar, <em>como é</em> vs. <em>como está</em>, vocabulário do sol e da família, e gíria (<em>bife/bifa</em>).</p>
+      <div>
+        <p class="date"><time datetime="2026-04-29">29 de abril de 2026</time></p>
+        <h3>Este/Esse/Aquele, Ser vs. Estar &amp; Apanhar Sol</h3>
+        <p class="topics">Demonstrativos vs. advérbios de lugar, <em>como é</em> vs. <em>como está</em>, vocabulário do sol e da família, e gíria (<em>bife/bifa</em>).</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-22.html"
        data-keys="pt_marianna_2026_04_22">
-      <p class="date"><time datetime="2026-04-22">22 de abril de 2026</time></p>
-      <h3><em>A</em> vs. <em>Para</em>, Demonstrativos &amp; Artigos</h3>
-      <p class="topics">Preposições de movimento (curto prazo vs. destino final), <em>isto/isso/aquilo</em> vs. <em>este/esse/aquele</em>, artigos e palavras interrogativas.</p>
+      <div>
+        <p class="date"><time datetime="2026-04-22">22 de abril de 2026</time></p>
+        <h3><em>A</em> vs. <em>Para</em>, Demonstrativos &amp; Artigos</h3>
+        <p class="topics">Preposições de movimento (curto prazo vs. destino final), <em>isto/isso/aquilo</em> vs. <em>este/esse/aquele</em>, artigos e palavras interrogativas.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-15.html"
        data-keys="pt_marianna_2026_04_15">
-      <p class="date"><time datetime="2026-04-15">15 de abril de 2026</time></p>
-      <h3>Preposições, Casa &amp; Perguntas de Confirmação</h3>
-      <p class="topics">Preposições de transporte, vocabulário de "casa", perguntas de confirmação (<em>não é?</em>) e demonstrativos.</p>
+      <div>
+        <p class="date"><time datetime="2026-04-15">15 de abril de 2026</time></p>
+        <h3>Preposições, Casa &amp; Perguntas de Confirmação</h3>
+        <p class="topics">Preposições de transporte, vocabulário de "casa", perguntas de confirmação (<em>não é?</em>) e demonstrativos.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-01.html"
        data-keys="pt_marianna_2026_04_01">
-      <p class="date"><time datetime="2026-04-01">1 de abril de 2026</time></p>
-      <h3>Apresentar-se &amp; Pedir num Café</h3>
-      <p class="topics">Primeira aula de grupo. Apresentações (idade com <em>ter</em>), o tabu do <em>você</em>, e o diálogo do café: <em>bica, galão, queria/era</em> e o troco.</p>
+      <div>
+        <p class="date"><time datetime="2026-04-01">1 de abril de 2026</time></p>
+        <h3>Apresentar-se &amp; Pedir num Café</h3>
+        <p class="topics">Primeira aula de grupo. Apresentações (idade com <em>ter</em>), o tabu do <em>você</em>, e o diálogo do café: <em>bica, galão, queria/era</em> e o troco.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-27.html"
        data-keys="pt_marianna_2026_03_27">
-      <p class="date"><time datetime="2026-03-27">27 de março de 2026</time></p>
-      <h3>Estar a + Infinitivo &amp; os Verbos do Dia a Dia</h3>
-      <p class="topics">Presente contínuo PT-PT (<em>estou a fazer</em>), <em>estar a</em> vs. <em>andar a</em>, e a família de verbos <em>tomar, apanhar, levar, tocar, ligar</em>. Mais <em>faz parte</em> e <em>vai-se andando</em>.</p>
+      <div>
+        <p class="date"><time datetime="2026-03-27">27 de março de 2026</time></p>
+        <h3>Estar a + Infinitivo &amp; os Verbos do Dia a Dia</h3>
+        <p class="topics">Presente contínuo PT-PT (<em>estou a fazer</em>), <em>estar a</em> vs. <em>andar a</em>, e a família de verbos <em>tomar, apanhar, levar, tocar, ligar</em>. Mais <em>faz parte</em> e <em>vai-se andando</em>.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-23.html"
        data-keys="pt_marianna_2026_03_23">
-      <p class="date"><time datetime="2026-03-23">23 de março de 2026</time></p>
-      <h3>Ser vs. Estar, Apetece-me &amp; Condições Físicas</h3>
-      <p class="topics">A grande questão do A2: <em>característica</em> vs. <em>condição</em>. Mais o verbo <em>apetecer</em>, <em>estar com fome/sono</em>, e <em>a mala é/está pesada</em>.</p>
+      <div>
+        <p class="date"><time datetime="2026-03-23">23 de março de 2026</time></p>
+        <h3>Ser vs. Estar, Apetece-me &amp; Condições Físicas</h3>
+        <p class="topics">A grande questão do A2: <em>característica</em> vs. <em>condição</em>. Mais o verbo <em>apetecer</em>, <em>estar com fome/sono</em>, e <em>a mala é/está pesada</em>.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
     <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-19.html"
        data-keys="pt_marianna_2026_03_19">
-      <p class="date"><time datetime="2026-03-19">19 de março de 2026</time></p>
-      <h3>Cotovia ou Coruja? Hábitos &amp; Estados Físicos</h3>
-      <p class="topics">Rotinas e hábitos, expressões com <em>estar com</em> (fome, sono, calor), e falar de manhãs vs. noites.</p>
+      <div>
+        <p class="date"><time datetime="2026-03-19">19 de março de 2026</time></p>
+        <h3>Cotovia ou Coruja? Hábitos &amp; Estados Físicos</h3>
+        <p class="topics">Rotinas e hábitos, expressões com <em>estar com</em> (fome, sono, calor), e falar de manhãs vs. noites.</p>
+      </div>
       <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
@@ -389,20 +417,6 @@
         status.textContent = ' · começada';
         meta.appendChild(status);
       }
-    }
-
-    // Swap the Continuar block to a started lesson when one exists.
-    // Default in HTML already points to the most recent lesson.
-    const continueBlock = document.getElementById('continueBlock');
-    const startedLesson = lessons.find(isStarted);
-    if (continueBlock && startedLesson) {
-      const title = startedLesson.querySelector('h3')?.textContent?.trim() || '';
-      const topicsEl = startedLesson.querySelector('.topics');
-      continueBlock.href = startedLesson.getAttribute('href');
-      document.getElementById('continueLabel').textContent = 'Continuar onde paraste';
-      document.getElementById('continueTitle').textContent = title;
-      if (topicsEl) document.getElementById('continueTopics').innerHTML = topicsEl.innerHTML;
-      document.getElementById('continueCta').textContent = 'Continuar a aula';
     }
   })();
 </script>

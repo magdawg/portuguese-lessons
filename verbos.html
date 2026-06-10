@@ -290,7 +290,7 @@
     </div>
   </div>
 
-  <div class="pills" id="pills" role="list" aria-label="Lista de verbos"></div>
+  <div class="pills" id="pills"></div>
   <p class="empty" id="empty" hidden>Nenhum verbo encontrado.</p>
 
   <footer>
@@ -787,7 +787,7 @@
     btn.type = 'button';
     btn.dataset.group = verb.group;
     btn.dataset.inf = verb.inf;
-    btn.setAttribute('role', 'listitem');
+    btn.setAttribute('aria-label', verb.inf + ' — ' + verb.en);
     btn.innerHTML =
       '<span class="verb">' + verb.inf + '</span>' +
       '<span class="gloss">' + verb.en + '</span>' +
@@ -814,9 +814,11 @@
     if (el) el.textContent = counts[k];
   });
 
+  // Strip combining diacritics so searching for "po" matches "pôr", "feito" matches "feíto", etc.
+  const DIACRITICS_RE = new RegExp('[̀-ͯ]', 'g');
   function norm(s) {
     return (s || '').toString().toLowerCase()
-      .normalize('NFD').replace(/[̀-ͯ]/g, '');
+      .normalize('NFD').replace(DIACRITICS_RE, '');
   }
 
   function applyFilters() {
