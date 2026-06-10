@@ -67,9 +67,18 @@
     transform: rotate(-6deg);
     pointer-events: none;
   }
+  .header-sardine {
+    position: absolute;
+    right: 335px; bottom: 22px;
+    width: 150px; height: auto;
+    opacity: .2;
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
   @media (max-width: 640px) {
     header::after { font-size: 120px; bottom: -22px; }
     .header-pastel { width: 105px; right: 120px; bottom: 6px; }
+    .header-sardine { display: none; }
   }
   .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
   h1 {
@@ -191,6 +200,27 @@
 <body>
 
 <header>
+  <svg class="header-sardine" viewBox="0 0 140 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <!-- Tail fin -->
+    <path d="M 5 10 L 28 25 L 5 40 L 14 25 Z" fill="#5a738a"/>
+    <!-- Body -->
+    <path d="M 22 25 Q 65 6 122 22 Q 130 25 122 28 Q 65 44 22 25 Z" fill="#7e9cb6"/>
+    <!-- Belly highlight -->
+    <path d="M 28 28 Q 65 41 118 30 Q 65 37 28 28 Z" fill="#c4d4e0"/>
+    <!-- Lateral line -->
+    <path d="M 38 25 Q 75 23 110 26" stroke="#3d556e" stroke-width="1" fill="none" opacity=".45"/>
+    <!-- Top fin -->
+    <path d="M 60 13 L 72 4 L 72 14 Z" fill="#5a738a"/>
+    <!-- Pelvic fin -->
+    <path d="M 66 37 L 72 43 L 76 38 Z" fill="#5a738a"/>
+    <!-- Gill -->
+    <path d="M 106 18 Q 108 25 106 32" stroke="#3d556e" stroke-width="0.9" fill="none" opacity=".5"/>
+    <!-- Eye -->
+    <circle cx="115" cy="22" r="2.2" fill="#1a2530"/>
+    <circle cx="114.4" cy="21.3" r="0.7" fill="#fff"/>
+    <!-- Mouth -->
+    <path d="M 122 26 Q 126 27 122 28" stroke="#3d556e" stroke-width="0.9" fill="none" opacity=".5"/>
+  </svg>
   <svg class="header-pastel" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <!-- Pastry cup body -->
     <path d="M 20 28 L 22 72 Q 50 78 78 72 L 80 28 Z" fill="#b87a3e"/>
