@@ -3,96 +3,119 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>As Minhas Aulas de Português 🇵🇹 — Página Principal</title>
+<title>As Minhas Aulas de Português</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 <style>
   :root {
     --green: #1B5E20;
-    --green-light: #e8f1e9;
-    --red: #B71C1C;
     --gold: #F9A825;
+    --gold-text: #8a5e00;       /* WCAG-safe for foreground text on white */
     --gold-light: #fdf3dc;
-    --blue: #1565C0;
-    --blue-light: #e7f0fa;
     --ink: #20302a;
-    --muted: #5e6e66;
+    --muted: #5b6b63;
     --paper: #fcfbf7;
     --card: #ffffff;
     --border: #e3e0d6;
-    --shadow: 0 2px 8px rgba(27,94,32,.06), 0 10px 30px rgba(27,94,32,.05);
+    --shadow: 0 1px 2px rgba(27,94,32,.05);
+    /* spacing scale */
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
     color: var(--ink);
     background: var(--paper);
     line-height: 1.6;
-    font-size: 17px;
+    font-size: 1.0625rem;        /* 17px at the user's default; respects browser font-size setting */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 90px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px var(--space-9); }
 
   /* Header */
   header {
-    background: linear-gradient(135deg, var(--green) 0%, #2e7d32 55%, #388e3c 100%);
+    background: var(--green);
     color: #fff;
-    padding: 56px 0 48px;
-    position: relative;
-    overflow: hidden;
+    padding: clamp(48px, 8vw, 80px) 0 clamp(40px, 6vw, 64px);
   }
-  header::after {
-    content: "🇵🇹";
-    position: absolute;
-    right: -10px; bottom: -34px;
-    font-size: 170px; opacity: .12;
-    transform: rotate(-8deg);
-  }
-  .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-  .kicker { font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  .header-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; }
   h1 {
-    font-family: 'Lora', serif; font-weight: 600;
+    font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
     font-size: clamp(30px, 5vw, 46px); line-height: 1.15;
-    margin: 8px 0 12px;
+    margin: 0 0 14px;
+    text-wrap: balance;
   }
-  .subtitle { font-size: 17px; opacity: .94; max-width: 640px; }
-  .stats { display: flex; gap: 26px; margin-top: 24px; flex-wrap: wrap; }
-  .stat .n { font-family: 'Lora', serif; font-size: 30px; font-weight: 700; line-height: 1; }
-  .stat .l { font-size: 13px; opacity: .85; }
+  .subtitle { font-size: 1.0625rem; opacity: .92; max-width: 60ch; margin: 0; text-wrap: pretty; }
+
+  /* Continuar — the page's primary action */
+  .continue {
+    display: block;
+    text-decoration: none; color: inherit;
+    padding: clamp(28px, 4vw, 44px) 0 clamp(36px, 5vw, 56px);
+    border-bottom: 1px solid var(--border);
+  }
+  .continue .label {
+    font-size: 13px; font-weight: 700; letter-spacing: .02em;
+    color: var(--green); margin: 0 0 var(--space-3);
+    display: inline-flex; align-items: center; gap: var(--space-2);
+  }
+  .continue .label::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+  }
+  .continue h2 {
+    font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
+    font-size: clamp(26px, 3.8vw, 38px); line-height: 1.2;
+    margin: 0 0 var(--space-3); color: var(--ink); text-wrap: balance;
+  }
+  .continue .topics {
+    font-size: 16px; color: var(--muted); margin: 0 0 var(--space-5);
+    max-width: 60ch; text-wrap: pretty;
+  }
+  .continue .go {
+    font-weight: 700; font-size: 15px; color: var(--green);
+    display: inline-flex; align-items: center; gap: var(--space-2);
+  }
+  .continue .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); }
+  .continue:hover .arrow { transform: translateX(6px); }
 
   /* Section heads */
-  .section-head { display: flex; align-items: baseline; gap: 12px; margin: 44px 0 6px; }
-  .section-head h2 { font-family: 'Lora', serif; font-size: 27px; color: var(--green); margin: 0; }
-  .section-head .count { font-size: 14px; color: var(--muted); font-weight: 600; }
-  .section-sub { color: var(--muted); margin: 0 0 18px; font-size: 15.5px; }
+  .section-head { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-8) 0 var(--space-2); }
+  .section-head h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 26px; font-weight: 600; color: var(--ink); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  .section-head .count { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .section-sub { color: var(--muted); margin: 0 0 var(--space-5); font-size: 15px; max-width: 60ch; text-wrap: pretty; }
 
   /* Cards grid */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
   .lesson {
     display: flex; flex-direction: column;
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 22px 22px 20px; box-shadow: var(--shadow);
+    border-radius: 14px; padding: var(--space-5); box-shadow: var(--shadow);
     text-decoration: none; color: inherit;
-    transition: transform .14s ease, box-shadow .2s ease, border-color .2s;
-    position: relative; overflow: hidden;
+    transition: border-color .18s ease, box-shadow .18s ease;
   }
-  .lesson::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
-    background: var(--accent, var(--green));
+  .lesson:hover { border-color: var(--accent, var(--green)); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
+  .lesson .date {
+    font-size: 14px; color: var(--muted); margin: 0 0 var(--space-3);
+    font-variant-numeric: tabular-nums;
   }
-  .lesson:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(27,94,32,.16); border-color: var(--accent, var(--green)); }
-  .lesson .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .pill {
-    font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
-    background: var(--green-light); color: var(--green);
+  .lesson .date .status {
+    color: var(--accent, var(--green));
+    font-weight: 600;
   }
-  .pill.real { background: var(--gold-light); color: #9a6b00; }
-  .pill.date { background: var(--blue-light); color: var(--blue); }
-  .pill.started { background: #ede4fb; color: #6a3bb0; }
-  .lesson h3 { font-family: 'Lora', serif; font-size: 20px; margin: 0 0 6px; line-height: 1.25; color: var(--ink); }
-  .lesson .topics { font-size: 14.5px; color: var(--muted); margin: 0 0 16px; flex: 1; }
+  .lesson h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; font-weight: 600; margin: 0 0 var(--space-2); line-height: 1.2; color: var(--ink); text-wrap: balance; }
+  .lesson .topics { font-size: 15px; color: var(--muted); margin: 0 0 var(--space-4); flex: 1; text-wrap: pretty; }
   .lesson .go {
     align-self: flex-start; font-weight: 700; font-size: 14px; color: var(--accent, var(--green));
     display: inline-flex; align-items: center; gap: 6px;
@@ -100,185 +123,287 @@
   .lesson .go .arrow { transition: transform .15s; }
   .lesson:hover .go .arrow { transform: translateX(4px); }
 
-  .note { background: var(--gold-light); border: 1px solid #f0dca8; border-radius: 12px; padding: 14px 18px; margin-top: 30px; font-size: 14.5px; color: #6b4d00; }
+  /* Course callout — featured singleton, not a grid */
+  .course-callout {
+    display: grid; grid-template-columns: 1fr auto; gap: var(--space-5);
+    align-items: center;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: var(--space-5) var(--space-5);
+    box-shadow: var(--shadow);
+    text-decoration: none; color: inherit;
+    transition: border-color .18s ease;
+  }
+  .course-callout:hover { border-color: var(--green); }
+  .course-callout .meta {
+    font-size: 14px; color: var(--muted); margin: 0 0 var(--space-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .course-callout .meta .status {
+    color: var(--green); font-weight: 600;
+  }
+  .course-callout h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; font-weight: 600; margin: 0 0 var(--space-2); line-height: 1.2; color: var(--ink); text-wrap: balance; }
+  .course-callout .topics { font-size: 15px; color: var(--muted); margin: 0; max-width: 56ch; text-wrap: pretty; }
+  .course-callout .go {
+    font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap;
+    display: inline-flex; align-items: center; gap: var(--space-2);
+  }
+  .course-callout .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); }
+  .course-callout:hover .arrow { transform: translateX(4px); }
+  @media (max-width: 520px) {
+    .course-callout { grid-template-columns: 1fr; }
+  }
+
+  /* Resources — external study links, denser than the course callout */
+  .resources { display: flex; flex-direction: column; gap: var(--space-3); }
+  .resource {
+    display: grid; grid-template-columns: 1fr auto; gap: var(--space-4);
+    align-items: center;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: var(--space-4) var(--space-5);
+    text-decoration: none; color: inherit;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .resource:hover { border-color: var(--green); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
+  .resource h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 600; margin: 0 0 4px; line-height: 1.25; color: var(--ink); }
+  .resource .host { font-size: 13px; color: var(--muted); margin: 0; font-variant-numeric: tabular-nums; }
+  .resource .go {
+    font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap;
+    display: inline-flex; align-items: center; gap: var(--space-2);
+  }
+  .resource .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); display: inline-block; }
+  .resource:hover .arrow { transform: translate(2px, -2px); }
+  @media (max-width: 520px) {
+    .resource { grid-template-columns: 1fr; }
+  }
+
+  .note { background: var(--gold-light); border: 1px solid #f0dca8; border-radius: 12px; padding: var(--space-3) var(--space-4); margin-top: var(--space-7); font-size: 14.5px; color: #6b4d00; }
   .note strong { color: #9a6b00; }
 
-  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 50px; }
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: var(--space-8); }
+
+  /* Focus rings for keyboard users — solid green so it reads as "selected", not as hover */
+  .lesson:focus-visible,
+  .course-callout:focus-visible,
+  .resource:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+  }
+  .continue:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .continue .arrow, .course-callout .arrow, .lesson .go .arrow,
+    .continue, .course-callout, .lesson { transition: none; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <p class="kicker">Português Europeu · A2 → B1</p>
     <h1>As Minhas Aulas de Português</h1>
-    <p class="subtitle">Bem-vinda, Magda! 🌟 Aqui estão todas as tuas lições num só lugar. Escolhe uma aula para começar — ou continuar de onde paraste.</p>
-    <div class="stats">
-      <div class="stat"><div class="n" id="statTotal">8</div><div class="l">aulas disponíveis</div></div>
-      <div class="stat"><div class="n" id="statMariana">8</div><div class="l">com a Mariana</div></div>
-      <div class="stat"><div class="n" id="statStarted">0</div><div class="l">já começadas</div></div>
-    </div>
+    <p class="subtitle">Bem-vinda, Magda. Aqui estão todas as tuas lições, prontas para começar ou continuar de onde paraste.</p>
   </div>
 </header>
 
 <div class="wrap">
 
+  <!-- CONTINUAR — primary action. Server-side default is the most recent
+       lesson; JS swaps in a started one if localStorage shows progress. -->
+  <a class="continue" id="continueBlock" href="aulas/aulas_mariana_2026-06-03.html">
+    <span class="label" id="continueLabel">A tua próxima aula</span>
+    <h2 id="continueTitle">Saúde, Casa &amp; Viagens à Madeira</h2>
+    <p class="topics" id="continueTopics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
+    <span class="go">
+      <span id="continueCta">Começar a aula</span> <span class="arrow">→</span>
+    </span>
+  </a>
+
   <!-- AULAS COM A MARIANA -->
   <div class="section-head">
-    <h2>👩‍🏫 Aulas com a Mariana</h2>
+    <h2>Aulas com a Mariana</h2>
     <span class="count">aulas reais transformadas em guias de estudo</span>
   </div>
-  <p class="section-sub">Cada uma foi gerada a partir de uma aula real que tiveste — da mais recente para a mais antiga.</p>
+  <p class="section-sub">Cada uma foi gerada a partir de uma aula que tiveste com a Mariana, da mais recente para a mais antiga.</p>
 
   <div class="grid">
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-06-03.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-06-03.html"
        data-keys="pt_marianna_2026_06_03">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">3 jun 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-06-03">3 de junho de 2026</time></p>
       <h3>Saúde, Casa &amp; Viagens à Madeira</h3>
       <p class="topics">Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>), e verbos como <em>poupar, alugar, demorar</em>.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-04-29.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-29.html"
        data-keys="pt_marianna_2026_04_29">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">29 abr 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-04-29">29 de abril de 2026</time></p>
       <h3>Este/Esse/Aquele, Ser vs. Estar &amp; Apanhar Sol</h3>
       <p class="topics">Demonstrativos vs. advérbios de lugar, <em>como é</em> vs. <em>como está</em>, vocabulário do sol e da família, e gíria (<em>bife/bifa</em>).</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-04-22.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-22.html"
        data-keys="pt_marianna_2026_04_22">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">22 abr 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-04-22">22 de abril de 2026</time></p>
       <h3><em>A</em> vs. <em>Para</em>, Demonstrativos &amp; Artigos</h3>
       <p class="topics">Preposições de movimento (curto prazo vs. destino final), <em>isto/isso/aquilo</em> vs. <em>este/esse/aquele</em>, artigos e palavras interrogativas.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-04-15.html"
-       data-keys="marianna_2026-04-15">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">15 abr 2026</span>
-      </div>
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-15.html"
+       data-keys="pt_marianna_2026_04_15">
+      <p class="date"><time datetime="2026-04-15">15 de abril de 2026</time></p>
       <h3>Preposições, Casa &amp; Perguntas de Confirmação</h3>
       <p class="topics">Preposições de transporte, vocabulário de "casa", perguntas de confirmação (<em>não é?</em>) e demonstrativos.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-04-01.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-04-01.html"
        data-keys="pt_marianna_2026_04_01">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">1 abr 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-04-01">1 de abril de 2026</time></p>
       <h3>Apresentar-se &amp; Pedir num Café</h3>
-      <p class="topics">Primeira aula de grupo! Apresentações (idade com <em>ter</em>), o tabu do <em>você</em>, e o diálogo do café: <em>bica, galão, queria/era</em> e o troco.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <p class="topics">Primeira aula de grupo. Apresentações (idade com <em>ter</em>), o tabu do <em>você</em>, e o diálogo do café: <em>bica, galão, queria/era</em> e o troco.</p>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-03-27.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-27.html"
        data-keys="pt_marianna_2026_03_27">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">27 mar 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-03-27">27 de março de 2026</time></p>
       <h3>Estar a + Infinitivo &amp; os Verbos do Dia a Dia</h3>
       <p class="topics">Presente contínuo PT-PT (<em>estou a fazer</em>), <em>estar a</em> vs. <em>andar a</em>, e a família de verbos <em>tomar, apanhar, levar, tocar, ligar</em>. Mais <em>faz parte</em> e <em>vai-se andando</em>.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-03-23.html"
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-23.html"
        data-keys="pt_marianna_2026_03_23">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">23 mar 2026</span>
-      </div>
+      <p class="date"><time datetime="2026-03-23">23 de março de 2026</time></p>
       <h3>Ser vs. Estar, Apetece-me &amp; Condições Físicas</h3>
       <p class="topics">A grande questão do A2: <em>característica</em> vs. <em>condição</em>. Mais o verbo <em>apetecer</em>, <em>estar com fome/sono</em>, e <em>a mala é/está pesada</em>.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
-    <a class="lesson" style="--accent: var(--gold)" href="aulas/aulas_mariana_2026-03-19.html"
-       data-keys="marianna_2026-03-19,marianna_2026-03-19_score">
-      <div class="top">
-        <span class="pill real">📝 Aula real</span>
-        <span class="pill date">19 mar 2026</span>
-      </div>
+    <a class="lesson" style="--accent: var(--gold-text)" href="aulas/aulas_mariana_2026-03-19.html"
+       data-keys="pt_marianna_2026_03_19">
+      <p class="date"><time datetime="2026-03-19">19 de março de 2026</time></p>
       <h3>Cotovia ou Coruja? Hábitos &amp; Estados Físicos</h3>
       <p class="topics">Rotinas e hábitos, expressões com <em>estar com</em> (fome, sono, calor), e falar de manhãs vs. noites.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
+      <span class="go">Abrir <span class="arrow">→</span></span>
     </a>
 
   </div>
 
-  <!-- CURSO ESTRUTURADO -->
+  <!-- CURSO ESTRUTURADO — singleton callout, not a grid -->
   <div class="section-head">
-    <h2>📚 Curso estruturado A2 → B1</h2>
-    <span class="count">progressão numerada</span>
+    <h2>Curso estruturado A2 → B1</h2>
+    <span class="count">lições do plano de curso</span>
   </div>
-  <p class="section-sub">As lições do plano de curso, na ordem certa para construíres bases sólidas.</p>
+  <p class="section-sub">Na ordem certa, para construíres bases sólidas.</p>
 
-  <div class="grid">
-
-    <a class="lesson" style="--accent: var(--green)" href="aulas/aula-1.html"
-       data-keys="pt-lesson-1,pt-lesson-">
-      <div class="top">
-        <span class="pill">Lição 1</span>
-        <span class="pill date">Nível A2</span>
-      </div>
-      <h3>Presente do Indicativo — Revisão</h3>
+  <a class="course-callout" href="aulas/aula-1.html" data-keys="pt-lesson-1,pt-lesson-">
+    <div>
+      <p class="meta">Lição 1 · Nível A2</p>
+      <h3>Presente do Indicativo: Revisão</h3>
       <p class="topics">Verbos regulares e irregulares comuns (<em>ser, estar, ter, ir</em>), apresentar-se e falar da rotina diária.</p>
-      <span class="go">Abrir aula <span class="arrow">→</span></span>
-    </a>
+    </div>
+    <span class="go">Abrir <span class="arrow">→</span></span>
+  </a>
 
+  <!-- RECURSOS — external study tools -->
+  <div class="section-head">
+    <h2>Recursos úteis</h2>
+    <span class="count">três sites para guardar</span>
+  </div>
+  <p class="section-sub">Quando precisas de tirar uma dúvida fora da aula.</p>
+
+  <div class="resources">
+    <a class="resource" href="https://european-portuguese.info/conjugator/ser" target="_blank" rel="noopener noreferrer">
+      <div>
+        <h3>Conjugador de Português Europeu</h3>
+        <p class="host">european-portuguese.info</p>
+      </div>
+      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+    </a>
+    <a class="resource" href="https://www.deepl.com/pt-PT/translator" target="_blank" rel="noopener noreferrer">
+      <div>
+        <h3>DeepL <span lang="en">Translator</span></h3>
+        <p class="host">deepl.com</p>
+      </div>
+      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+    </a>
+    <a class="resource" href="https://dicionario.priberam.org/" target="_blank" rel="noopener noreferrer">
+      <div>
+        <h3>Dicionário Priberam</h3>
+        <p class="host">dicionario.priberam.org</p>
+      </div>
+      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+    </a>
   </div>
 
   <div class="note">
-    💡 <strong>Dica:</strong> a tua pontuação e respostas ficam guardadas no teu navegador (<em>localStorage</em>), por isso podes fechar uma aula e voltar mais tarde sem perder o progresso. As aulas marcadas como <span class="pill started" style="margin:0">Começada</span> são as que já abriste e respondeste.
+    A tua pontuação fica guardada no navegador. Podes fechar uma aula e voltar mais tarde, sem perder o progresso.
   </div>
 
   <footer>
-    🇵🇹 Bons estudos, Magda! · Página principal das aulas de Português · <span id="todayNote"></span>
+    Bons estudos, Magda.
   </footer>
 </div>
 
 <script>
-  // Mark lessons that have saved progress, and count them.
   (function(){
-    let started = 0;
-    document.querySelectorAll('.lesson[data-keys]').forEach(card => {
-      const keys = card.dataset.keys.split(',').map(s => s.trim()).filter(Boolean);
-      let hit = false;
+    function isStarted(el){
+      const keys = (el.dataset.keys || '').split(',').map(s => s.trim()).filter(Boolean);
       for (const k of keys){
-        // exact key, or any localStorage key that starts with the given prefix
-        if (localStorage.getItem(k) !== null){ hit = true; break; }
+        if (localStorage.getItem(k) !== null) return true;
         for (let i = 0; i < localStorage.length; i++){
-          if (localStorage.key(i).startsWith(k)){ hit = true; break; }
+          if (localStorage.key(i).startsWith(k)) return true;
         }
-        if (hit) break;
       }
-      if (hit){
-        started++;
-        const badge = document.createElement('span');
-        badge.className = 'pill started';
-        badge.textContent = '✓ Começada';
-        card.querySelector('.top').appendChild(badge);
-      }
+      return false;
+    }
+
+    // Mark Mariana lesson cards as começada inline with the date line.
+    const lessons = Array.from(document.querySelectorAll('.lesson[data-keys]'));
+    lessons.forEach(card => {
+      if (!isStarted(card)) return;
+      const dateLine = card.querySelector('.date');
+      if (!dateLine) return;
+      const status = document.createElement('span');
+      status.className = 'status';
+      status.textContent = ' · começada';
+      dateLine.appendChild(status);
     });
-    document.getElementById('statStarted').textContent = started;
-    const total = document.querySelectorAll('.lesson').length;
-    document.getElementById('statTotal').textContent = total;
+
+    // Mark the course callout if started, and shift its CTA verb.
+    const courseCallout = document.querySelector('.course-callout[data-keys]');
+    if (courseCallout && isStarted(courseCallout)) {
+      const cta = courseCallout.querySelector('.go');
+      if (cta) cta.firstChild.textContent = 'Continuar ';
+      const meta = courseCallout.querySelector('.meta');
+      if (meta) {
+        const status = document.createElement('span');
+        status.className = 'status';
+        status.textContent = ' · começada';
+        meta.appendChild(status);
+      }
+    }
+
+    // Swap the Continuar block to a started lesson when one exists.
+    // Default in HTML already points to the most recent lesson.
+    const continueBlock = document.getElementById('continueBlock');
+    const startedLesson = lessons.find(isStarted);
+    if (continueBlock && startedLesson) {
+      const title = startedLesson.querySelector('h3')?.textContent?.trim() || '';
+      const topicsEl = startedLesson.querySelector('.topics');
+      continueBlock.href = startedLesson.getAttribute('href');
+      document.getElementById('continueLabel').textContent = 'Continuar onde paraste';
+      document.getElementById('continueTitle').textContent = title;
+      if (topicsEl) document.getElementById('continueTopics').innerHTML = topicsEl.innerHTML;
+      document.getElementById('continueCta').textContent = 'Continuar a aula';
+    }
   })();
 </script>
 </body>

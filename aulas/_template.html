@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--
+  TEMPLATE FOR A PORTUGUESE LESSON PAGE
+  Read together with ./LESSON_DESIGN.md
+  Placeholders use {{HANDLEBARS_STYLE}} so the /portuguese-lesson skill can
+  substitute mechanically. Sections with [REPEATABLE: ...] indicate blocks
+  the skill can duplicate for additional content.
+-->
+<title>{{LESSON_TITLE_SHORT}} · {{LESSON_DATE_ISO}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-light: #e8f1e9;
+    --red: #B71C1C;
+    --red-light: #fbeaea;
+    --gold: #F9A825;
+    --gold-text: #8a5e00;
+    --gold-light: #fdf3dc;
+    --blue: #1565C0;
+    --blue-light: #e7f0fa;
+    --ink: #20302a;
+    --muted: #5b6b63;
+    --paper: #fcfbf7;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --ok: #2e7d32;
+    --ok-bg: #e6f4e7;
+    --err: #c62828;
+    --err-bg: #fcebea;
+    --shadow: 0 1px 2px rgba(27,94,32,.05);
+    --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+    --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    color: var(--ink); background: var(--paper); line-height: 1.65;
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+
+  header {
+    background: var(--green); color: #fff;
+    padding: clamp(40px, 6vw, 64px) 0 clamp(36px, 5vw, 56px);
+  }
+  .header-inner { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .badges { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.22);
+    padding: 4px 11px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  }
+  .badge.real { background: var(--gold); color: #3a2a00; border-color: transparent; }
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
+    font-size: clamp(28px, 4.6vw, 42px); line-height: 1.15;
+    margin: 6px 0 var(--space-3); text-wrap: balance; letter-spacing: -0.01em;
+  }
+  .subtitle { font-size: 1rem; opacity: .92; max-width: 60ch; margin: 0; text-wrap: pretty; }
+
+  /* Scorebar — lives inside the Exercícios section */
+  .scorebar {
+    position: sticky; top: 12px; z-index: 5;
+    background: rgba(252,251,247,.94);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 10px 14px; margin: var(--space-4) 0 var(--space-5);
+  }
+  .scorebar-inner { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+  .score-label { font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap; }
+  .progress-track { flex: 1; min-width: 140px; height: 8px; background: #e9e6dd; border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 100%; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--gold), var(--green)); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .score-num { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .btn-reset {
+    border: 1px solid var(--border); background: #fff; color: var(--muted);
+    border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer; font-weight: 600;
+    transition: color .15s, border-color .15s;
+  }
+  .btn-reset:hover { color: var(--red); border-color: var(--red); }
+
+  section { margin-top: var(--space-6); }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: var(--space-6) clamp(20px, 4vw, 32px); box-shadow: var(--shadow);
+  }
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif; font-size: clamp(22px, 3vw, 26px);
+    font-weight: 600; color: var(--green); letter-spacing: -0.01em;
+    margin: 0 0 6px; display: flex; align-items: center; gap: var(--space-3);
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: #fff;
+    background: var(--green); width: 28px; height: 28px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    font-variant-numeric: tabular-nums;
+  }
+  h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin: var(--space-5) 0 var(--space-2); }
+  .lead { color: var(--muted); margin: 2px 0 var(--space-4); text-wrap: pretty; }
+  p { margin: 10px 0; }
+  .en { color: var(--blue); font-style: italic; }
+  .pt-ex { font-weight: 500; }
+
+  ul.goals { list-style: none; padding: 0; margin: 0; }
+  ul.goals li {
+    padding: 12px 14px 12px 44px; position: relative; margin-bottom: 8px;
+    background: var(--green-light); border-radius: 10px; border: 1px solid #d7e7d9;
+  }
+  ul.goals li::before { content: "✓"; position: absolute; left: 14px; top: 12px; color: var(--green); font-weight: 800; }
+  ul.goals .t { color: var(--blue); font-style: italic; font-size: 14px; display: block; }
+
+  .table-scroll { overflow-x: auto; margin: 14px 0; border-radius: 12px; border: 1px solid var(--border); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; background: #fff; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  th { background: var(--green-light); color: var(--green); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr { transition: background .15s; }
+  tbody tr:hover { background: var(--gold-light); }
+  td .ex { display: block; color: var(--muted); font-size: 13.5px; font-style: italic; margin-top: 2px; }
+  .end { color: var(--red); font-weight: 700; }
+  .stem { color: var(--ink); }
+
+  .callout { border-radius: 12px; padding: 16px 18px 16px 50px; position: relative; margin: 16px 0; font-size: 15.5px; }
+  .callout .ic { position: absolute; left: 16px; top: 15px; font-size: 20px; }
+  .callout.warn { background: var(--red-light); border: 1px solid #f0c9c9; }
+  .callout.warn strong { color: var(--red); }
+  .callout.culture { background: var(--blue-light); border: 1px solid #c9def5; }
+  .callout.culture strong { color: var(--blue); }
+  .callout.tip { background: var(--gold-light); border: 1px solid #f0dca8; }
+  .callout.tip strong { color: var(--gold-text); }
+
+  .dialogue { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .turn { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+  .turn:last-child { border-bottom: none; }
+  .turn .who { font-weight: 700; min-width: 78px; flex: none; }
+  .turn.m .who { color: var(--red); }    /* Mariana (teacher) */
+  .turn.a .who { color: var(--blue); }   /* Aluna (student) */
+  .turn .line .tr { color: var(--muted); font-style: italic; font-size: 14px; display: block; margin-top: 2px; }
+
+  .bonus-tag { font-size: 11px; font-weight: 700; background: var(--gold); color: #3a2a00; padding: 2px 8px; border-radius: 6px; vertical-align: middle; }
+
+  .exercise { margin-top: 22px; padding-top: 22px; border-top: 2px dashed var(--border); }
+  .exercise:first-of-type { border-top: none; padding-top: 0; }
+  .q { margin: 14px 0; padding: 14px 16px; background: #faf9f4; border: 1px solid var(--border); border-radius: 10px; }
+  .q .qnum { font-weight: 700; color: var(--green); margin-right: 6px; }
+  .q input[type="text"] {
+    font-family: inherit; font-size: 15px; padding: 7px 10px; border: 2px solid var(--border);
+    border-radius: 8px; min-width: 130px; margin: 0 4px; transition: border-color .2s, background .2s;
+  }
+  .q input[type="text"]:focus { outline: none; border-color: var(--blue); }
+  .q input.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .q input.incorrect { border-color: var(--err); background: var(--err-bg); }
+  .hint { display: none; font-size: 13.5px; color: var(--err); margin-top: 8px; }
+  .hint.show { display: block; }
+  .reveal { display: none; font-size: 14px; color: var(--ok); margin-top: 6px; font-weight: 600; }
+  .reveal.show { display: block; }
+  .feedback { font-size: 12px; margin-top: 4px; font-weight: 600; }
+  .feedback.ok { color: var(--ok); }
+  .feedback.no { color: var(--err); }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer;
+    border: 2px solid var(--border); border-radius: 10px; background: #fff; transition: all .15s; font-size: 15px;
+  }
+  .choice:hover { border-color: var(--blue); background: var(--blue-light); }
+  .choice input { accent-color: var(--green); width: 17px; height: 17px; }
+  .choice.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .choice.incorrect { border-color: var(--err); background: var(--err-bg); }
+
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
+  @media (max-width: 600px) { .match-grid { grid-template-columns: 1fr; } }
+  .match-col h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .match-item {
+    padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 8px;
+    background: #fff; cursor: pointer; transition: all .15s; font-size: 15px;
+  }
+  .match-item:hover { border-color: var(--blue); }
+  .match-item.selected { border-color: var(--blue); background: var(--blue-light); }
+  .match-item.matched { border-color: var(--ok); background: var(--ok-bg); cursor: default; opacity: .75; }
+  .match-item.matched::after { content: " ✓"; color: var(--ok); font-weight: 700; }
+  .match-item.incorrect { border-color: var(--err); background: var(--err-bg); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4); align-items: center; }
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+    border-radius: 10px; padding: 10px 18px; border: 1px solid transparent;
+    transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-check { background: var(--green); color: #fff; }
+  .btn-check:hover { background: #194f1c; box-shadow: 0 2px 6px rgba(27,94,32,.18); }
+  .btn-show { background: #fff; color: var(--muted); border-color: var(--border); }
+  .btn-show:hover { color: var(--gold-text); border-color: var(--gold-text); }
+  .result-pill { align-self: center; font-weight: 700; font-size: 13px; padding: 5px 12px; border-radius: 999px; display: none; }
+  .result-pill.show { display: inline-block; }
+  .result-pill.good { background: var(--ok-bg); color: var(--ok); }
+  .result-pill.partial { background: var(--gold-light); color: var(--gold-text); }
+
+  textarea {
+    width: 100%; font-family: inherit; font-size: 15px; padding: 12px; border: 2px solid var(--border);
+    border-radius: 10px; resize: vertical; min-height: 120px; margin-top: 8px;
+  }
+  textarea:focus { outline: none; border-color: var(--blue); }
+  .writing-tips { font-size: 14px; color: var(--muted); }
+  .writing-tips li { margin: 4px 0; }
+
+  .selfcheck { list-style: none; padding: 0; }
+  .selfcheck li { padding: 8px 0 8px 30px; position: relative; }
+  .selfcheck li::before { content: "☐"; position: absolute; left: 0; font-size: 18px; color: var(--green); }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: var(--space-7); }
+  .nav { display: flex; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-6); flex-wrap: wrap; }
+  .nav a {
+    text-decoration: none; color: var(--green); font-weight: 600; font-size: 14px;
+    padding: 9px 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;
+    transition: background .15s, border-color .15s;
+  }
+  .nav a:hover { background: var(--green-light); border-color: var(--green); }
+  .nav a.disabled { opacity: .4; pointer-events: none; }
+
+  .ipa { font-family: 'EB Garamond', Georgia, serif; color: var(--blue); font-style: normal; background: var(--blue-light); padding: 1px 6px; border-radius: 5px; font-size: 14px; }
+
+  .btn:focus-visible, .nav a:focus-visible, .btn-reset:focus-visible,
+  .choice:focus-within, .match-item:focus-visible {
+    outline: 2px solid var(--green); outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+  @media print {
+    .scorebar, .actions, .btn, .nav { display: none !important; }
+    body { font-size: 12px; background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    .hint, .reveal { display: block !important; }
+    header { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badges">
+      <!-- The "real" badge is gold; others are subtle. Keep emojis here. -->
+      <span class="badge real">📝 {{ORIGIN_LABEL}}</span>             <!-- e.g. "Baseada na aula real" -->
+      <span class="badge">{{LEVEL_LABEL}}</span>                     <!-- e.g. "Nível A2 → B1" -->
+      <span class="badge">🗓️ {{LESSON_DATE_LONG}}</span>            <!-- e.g. "3 de junho de 2026" -->
+      <span class="badge">👩‍🏫 {{TEACHER_LABEL}}</span>             <!-- e.g. "Professora Mariana" -->
+    </div>
+    <h1>{{LESSON_TITLE_FULL}}</h1>
+    <p class="subtitle">{{LESSON_SUBTITLE}}</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Top nav: previous / home / next. Disable any unavailable link with class="disabled". -->
+  <div class="nav" style="margin-top:24px">
+    <a href="{{PREV_HREF}}">← {{PREV_LABEL}}</a>
+    <a href="../index.html">🏠 Página principal</a>
+    <a class="disabled" href="#">Próxima aula →</a>
+  </div>
+
+  <!-- 1. RECAP — what the student talked about / saw -->
+  <section>
+    <div class="card">
+      <h2><span class="num">1</span> Resumo da aula</h2>
+      <p class="lead">{{RECAP_LEAD}}</p>
+      <p>{{RECAP_PARAGRAPH}}</p>
+    </div>
+  </section>
+
+  <!-- 2. OBJECTIVES — concrete things this lesson teaches. Keep PT + EN gloss. -->
+  <section>
+    <div class="card">
+      <h2><span class="num">2</span> O que vamos aprender hoje</h2>
+      <ul class="goals">
+        <!-- [REPEATABLE: 3-5 objectives] -->
+        <li>{{GOAL_PT}}<span class="t">{{GOAL_EN_GLOSS}}</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. GRAMMAR — the meat of the lesson. h3 sub-sections per topic. -->
+  <section>
+    <div class="card">
+      <h2><span class="num">3</span> Gramática</h2>
+
+      <!-- [REPEATABLE: each grammar topic gets its own h3 block] -->
+      <h3>{{GRAMMAR_TOPIC_HEADING}}</h3>             <!-- e.g. "A. Pretérito imperfeito vs. perfeito" -->
+      <p>{{GRAMMAR_INTRO}}</p>
+
+      <!-- Tip callout: insight, takeaway, key rule -->
+      <div class="callout tip"><span class="ic">💡</span>
+        <strong>{{TIP_LABEL}}</strong> {{TIP_BODY}}
+      </div>
+
+      <!-- Conjugation/grammar table — use .end for verb endings, .stem for stems -->
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>{{TABLE_COL_1}}</th><th>{{TABLE_COL_2}}</th></tr></thead>
+          <tbody>
+            <tr><td>{{ROW_LABEL}}</td><td>fal<span class="end">ava</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Other callout variants: warn (red), culture (blue), tip (gold) -->
+      <div class="callout warn"><span class="ic">⚠️</span>
+        <strong>{{WARN_LABEL}}</strong> {{WARN_BODY}}
+      </div>
+      <div class="callout culture"><span class="ic">🇵🇹</span>
+        <strong>{{CULTURE_LABEL}}</strong> {{CULTURE_BODY}}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. VOCABULARY — words and expressions from the lesson -->
+  <section>
+    <div class="card">
+      <h2><span class="num">4</span> Vocabulário</h2>
+      <p class="lead">{{VOCAB_LEAD}}</p>
+
+      <!-- Use tables for verb conjugation, vocab + translation, etc. -->
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Português</th><th>Inglês</th></tr></thead>
+          <tbody>
+            <!-- [REPEATABLE: vocab rows] -->
+            <tr><td>{{PT_WORD}}</td><td><span class="en">{{EN_TRANSLATION}}</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- IPA pill for pronunciation notes -->
+      <p>Pronúncia: <em>{{WORD}}</em> <span class="ipa">{{IPA_NOTATION}}</span></p>
+    </div>
+  </section>
+
+  <!-- 5. DIALOGUE — reconstructed conversation. m = teacher (red), a = student (blue) -->
+  <section>
+    <div class="card">
+      <h2><span class="num">5</span> Diálogo reconstruído</h2>
+      <p class="lead">{{DIALOGUE_LEAD}}</p>
+      <div class="dialogue">
+        <!-- [REPEATABLE: alternating turns] -->
+        <div class="turn m"><span class="who">Mariana</span><span class="line">{{TEACHER_LINE}}<span class="tr">{{EN_GLOSS}}</span></span></div>
+        <div class="turn a"><span class="who">Aluno/a</span><span class="line">{{STUDENT_LINE}}<span class="tr">{{EN_GLOSS}}</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EXERCISES — scorebar lives inside this card and sticks within it only -->
+  <section class="exercises-section">
+    <div class="card">
+      <h2><span class="num">6</span> Exercícios</h2>
+      <p class="lead">{{EXERCISES_LEAD}}</p>
+
+      <div class="scorebar">
+        <div class="scorebar-inner">
+          <span class="score-label">🏆 Pontuação</span>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <span class="score-num" id="scoreNum">0 / 0</span>
+          <button class="btn-reset" onclick="resetAll()">Recomeçar</button>
+        </div>
+      </div>
+
+      <!-- EX 1: text fill-in. Multiple acceptable answers separated by |. -->
+      <div class="exercise" data-ex="1">
+        <h3>Exercício 1: {{EX1_TITLE}}</h3>
+        <p>{{EX1_INSTRUCTIONS}}</p>
+        <!-- [REPEATABLE: questions inside .q] -->
+        <div class="q">
+          <span class="qnum">1.</span> {{Q_PROMPT}}
+          <input type="text" data-a="{{ANSWER1}}|{{ANSWER1_VARIANT}}" size="12" />
+          <div class="hint">{{HINT_TEXT}}</div>
+          <div class="reveal">✓ {{REVEALED_ANSWER}}</div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkText(1)">Verificar</button>
+          <button class="btn btn-show" onclick="toggleReveal(1)">Mostrar respostas</button>
+          <span class="result-pill" id="res1"></span>
+        </div>
+      </div>
+
+      <!-- EX 2: matching. Pairs share the same data-key. Mount via setupMatch() in JS. -->
+      <div class="exercise" data-ex="2">
+        <h3>Exercício 2: {{EX2_TITLE}}</h3>
+        <p>{{EX2_INSTRUCTIONS}}</p>
+        <div class="match-grid" id="match2">
+          <div class="match-col" data-side="pt">
+            <h4>Português</h4>
+            <!-- [REPEATABLE pairs] -->
+            <div class="match-item" data-key="a">{{PT_TERM}}</div>
+          </div>
+          <div class="match-col" data-side="en">
+            <h4>Inglês</h4>
+            <div class="match-item" data-key="a">{{EN_GLOSS}}</div>
+          </div>
+        </div>
+        <span class="result-pill" id="res2" style="margin-top:12px"></span>
+      </div>
+
+      <!-- EX 3: multiple choice. q.dataset.mc = id, q.dataset.correct = correct value. -->
+      <div class="exercise" data-ex="3">
+        <h3>Exercício 3: {{EX3_TITLE}}</h3>
+        <p>{{EX3_INSTRUCTIONS}}</p>
+        <!-- [REPEATABLE questions] -->
+        <div class="q" data-mc="3-1" data-correct="a">
+          <span class="qnum">1.</span> {{Q_PROMPT}}
+          <div class="choices">
+            <label class="choice"><input type="radio" name="q3-1" value="a"> {{CHOICE_A}}</label>
+            <label class="choice"><input type="radio" name="q3-1" value="b"> {{CHOICE_B}}</label>
+            <label class="choice"><input type="radio" name="q3-1" value="c"> {{CHOICE_C}}</label>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkMC(3)">Verificar</button>
+          <span class="result-pill" id="res3"></span>
+        </div>
+      </div>
+
+      <!-- EX 4: free writing prompt. Counts as 1 point at ≥40 chars. -->
+      <div class="exercise" data-ex="4">
+        <h3>Exercício 4: Escrita livre</h3>
+        <p>{{WRITING_PROMPT}}</p>
+        <textarea id="writing" placeholder="Escreve aqui..."></textarea>
+        <ul class="writing-tips">
+          <li>{{TIP_1}}</li>
+          <li>{{TIP_2}}</li>
+        </ul>
+        <div class="actions">
+          <button class="btn btn-check" onclick="saveWriting()">Guardar texto</button>
+          <span class="result-pill" id="res4"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SUMMARY — take-home points + self-check + closer -->
+  <section>
+    <div class="card">
+      <h2><span class="num">7</span> Resumo e autoavaliação</h2>
+
+      <h3>O que levas desta aula</h3>
+      <ul>
+        <!-- [REPEATABLE: 3-5 take-aways] -->
+        <li>{{TAKEAWAY}}</li>
+      </ul>
+
+      <h3>Consigo…? (autoavaliação)</h3>
+      <ul class="selfcheck">
+        <!-- [REPEATABLE: 3-5 can-do statements] -->
+        <li>{{CAN_DO_STATEMENT}}</li>
+      </ul>
+
+      <div class="callout tip"><span class="ic">🌟</span>
+        <strong>{{CLOSER_LABEL}}</strong> {{CLOSER_BODY}}
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="{{PREV_HREF}}">← {{PREV_LABEL}}</a>
+      <a href="../index.html">🏠 Página principal</a>
+      <a class="disabled" href="#">Próxima aula →</a>
+    </div>
+  </section>
+
+  <footer>
+    📝 {{FOOTER_PROVENANCE}} · {{LESSON_DATE_LONG}} · <em>Próxima aula: {{NEXT_LESSON_NOTE}}</em>
+  </footer>
+</div>
+
+<script>
+  // localStorage key — must match the data-keys attribute on the index card.
+  // Convention: 'pt_marianna_YYYY_MM_DD' (double n, underscores). Don't break this.
+  const LS_KEY = '{{LS_KEY}}';   // e.g. 'pt_marianna_2026_06_03'
+
+  function norm(s){
+    return (s||'').toLowerCase().trim()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/\s+/g,' ');
+  }
+  function load(){ try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e){ return {}; } }
+  function save(state){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+  let state = load();
+
+  function totalPoints(){
+    let t = 0;
+    document.querySelectorAll('.exercise[data-ex] input[type="text"]').forEach(()=>t++);
+    t += document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length;
+    t += document.querySelectorAll('.q[data-mc]').length;
+    t += 1; // writing
+    return t;
+  }
+  function earnedPoints(){
+    let e = 0;
+    for (const k in state){ if(k.startsWith('pt:')&&state[k]) e++; }
+    for (const k in state){ if(k.startsWith('mc:')&&state[k]) e++; }
+    if (state['match']) e += state['match'];
+    if (state['writing']) e += 1;
+    return e;
+  }
+  function refreshScore(){
+    const tot = totalPoints();
+    const earned = Math.min(earnedPoints(), tot);
+    document.getElementById('scoreNum').textContent = earned + ' / ' + tot;
+    document.getElementById('progressFill').style.transform = 'scaleX(' + (tot? earned/tot : 0) + ')';
+  }
+
+  function checkText(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const inputs = box.querySelectorAll('input[type="text"]');
+    let ok = 0;
+    inputs.forEach((inp,i)=>{
+      const accepted = inp.dataset.a.split('|').map(norm);
+      const val = norm(inp.value);
+      const id = 'pt:'+ex+':'+i;
+      if (val && accepted.includes(val)){
+        inp.classList.add('correct'); inp.classList.remove('incorrect');
+        state[id]=true; ok++;
+      } else {
+        inp.classList.add('incorrect'); inp.classList.remove('correct');
+        state[id]=false;
+        const hint = inp.closest('.q').querySelector('.hint');
+        if(hint) hint.classList.add('show');
+      }
+    });
+    save(state); refreshScore();
+    const pill = document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+inputs.length+' certas';
+    pill.className = 'result-pill show ' + (ok===inputs.length?'good':'partial');
+  }
+  function toggleReveal(ex){
+    document.querySelectorAll('.exercise[data-ex="'+ex+'"] .reveal').forEach(r=>r.classList.toggle('show'));
+  }
+
+  let selected = null;
+  function setupMatch(){
+    const wrap = document.getElementById('match2');
+    if (!wrap) return;
+    wrap.querySelectorAll('.match-item').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        if(item.classList.contains('matched')) return;
+        const side = item.parentElement.dataset.side;
+        if(!selected){ selected = item; item.classList.add('selected'); return; }
+        if(selected === item){ item.classList.remove('selected'); selected=null; return; }
+        const sameSide = selected.parentElement.dataset.side === side;
+        if(sameSide){ selected.classList.remove('selected'); selected=item; item.classList.add('selected'); return; }
+        if(selected.dataset.key === item.dataset.key){
+          selected.classList.add('matched'); item.classList.add('matched');
+          selected.classList.remove('selected');
+          countMatches();
+        } else {
+          const a=selected, b=item;
+          a.classList.add('incorrect'); b.classList.add('incorrect');
+          setTimeout(()=>{ a.classList.remove('incorrect','selected'); b.classList.remove('incorrect'); }, 700);
+        }
+        selected=null;
+      });
+    });
+  }
+  function countMatches(){
+    const pairs = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item.matched').length;
+    state['match'] = pairs; save(state); refreshScore();
+    const total = document.querySelectorAll('#match2 .match-col[data-side="pt"] .match-item').length;
+    const pill = document.getElementById('res2');
+    pill.textContent = pairs+' / '+total+' ligações';
+    pill.className = 'result-pill show ' + (pairs===total?'good':'partial');
+  }
+
+  function checkMC(ex){
+    const box = document.querySelector('.exercise[data-ex="'+ex+'"]');
+    const qs = box.querySelectorAll('.q[data-mc]');
+    let ok=0;
+    qs.forEach(q=>{
+      const correct = q.dataset.correct;
+      const chosen = q.querySelector('input[type="radio"]:checked');
+      q.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','incorrect'));
+      const id='mc:'+q.dataset.mc;
+      if(chosen){
+        const label = chosen.closest('.choice');
+        if(chosen.value===correct){ label.classList.add('correct'); state[id]=true; ok++; }
+        else {
+          label.classList.add('incorrect'); state[id]=false;
+          q.querySelector('input[value="'+correct+'"]').closest('.choice').classList.add('correct');
+        }
+      } else { state[id]=false; }
+    });
+    save(state); refreshScore();
+    const pill=document.getElementById('res'+ex);
+    pill.textContent = ok+' / '+qs.length+' certas';
+    pill.className='result-pill show '+(ok===qs.length?'good':'partial');
+  }
+
+  function saveWriting(){
+    const txt = document.getElementById('writing').value.trim();
+    state['writingText'] = txt;
+    state['writing'] = txt.length > 40;
+    save(state); refreshScore();
+    const pill=document.getElementById('res4');
+    if(state['writing']){ pill.textContent='Texto guardado ✓'; pill.className='result-pill show good'; }
+    else { pill.textContent='Escreve um pouco mais!'; pill.className='result-pill show partial'; }
+  }
+
+  function restore(){
+    document.querySelectorAll('.exercise[data-ex]').forEach(box=>{
+      const ex = box.dataset.ex;
+      box.querySelectorAll('input[type="text"]').forEach((inp,i)=>{
+        const id='pt:'+ex+':'+i;
+        if(state[id]===true){ inp.classList.add('correct'); }
+      });
+    });
+    document.querySelectorAll('.q[data-mc]').forEach(q=>{
+      const id='mc:'+q.dataset.mc;
+      if(state[id]===true){
+        const correct = q.dataset.correct;
+        const inp = q.querySelector('input[value="'+correct+'"]');
+        if(inp){ inp.checked = true; inp.closest('.choice').classList.add('correct'); }
+      }
+    });
+    if(state['writingText']){ const w = document.getElementById('writing'); if(w) w.value = state['writingText']; }
+    refreshScore();
+  }
+
+  function resetAll(){
+    if(!confirm('Tens a certeza que queres recomeçar do zero? Vais perder o teu progresso desta aula.')) return;
+    localStorage.removeItem(LS_KEY); state = {};
+    location.reload();
+  }
+
+  setupMatch();
+  restore();
+</script>
+</body>
+</html>

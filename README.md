@@ -22,9 +22,14 @@ Start from **`index.html`** — the hub that links to every lesson.
 .
 ├── index.html                         # Home page (lesson hub) — stays at root
 └── aulas/                             # All lesson pages
+    ├── LESSON_DESIGN.md               # Design contract for new lessons
+    ├── _template.html                 # Working lesson skeleton with placeholders
     ├── aula-1.html                    # Structured A2→B1 course — Lesson 1
     └── aulas_mariana_YYYY-MM-DD.html  # Lessons generated from real classes
 ```
+
+> When generating a new lesson (e.g. via the `/portuguese-lesson` skill), start
+> from `aulas/_template.html` and follow `aulas/LESSON_DESIGN.md`.
 
 - Every page is **fully self-contained** — inline CSS + vanilla JS, no build
   step and no local assets. The only external dependency is Google Fonts (over

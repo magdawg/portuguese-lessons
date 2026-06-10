@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aula 1 — Presente do Indicativo · Português Europeu A2</title>
+<title>Aula 1: Presente do Indicativo · Português Europeu A2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --green: #1B5E20;
@@ -35,7 +35,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -73,7 +73,7 @@ body {
   backdrop-filter: blur(4px);
 }
 .hero h1 {
-  font-family: 'Lora', serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -120,7 +120,7 @@ body {
 .section-icon.exercise { background: var(--red-bg); }
 .section-icon.summary { background: #F3E5F5; }
 .section h2 {
-  font-family: 'Lora', serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.45rem;
   font-weight: 600;
   color: var(--green);
@@ -429,10 +429,12 @@ tr:hover td { background: #F5F5F5; }
 }
 .score-fill {
   height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
   background: linear-gradient(90deg, var(--green), var(--green-light));
   border-radius: 5px;
-  transition: width 0.5s ease;
-  width: 0%;
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
 }
 .score-text {
   font-weight: 700;
@@ -544,7 +546,7 @@ tr:hover td { background: #F5F5F5; }
 <!-- ========== HEADER ========== -->
 <div class="hero">
   <div class="hero-badge">A2 · Aula 1 de 36</div>
-  <h1>Presente do Indicativo — Revisão</h1>
+  <h1>Presente do Indicativo: Revisão</h1>
   <p class="subtitle">Apresentar-se e falar sobre rotinas diárias</p>
 </div>
 
@@ -598,7 +600,7 @@ tr:hover td { background: #F5F5F5; }
 <div class="section">
   <div class="section-header">
     <div class="section-icon grammar">📖</div>
-    <h2>Gramática — Presente do Indicativo</h2>
+    <h2>Gramática: Presente do Indicativo</h2>
   </div>
 
   <div class="card">
@@ -759,7 +761,7 @@ tr:hover td { background: #F5F5F5; }
 <div class="section">
   <div class="section-header">
     <div class="section-icon vocab">📝</div>
-    <h2>Vocabulário — Rotina Diária e Profissões</h2>
+    <h2>Vocabulário: Rotina Diária e Profissões</h2>
   </div>
 
   <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Rotina diária</h3>
@@ -812,7 +814,7 @@ tr:hover td { background: #F5F5F5; }
 <div class="section">
   <div class="section-header">
     <div class="section-icon comm">💬</div>
-    <h2>Comunicação — Apresentar-se e falar do dia a dia</h2>
+    <h2>Comunicação: Apresentar-se e falar do dia a dia</h2>
   </div>
 
   <p style="font-size: 0.95rem; color: var(--text-sec); margin-bottom: 1rem;">A Ana e o Marco conhecem-se num café em Lisboa. Lê o diálogo e repara nos verbos no presente.</p>
@@ -870,7 +872,7 @@ tr:hover td { background: #F5F5F5; }
 
   <!-- EXERCISE 1: FILL IN THE BLANK -->
   <div class="exercise-group" id="ex1">
-    <h3>Exercício 1 — Completa com o verbo no presente</h3>
+    <h3>Exercício 1: Completa com o verbo no presente</h3>
     <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escreve a forma correta do verbo entre parênteses.</p>
 
     <div class="exercise-item" data-answer="falo">
@@ -929,7 +931,7 @@ tr:hover td { background: #F5F5F5; }
 
   <!-- EXERCISE 2: VOCABULARY MATCHING -->
   <div class="exercise-group" id="ex2">
-    <h3>Exercício 2 — Liga o português ao inglês</h3>
+    <h3>Exercício 2: Liga o português ao inglês</h3>
     <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Clica numa palavra portuguesa, depois clica na tradução correta.</p>
 
     <div class="match-container" id="matchContainer">
@@ -950,7 +952,7 @@ tr:hover td { background: #F5F5F5; }
 
   <!-- EXERCISE 3: CONJUGATION DRILL -->
   <div class="exercise-group" id="ex3">
-    <h3>Exercício 3 — Conjuga os verbos</h3>
+    <h3>Exercício 3: Conjuga os verbos</h3>
     <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escreve a conjugação correta para cada pessoa.</p>
 
     <div class="card" style="margin-bottom: 1rem;">
@@ -1019,7 +1021,7 @@ tr:hover td { background: #F5F5F5; }
 
   <!-- EXERCISE 4: MULTIPLE CHOICE (SER vs ESTAR) -->
   <div class="exercise-group" id="ex4">
-    <h3>Exercício 4 — SER ou ESTAR?</h3>
+    <h3>Exercício 4: SER ou ESTAR?</h3>
     <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escolhe a opção correta para cada frase.</p>
 
     <div class="card mc-question" data-correct="sou">
@@ -1079,7 +1081,7 @@ tr:hover td { background: #F5F5F5; }
 
   <!-- EXERCISE 5: FREE WRITING -->
   <div class="exercise-group" id="ex5">
-    <h3>Exercício 5 — Escreve sobre ti!</h3>
+    <h3>Exercício 5: Escreve sobre ti!</h3>
     <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">
       Escreve um pequeno texto (5-8 frases) sobre ti. Inclui:
     </p>
@@ -1151,7 +1153,7 @@ tr:hover td { background: #F5F5F5; }
 
   // ---- SCORE ----
   function updateScore() {
-    document.getElementById('scoreFill').style.width = state.total > 0 ? ((state.score / state.total) * 100) + '%' : '0%';
+    document.getElementById('scoreFill').style.transform = 'scaleX(' + (state.total > 0 ? state.score / state.total : 0) + ')';
     document.getElementById('scoreText').textContent = state.score + ' / ' + state.total;
   }
 

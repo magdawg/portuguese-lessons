@@ -12,3 +12,7 @@ progression.json
 .claude/
 memory/
 node_modules/
+
+.impeccable/
+.kiro/
+.qoder/
