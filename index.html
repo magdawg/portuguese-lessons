@@ -10,15 +10,17 @@
 <style>
   :root {
     --green: #1B5E20;
-    --gold: #F9A825;
-    --gold-text: #8a5e00;       /* WCAG-safe for foreground text on white */
+    --gold-text: #8a5e00;       /* WCAG-safe on white and on --gold-light */
+    --gold-deep: #5c3d00;       /* For strong text on --gold-light */
     --gold-light: #fdf3dc;
+    --gold-border: #f0dca8;
     --ink: #20302a;
     --muted: #5b6b63;
     --paper: #fcfbf7;
     --card: #ffffff;
     --border: #e3e0d6;
     --shadow: 0 1px 2px rgba(27,94,32,.05);
+    --ease-out-soft: cubic-bezier(.2,.8,.2,1);
     /* spacing scale */
     --space-2: 8px;
     --space-3: 12px;
@@ -88,10 +90,11 @@
     text-wrap: balance;
   }
   .subtitle { font-size: 1.0625rem; opacity: .92; max-width: 60ch; margin: 0; text-wrap: pretty; }
+  .subtitle .name { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: 1.15em; letter-spacing: .005em; }
 
   /* Section heads */
   .section-head { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-8) 0 var(--space-2); }
-  .section-head h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 26px; font-weight: 600; color: var(--ink); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  .section-head h2 { font-family: 'EB Garamond', Georgia, serif; font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; color: var(--ink); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
   .section-head .count { font-size: 13px; color: var(--muted); font-weight: 500; }
   .section-sub { color: var(--muted); margin: 0 0 var(--space-5); font-size: 15px; max-width: 60ch; text-wrap: pretty; }
 
@@ -104,7 +107,7 @@
     border-radius: 14px; padding: var(--space-4) var(--space-5);
     box-shadow: var(--shadow);
     text-decoration: none; color: inherit;
-    transition: border-color .18s ease, box-shadow .18s ease;
+    transition: border-color .18s var(--ease-out-soft), box-shadow .18s var(--ease-out-soft);
   }
   .lesson:hover { border-color: var(--accent, var(--green)); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
   .lesson .date {
@@ -120,7 +123,7 @@
     font-weight: 700; font-size: 14px; color: var(--accent, var(--green)); white-space: nowrap;
     display: inline-flex; align-items: center; gap: var(--space-2);
   }
-  .lesson .go .arrow { transition: transform .15s; }
+  .lesson .go .arrow { transition: transform .18s var(--ease-out-soft); display: inline-block; }
   .lesson:hover .go .arrow { transform: translateX(4px); }
   @media (max-width: 520px) {
     .lesson { grid-template-columns: 1fr; gap: var(--space-3); }
@@ -134,9 +137,9 @@
     border-radius: 14px; padding: var(--space-5) var(--space-5);
     box-shadow: var(--shadow);
     text-decoration: none; color: inherit;
-    transition: border-color .18s ease;
+    transition: border-color .18s var(--ease-out-soft), box-shadow .18s var(--ease-out-soft);
   }
-  .course-callout:hover { border-color: var(--green); }
+  .course-callout:hover { border-color: var(--green); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
   .course-callout .meta {
     font-size: 14px; color: var(--muted); margin: 0 0 var(--space-2);
     font-variant-numeric: tabular-nums;
@@ -150,7 +153,7 @@
     font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap;
     display: inline-flex; align-items: center; gap: var(--space-2);
   }
-  .course-callout .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); }
+  .course-callout .arrow { transition: transform .18s var(--ease-out-soft); display: inline-block; }
   .course-callout:hover .arrow { transform: translateX(4px); }
   @media (max-width: 520px) {
     .course-callout { grid-template-columns: 1fr; }
@@ -164,7 +167,7 @@
     background: var(--card); border: 1px solid var(--border);
     border-radius: 12px; padding: var(--space-4) var(--space-5);
     text-decoration: none; color: inherit;
-    transition: border-color .18s ease, box-shadow .18s ease;
+    transition: border-color .18s var(--ease-out-soft), box-shadow .18s var(--ease-out-soft);
   }
   .resource:hover { border-color: var(--green); box-shadow: 0 2px 6px rgba(27,94,32,.08); }
   .resource h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 600; margin: 0 0 4px; line-height: 1.25; color: var(--ink); }
@@ -173,16 +176,41 @@
     font-weight: 700; font-size: 14px; color: var(--green); white-space: nowrap;
     display: inline-flex; align-items: center; gap: var(--space-2);
   }
-  .resource .arrow { transition: transform .18s cubic-bezier(.2,.8,.2,1); display: inline-block; }
+  .resource .arrow { transition: transform .18s var(--ease-out-soft); display: inline-block; }
   .resource:hover .arrow { transform: translate(2px, -2px); }
   @media (max-width: 520px) {
     .resource { grid-template-columns: 1fr; }
   }
 
-  .note { background: var(--gold-light); border: 1px solid #f0dca8; border-radius: 12px; padding: var(--space-3) var(--space-4); margin-top: var(--space-7); font-size: 14.5px; color: #6b4d00; }
-  .note strong { color: #9a6b00; }
+  /* Visually hidden but available to assistive tech */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
 
-  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: var(--space-8); }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  footer .sign-off {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    margin: 0;
+  }
+  footer .persistence {
+    font-size: 14px;
+    margin: 0;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
 
   /* Focus rings for keyboard users — solid green so it reads as "selected", not as hover */
   .lesson:focus-visible,
@@ -192,8 +220,10 @@
     outline-offset: 3px;
   }
   @media (prefers-reduced-motion: reduce) {
-    .course-callout .arrow, .lesson .go .arrow,
-    .course-callout, .lesson { transition: none; }
+    .course-callout .arrow, .lesson .go .arrow, .resource .arrow,
+    .course-callout, .lesson, .resource { transition: none; }
+    .course-callout:hover .arrow, .lesson:hover .go .arrow, .resource:hover .arrow { transform: none; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
@@ -241,7 +271,7 @@
   </svg>
   <div class="header-inner">
     <h1>As Minhas Aulas de Português</h1>
-    <p class="subtitle">Bem-vinda, Magda. Aqui estão todas as tuas lições, prontas para começar ou continuar de onde paraste.</p>
+    <p class="subtitle">Bem-vinda, <span class="name">Magda</span>. Aqui estão todas as tuas lições, prontas para começar ou continuar de onde paraste.</p>
   </div>
 </header>
 
@@ -250,9 +280,8 @@
   <!-- CHEAT SHEET — quick verb conjugation reference -->
   <div class="section-head">
     <h2>Referência rápida</h2>
-    <span class="count">para tirar dúvidas em segundos</span>
   </div>
-  <p class="section-sub">As conjugações dos verbos mais usados, num só sítio.</p>
+  <p class="section-sub">As conjugações dos verbos mais usados, para tirares dúvidas em segundos.</p>
 
   <a class="course-callout" href="verbos.html">
     <div>
@@ -357,9 +386,9 @@
   <!-- CURSO ESTRUTURADO — singleton callout, not a grid -->
   <div class="section-head">
     <h2>Curso estruturado A2 → B1</h2>
-    <span class="count">lições do plano de curso</span>
+    <span class="count">lição 1 · mais a chegar</span>
   </div>
-  <p class="section-sub">Na ordem certa, para construíres bases sólidas.</p>
+  <p class="section-sub">O começo do plano, para construíres bases sólidas desde a raiz.</p>
 
   <a class="course-callout" href="aulas/aula-1.html" data-keys="pt-lesson-1,pt-lesson-">
     <div>
@@ -383,30 +412,27 @@
         <h3>Conjugador de Português Europeu</h3>
         <p class="host">european-portuguese.info</p>
       </div>
-      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="go">Abrir<span class="sr-only"> em nova janela</span> <span class="arrow" aria-hidden="true">↗</span></span>
     </a>
     <a class="resource" href="https://www.deepl.com/pt-PT/translator" target="_blank" rel="noopener noreferrer">
       <div>
         <h3>DeepL <span lang="en">Translator</span></h3>
         <p class="host">deepl.com</p>
       </div>
-      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="go">Abrir<span class="sr-only"> em nova janela</span> <span class="arrow" aria-hidden="true">↗</span></span>
     </a>
     <a class="resource" href="https://dicionario.priberam.org/" target="_blank" rel="noopener noreferrer">
       <div>
         <h3>Dicionário Priberam</h3>
         <p class="host">dicionario.priberam.org</p>
       </div>
-      <span class="go">Abrir <span class="arrow" aria-hidden="true">↗</span></span>
+      <span class="go">Abrir<span class="sr-only"> em nova janela</span> <span class="arrow" aria-hidden="true">↗</span></span>
     </a>
   </div>
 
-  <div class="note">
-    A tua pontuação fica guardada no navegador. Podes fechar uma aula e voltar mais tarde, sem perder o progresso.
-  </div>
-
   <footer>
-    Bons estudos, Magda.
+    <p class="sign-off">Bons estudos, Magda.</p>
+    <p class="persistence">A tua pontuação fica guardada no navegador. Podes fechar uma aula e voltar mais tarde, sem perderes o progresso.</p>
   </footer>
 </div>
 
@@ -433,6 +459,8 @@
       status.className = 'status';
       status.textContent = ' · começada';
       dateLine.appendChild(status);
+      const title = card.querySelector('h3');
+      if (title) card.setAttribute('aria-label', title.textContent.trim() + ', aula começada');
     });
 
     // Mark the course callout if started, and shift its CTA verb.
@@ -447,6 +475,8 @@
         status.textContent = ' · começada';
         meta.appendChild(status);
       }
+      const title = courseCallout.querySelector('h3');
+      if (title) courseCallout.setAttribute('aria-label', title.textContent.trim() + ', começada');
     }
   })();
 </script>
