@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ title | safe }} · {{ date | ptDateISO }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ '/assets/lesson.css' | url }}" />
+</head>
+<body data-storage-key="{{ date | ptStorageKey }}">
+<a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+<header>
+  <div class="header-inner">
+    <a class="back" href="{{ '/' | url }}">← Voltar ao início</a>
+    <p class="lesson-date">{{ date | ptDateLong }}</p>
+    <h1>{{ title | safe }}</h1>
+    <p class="subtitle">{{ subtitle | safe }}</p>
+  </div>
+</header>
+
+{# Section jump-nav — populated by lesson.js from each section's <h2>; stays empty (and hidden) when a page has no sections. #}
+<nav class="section-nav" id="sectionNav" aria-label="Secções da aula"></nav>
+
+<main class="wrap" id="conteudo">
+
+  {# Auto prev/next from the lesson collection (oldest → newest). Adding a lesson updates neighbours automatically. #}
+  {% set prevItem = collections.lesson | getPreviousCollectionItem(page) %}
+  {% set nextItem = collections.lesson | getNextCollectionItem(page) %}
+
+  <nav class="pager" aria-label="Navegação entre aulas">
+    {% if prevItem %}
+    <a class="pager-link prev" href="{{ prevItem.url | url }}">
+      <span class="pager-dir">← Anterior</span>
+      <span class="pager-title">{{ prevItem.date | ptDateShort }}</span>
+    </a>
+    {% else %}
+    <span class="pager-link prev disabled">
+      <span class="pager-dir">← Anterior</span>
+      <span class="pager-title">—</span>
+    </span>
+    {% endif %}
+    {% if nextItem %}
+    <a class="pager-link next" href="{{ nextItem.url | url }}">
+      <span class="pager-dir">Próxima →</span>
+      <span class="pager-title">{{ nextItem.date | ptDateShort }}</span>
+    </a>
+    {% else %}
+    <span class="pager-link next disabled">
+      <span class="pager-dir">Próxima →</span>
+      <span class="pager-title">Em breve</span>
+    </span>
+    {% endif %}
+  </nav>
+
+  {{ content | safe }}
+
+  <nav class="pager" aria-label="Navegação entre aulas">
+    {% if prevItem %}
+    <a class="pager-link prev" href="{{ prevItem.url | url }}">
+      <span class="pager-dir">← Anterior</span>
+      <span class="pager-title">{{ prevItem.date | ptDateShort }}</span>
+    </a>
+    {% else %}
+    <span class="pager-link prev disabled">
+      <span class="pager-dir">← Anterior</span>
+      <span class="pager-title">—</span>
+    </span>
+    {% endif %}
+    {% if nextItem %}
+    <a class="pager-link next" href="{{ nextItem.url | url }}">
+      <span class="pager-dir">Próxima →</span>
+      <span class="pager-title">{{ nextItem.date | ptDateShort }}</span>
+    </a>
+    {% else %}
+    <span class="pager-link next disabled">
+      <span class="pager-dir">Próxima →</span>
+      <span class="pager-title">Em breve</span>
+    </span>
+    {% endif %}
+  </nav>
+
+  {# Worksheet lightbox — chrome shared by every lesson; the script no-ops when a lesson has no gallery. #}
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Ficha de trabalho ampliada">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Fechar">✕</button>
+    <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Página anterior">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Página seguinte">›</button>
+    <span class="lb-cap" id="lbCap"></span>
+  </div>
+
+  <footer>
+    📝 {{ footerProvenance or "Lição gerada a partir da aula real com a Mariana" }} · {{ date | ptDateLong }}
+    <p class="made-with">Feito com ❤️ em Portugal<span class="sep">·</span>© Magda Kowalska</p>
+  </footer>
+</main>
+
+<script src="{{ '/assets/lesson.js' | url }}"></script>
+</body>
+</html>

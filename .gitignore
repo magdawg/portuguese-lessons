@@ -16,3 +16,6 @@ node_modules/
 .impeccable/
 .kiro/
 .qoder/
+
+# Eleventy build output
+_site/

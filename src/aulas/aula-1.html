@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 1: Presente do Indicativo · Português Europeu A2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1B5E20;
+  --green-light: #2E7D32;
+  --green-bg: #E8F5E9;
+  --green-soft: #A5D6A7;
+  --red: #B71C1C;
+  --red-light: #E53935;
+  --red-bg: #FFEBEE;
+  --gold: #F9A825;
+  --gold-bg: #FFF8E1;
+  --blue: #1565C0;
+  --blue-light: #1976D2;
+  --blue-bg: #E3F2FD;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --text: #1A1A1A;
+  --text-sec: #555;
+  --text-light: #888;
+  --border: #E0E0E0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --transition: 0.2s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 0;
+}
+
+/* ---- HEADER ---- */
+.hero {
+  background: linear-gradient(135deg, var(--green) 0%, #2E7D32 50%, #388E3C 100%);
+  color: white;
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(4px);
+}
+.hero h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.hero .subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  position: relative;
+}
+
+/* ---- LAYOUT ---- */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ---- SECTIONS ---- */
+.section {
+  margin: 2.5rem 0;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--green-bg);
+}
+.section-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.section-icon.grammar { background: var(--green-bg); }
+.section-icon.vocab { background: var(--gold-bg); }
+.section-icon.comm { background: var(--blue-bg); }
+.section-icon.exercise { background: var(--red-bg); }
+.section-icon.summary { background: #F3E5F5; }
+.section h2 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* ---- CARDS ---- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+  transition: box-shadow var(--transition);
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+
+/* ---- WELCOME BOX ---- */
+.welcome-box {
+  background: linear-gradient(135deg, var(--green-bg) 0%, #C8E6C9 100%);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+.welcome-box strong { color: var(--green); }
+
+/* ---- OBJECTIVES ---- */
+.objectives {
+  list-style: none;
+  padding: 0;
+}
+.objectives li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: var(--card);
+  border-radius: 8px;
+  border-left: 3px solid var(--green);
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+}
+.objectives li .en {
+  display: block;
+  color: var(--text-sec);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* ---- TABLES ---- */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--card);
+}
+th {
+  background: var(--green);
+  color: white;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #F5F5F5; }
+.conj-table th { font-size: 0.8rem; }
+.conj-table td { font-size: 0.9rem; }
+.conj-table .ending { color: var(--red); font-weight: 600; }
+.conj-table .stem { color: var(--text-sec); }
+.conj-table .irregular { background: var(--gold-bg); }
+
+.vocab-table tr:hover td { background: var(--gold-bg); }
+.vocab-table .gender {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.vocab-table .gender.m { background: var(--blue-bg); color: var(--blue); }
+.vocab-table .gender.f { background: #FCE4EC; color: #C2185B; }
+
+/* ---- EXAMPLES ---- */
+.example {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  background: #F5F5F5;
+  border-radius: 8px;
+  border-left: 3px solid var(--blue);
+}
+.example .pt { font-weight: 500; }
+.example .en { color: var(--text-sec); font-style: italic; font-size: 0.9rem; }
+.example .ipa { color: var(--text-light); font-size: 0.8rem; font-family: monospace; }
+
+/* ---- ATTENTION BOX ---- */
+.atencao {
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+.atencao-title {
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+}
+
+/* ---- CULTURAL NOTE ---- */
+.cultural {
+  background: var(--blue-bg);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+.cultural-title {
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 0.4rem;
+}
+
+/* ---- DIALOGUE ---- */
+.dialogue {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin: 1rem 0;
+}
+.dialogue-line {
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  border-left: 3px solid transparent;
+}
+.dialogue-line:nth-child(odd) { border-left-color: var(--green); }
+.dialogue-line:nth-child(even) { border-left-color: var(--blue); }
+.speaker {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.speaker.a { color: var(--green); }
+.speaker.b { color: var(--blue); }
+.dialogue-text { margin-top: 0.15rem; }
+.dialogue-translation {
+  color: var(--text-sec);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* ---- EXERCISES ---- */
+.exercise-group {
+  margin: 2rem 0;
+}
+.exercise-group h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--green);
+}
+.exercise-item {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition);
+  border: 2px solid transparent;
+}
+.exercise-item.correct { border-color: var(--green); background: var(--green-bg); }
+.exercise-item.incorrect { border-color: var(--red-light); background: var(--red-bg); }
+
+.exercise-item label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.exercise-item input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color var(--transition);
+  outline: none;
+}
+.exercise-item input[type="text"]:focus {
+  border-color: var(--green);
+}
+
+.feedback {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-height: 1.4em;
+}
+.feedback.correct { color: var(--green); }
+.feedback.incorrect { color: var(--red); }
+
+/* ---- BUTTONS ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-primary {
+  background: var(--green);
+  color: white;
+}
+.btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  color: var(--green);
+  border: 2px solid var(--green);
+}
+.btn-secondary:hover { background: var(--green-bg); }
+.btn-small {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* ---- MATCHING EXERCISE ---- */
+.match-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.match-column h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-sec);
+  margin-bottom: 0.75rem;
+}
+.match-item {
+  padding: 0.6rem 1rem;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.9rem;
+  user-select: none;
+}
+.match-item:hover { border-color: var(--green); background: var(--green-bg); }
+.match-item.selected { border-color: var(--green); background: var(--green-bg); font-weight: 600; }
+.match-item.matched { border-color: var(--green); background: var(--green-bg); opacity: 0.6; pointer-events: none; }
+.match-item.wrong { border-color: var(--red-light); background: var(--red-bg); }
+
+/* ---- SCORE ---- */
+.score-bar {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--shadow);
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+  z-index: 10;
+}
+.score-bar .label { font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+.score-progress {
+  flex: 1;
+  height: 10px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.score-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  border-radius: 5px;
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+.score-text {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--green);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ---- SUMMARY ---- */
+.summary-list {
+  list-style: none;
+  padding: 0;
+}
+.summary-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+.summary-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+.self-check li::before {
+  content: '?';
+  color: var(--blue);
+}
+
+/* ---- NAVIGATION ---- */
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+}
+.nav-footer a {
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition);
+}
+.nav-footer a:hover { color: var(--green-light); }
+
+/* ---- WRITING PROMPT ---- */
+.writing-area {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.writing-area:focus { border-color: var(--green); }
+
+/* ---- MULTIPLE CHOICE ---- */
+.mc-options { list-style: none; padding: 0; }
+.mc-option {
+  padding: 0.65rem 1rem;
+  margin-bottom: 0.4rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.9rem;
+}
+.mc-option:hover { border-color: var(--green); background: var(--green-bg); }
+.mc-option.selected { border-color: var(--green); background: var(--green-bg); font-weight: 500; }
+.mc-option.correct-answer { border-color: var(--green); background: var(--green-bg); }
+.mc-option.wrong-answer { border-color: var(--red-light); background: var(--red-bg); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 640px) {
+  .hero { padding: 2rem 1rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .container { padding: 0 1rem 3rem; }
+  .match-container { grid-template-columns: 1fr; }
+  .score-bar { flex-wrap: wrap; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 0.5rem 0.6rem; }
+}
+
+/* ---- PRINT ---- */
+@media print {
+  body { background: white; }
+  .hero { background: var(--green) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .score-bar { display: none; }
+  .btn { display: none; }
+  .card, .exercise-item { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="hero">
+  <div class="hero-badge">A2 · Aula 1 de 36</div>
+  <h1>Presente do Indicativo: Revisão</h1>
+  <p class="subtitle">Apresentar-se e falar sobre rotinas diárias</p>
+</div>
+
+<div class="container">
+
+<div class="nav-footer" style="margin-top:0;margin-bottom:1.5rem">
+  <a href="#" style="opacity:.4;pointer-events:none">← Aula anterior</a>
+  <a href="../index.html">🏠 Página principal</a>
+  <a href="#" style="opacity:.4;pointer-events:none">Próxima aula →</a>
+</div>
+
+<!-- ========== WELCOME ========== -->
+<div class="welcome-box">
+  <strong>Bem-vinda!</strong> Esta é a tua primeira aula. Ao longo de 36 aulas, vais consolidar o nível A2 e progredir até ao B1. Hoje começamos pelo básico — o presente do indicativo — porque é o tempo verbal que usas mais no dia a dia. Mesmo que já o conheças, esta revisão vai deixar as bases bem firmes para tudo o que vem a seguir. Vamos a isso!
+</div>
+
+<!-- ========== SCORE BAR ========== -->
+<div class="score-bar" id="scoreBar">
+  <span class="label">Pontuação</span>
+  <div class="score-progress"><div class="score-fill" id="scoreFill"></div></div>
+  <span class="score-text" id="scoreText">0 / 0</span>
+</div>
+
+<!-- ========== OBJECTIVES ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon grammar">🎯</div>
+    <h2>O que vamos aprender hoje</h2>
+  </div>
+  <ul class="objectives">
+    <li>
+      Rever a conjugação do presente do indicativo — verbos regulares das 3 conjugações
+      <span class="en">Review present tense conjugation — regular verbs across all 3 verb groups</span>
+    </li>
+    <li>
+      Dominar os irregulares essenciais: <em>ser, estar, ter, ir</em>
+      <span class="en">Master the essential irregulars: ser, estar, ter, ir</span>
+    </li>
+    <li>
+      Aprender vocabulário de rotina diária e profissões
+      <span class="en">Learn vocabulary for daily routine and professions</span>
+    </li>
+    <li>
+      Praticar apresentações pessoais e descrever o dia a dia
+      <span class="en">Practice self-introductions and describing your daily life</span>
+    </li>
+  </ul>
+</div>
+
+<!-- ========== GRAMMAR ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon grammar">📖</div>
+    <h2>Gramática: Presente do Indicativo</h2>
+  </div>
+
+  <div class="card">
+    <p>O presente do indicativo é o tempo verbal mais usado em português. Usamo-lo para:</p>
+    <ul style="margin: 0.75rem 0 0 1.5rem; font-size: 0.95rem;">
+      <li><strong>Factos e verdades gerais</strong> — <em>O sol nasce a este.</em></li>
+      <li><strong>Rotinas e hábitos</strong> — <em>Eu acordo às sete.</em></li>
+      <li><strong>O que está a acontecer agora</strong> — <em>Eu estudo português.</em></li>
+      <li><strong>Futuro próximo (informal)</strong> — <em>Amanhã vou ao médico.</em></li>
+    </ul>
+  </div>
+
+  <h3 style="margin: 1.5rem 0 0.75rem; font-size: 1.1rem;">Verbos regulares — as 3 conjugações</h3>
+  <p style="font-size: 0.95rem; color: var(--text-sec); margin-bottom: 0.75rem;">Em português, os verbos dividem-se em 3 grupos pelo infinitivo: <strong>-AR</strong>, <strong>-ER</strong>, <strong>-IR</strong>. Cada grupo tem terminações próprias.</p>
+
+  <div class="table-wrapper">
+    <table class="conj-table">
+      <thead>
+        <tr>
+          <th>Pessoa</th>
+          <th>-AR (falar)</th>
+          <th>-ER (comer)</th>
+          <th>-IR (partir)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>eu</strong></td>
+          <td><span class="stem">fal</span><span class="ending">o</span></td>
+          <td><span class="stem">com</span><span class="ending">o</span></td>
+          <td><span class="stem">part</span><span class="ending">o</span></td>
+        </tr>
+        <tr>
+          <td><strong>tu</strong></td>
+          <td><span class="stem">fal</span><span class="ending">as</span></td>
+          <td><span class="stem">com</span><span class="ending">es</span></td>
+          <td><span class="stem">part</span><span class="ending">es</span></td>
+        </tr>
+        <tr>
+          <td><strong>ele / ela / você</strong></td>
+          <td><span class="stem">fal</span><span class="ending">a</span></td>
+          <td><span class="stem">com</span><span class="ending">e</span></td>
+          <td><span class="stem">part</span><span class="ending">e</span></td>
+        </tr>
+        <tr>
+          <td><strong>nós</strong></td>
+          <td><span class="stem">fal</span><span class="ending">amos</span></td>
+          <td><span class="stem">com</span><span class="ending">emos</span></td>
+          <td><span class="stem">part</span><span class="ending">imos</span></td>
+        </tr>
+        <tr>
+          <td><strong>eles / elas / vocês</strong></td>
+          <td><span class="stem">fal</span><span class="ending">am</span></td>
+          <td><span class="stem">com</span><span class="ending">em</span></td>
+          <td><span class="stem">part</span><span class="ending">em</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="atencao">
+    <div class="atencao-title">⚠️ Atenção!</div>
+    <p>Em Portugal, a forma <strong>vós</strong> quase não se usa na fala do dia a dia (só em algumas regiões do norte e em textos formais). Usa-se <strong>vocês</strong> + 3.ª pessoa do plural. Por isso, não incluímos <em>vós</em> nas tabelas — mas sabe que existe!</p>
+  </div>
+
+  <h3 style="margin: 1.5rem 0 0.75rem; font-size: 1.1rem;">Irregulares essenciais</h3>
+  <p style="font-size: 0.95rem; color: var(--text-sec); margin-bottom: 0.75rem;">Estes quatro verbos são os mais usados na língua. Não seguem o padrão — tens de os memorizar.</p>
+
+  <div class="table-wrapper">
+    <table class="conj-table">
+      <thead>
+        <tr>
+          <th>Pessoa</th>
+          <th>SER (to be — permanent)</th>
+          <th>ESTAR (to be — temporary)</th>
+          <th>TER (to have)</th>
+          <th>IR (to go)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="irregular">
+          <td><strong>eu</strong></td>
+          <td><strong>sou</strong></td>
+          <td><strong>estou</strong></td>
+          <td><strong>tenho</strong></td>
+          <td><strong>vou</strong></td>
+        </tr>
+        <tr class="irregular">
+          <td><strong>tu</strong></td>
+          <td><strong>és</strong></td>
+          <td><strong>estás</strong></td>
+          <td><strong>tens</strong></td>
+          <td><strong>vais</strong></td>
+        </tr>
+        <tr class="irregular">
+          <td><strong>ele/ela/você</strong></td>
+          <td><strong>é</strong></td>
+          <td><strong>está</strong></td>
+          <td><strong>tem</strong></td>
+          <td><strong>vai</strong></td>
+        </tr>
+        <tr class="irregular">
+          <td><strong>nós</strong></td>
+          <td><strong>somos</strong></td>
+          <td><strong>estamos</strong></td>
+          <td><strong>temos</strong></td>
+          <td><strong>vamos</strong></td>
+        </tr>
+        <tr class="irregular">
+          <td><strong>eles/elas/vocês</strong></td>
+          <td><strong>são</strong></td>
+          <td><strong>estão</strong></td>
+          <td><strong>têm</strong></td>
+          <td><strong>vão</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="atencao">
+    <div class="atencao-title">⚠️ Atenção — SER vs. ESTAR!</div>
+    <p>Esta é uma das diferenças mais importantes do português. A regra simplificada:</p>
+    <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.95rem;">
+      <li><strong>SER</strong> = características permanentes, identidade, origem, profissão. <em>Eu <strong>sou</strong> portuguesa.</em></li>
+      <li><strong>ESTAR</strong> = estados temporários, localização, emoções passageiras. <em>Eu <strong>estou</strong> cansada.</em></li>
+    </ul>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-sec);">Dica: se a situação pode mudar, usa <em>estar</em>. Se é uma verdade duradoura, usa <em>ser</em>.</p>
+  </div>
+
+  <h3 style="margin: 1.5rem 0 0.75rem; font-size: 1.1rem;">Exemplos com pronúncia</h3>
+
+  <div class="example">
+    <div class="pt">Eu <strong>sou</strong> engenheira e <strong>trabalho</strong> em Lisboa.</div>
+    <div class="en">I'm an engineer and I work in Lisbon.</div>
+    <div class="ipa">/ew sow ẽʒeˈɲɐjɾɐ i tɾɐˈbaʎu ẽ liʒˈboɐ/</div>
+  </div>
+
+  <div class="example">
+    <div class="pt">A que horas <strong>acordas</strong>? — <strong>Acordo</strong> às sete e meia.</div>
+    <div class="en">What time do you wake up? — I wake up at half past seven.</div>
+    <div class="ipa">/ɐ kɨ ˈɔɾɐʃ ɐˈkɔɾdɐʃ — ɐˈkɔɾdu aʃ ˈsɛtɨ i ˈmɐjɐ/</div>
+  </div>
+
+  <div class="example">
+    <div class="pt">Nós <strong>temos</strong> aula de português às terças e quintas.</div>
+    <div class="en">We have Portuguese class on Tuesdays and Thursdays.</div>
+    <div class="ipa">/nɔʃ ˈtẽmuʃ ˈawlɐ dɨ puɾtuˈɡeʃ aʃ ˈteɾsɐʃ i ˈkĩtɐʃ/</div>
+  </div>
+
+  <div class="example">
+    <div class="pt">Eles <strong>vão</strong> ao ginásio todos os dias, mas hoje <strong>estão</strong> em casa.</div>
+    <div class="en">They go to the gym every day, but today they're at home.</div>
+    <div class="ipa">/ˈelɨʃ vɐ̃w aw ʒiˈnaziu ˈtoduʃ uʃ ˈdiɐʃ mɐʃ ˈoʒɨ (ɨ)ʃˈtɐ̃w ẽ ˈkazɐ/</div>
+  </div>
+</div>
+
+<!-- ========== VOCABULARY ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon vocab">📝</div>
+    <h2>Vocabulário: Rotina Diária e Profissões</h2>
+  </div>
+
+  <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Rotina diária</h3>
+  <div class="table-wrapper">
+    <table class="vocab-table">
+      <thead>
+        <tr><th>Português</th><th>English</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>acordar</strong></td><td>to wake up</td><td><em>Eu acordo às sete.</em></td></tr>
+        <tr><td><strong>levantar-se</strong></td><td>to get up</td><td><em>Levanto-me logo a seguir.</em></td></tr>
+        <tr><td><strong>tomar o pequeno-almoço</strong></td><td>to have breakfast</td><td><em>Tomo o pequeno-almoço em casa.</em></td></tr>
+        <tr><td><strong>ir trabalhar</strong></td><td>to go to work</td><td><em>Vou trabalhar de metro.</em></td></tr>
+        <tr><td><strong>almoçar</strong></td><td>to have lunch</td><td><em>Almoço com os colegas.</em></td></tr>
+        <tr><td><strong>jantar</strong></td><td>to have dinner</td><td><em>Jantamos às oito.</em></td></tr>
+        <tr><td><strong>deitar-se</strong></td><td>to go to bed</td><td><em>Deito-me às onze.</em></td></tr>
+        <tr><td><strong>tomar banho</strong></td><td>to take a shower/bath</td><td><em>Tomo banho de manhã.</em></td></tr>
+        <tr><td><strong>vestir-se</strong></td><td>to get dressed</td><td><em>Visto-me rapidamente.</em></td></tr>
+        <tr><td><strong>descansar</strong></td><td>to rest</td><td><em>Ao fim de semana, descanso.</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin: 1.5rem 0 0.75rem; font-size: 1rem;">Profissões</h3>
+  <div class="table-wrapper">
+    <table class="vocab-table">
+      <thead>
+        <tr><th>Português</th><th>Género</th><th>English</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>professor / professora</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>teacher</td><td><em>A Marianna é professora de português.</em></td></tr>
+        <tr><td><strong>engenheiro / engenheira</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>engineer</td><td><em>O meu pai é engenheiro civil.</em></td></tr>
+        <tr><td><strong>médico / médica</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>doctor</td><td><em>A médica trabalha no hospital.</em></td></tr>
+        <tr><td><strong>advogado / advogada</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>lawyer</td><td><em>Ele é advogado num escritório grande.</em></td></tr>
+        <tr><td><strong>enfermeiro / enfermeira</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>nurse</td><td><em>A enfermeira está de serviço.</em></td></tr>
+        <tr><td><strong>programador / programadora</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>programmer</td><td><em>Sou programadora — trabalho com código.</em></td></tr>
+        <tr><td><strong>cozinheiro / cozinheira</strong></td><td><span class="gender m">m</span> / <span class="gender f">f</span></td><td>cook / chef</td><td><em>O cozinheiro prepara o almoço.</em></td></tr>
+        <tr><td><strong>jornalista</strong></td><td><span class="gender m">m</span><span class="gender f">f</span></td><td>journalist</td><td><em>A jornalista escreve artigos.</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cultural">
+    <div class="cultural-title">🇵🇹 Nota cultural — Pequeno-almoço, não café da manhã!</div>
+    <p>Em Portugal diz-se <strong>pequeno-almoço</strong> (literally "small lunch"). No Brasil, é "café da manhã". Da mesma forma, os portugueses dizem <strong>autocarro</strong> (bus), não "ônibus", e <strong>telemóvel</strong> (mobile phone), não "celular". Estes detalhes fazem toda a diferença para soares natural em PT-PT!</p>
+  </div>
+</div>
+
+<!-- ========== COMMUNICATION ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon comm">💬</div>
+    <h2>Comunicação: Apresentar-se e falar do dia a dia</h2>
+  </div>
+
+  <p style="font-size: 0.95rem; color: var(--text-sec); margin-bottom: 1rem;">A Ana e o Marco conhecem-se num café em Lisboa. Lê o diálogo e repara nos verbos no presente.</p>
+
+  <div class="dialogue">
+    <div class="dialogue-line">
+      <div class="speaker a">Ana</div>
+      <div class="dialogue-text">Olá! Eu sou a Ana. Tu és o Marco, não és? A Sofia falou-me de ti.</div>
+      <div class="dialogue-translation">Hi! I'm Ana. You're Marco, right? Sofia told me about you.</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker b">Marco</div>
+      <div class="dialogue-text">Sim, sou eu! Prazer. O que é que fazes, Ana?</div>
+      <div class="dialogue-translation">Yes, that's me! Nice to meet you. What do you do, Ana?</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker a">Ana</div>
+      <div class="dialogue-text">Sou engenheira informática. Trabalho numa empresa de tecnologia no Parque das Nações. E tu?</div>
+      <div class="dialogue-translation">I'm a software engineer. I work at a tech company in Parque das Nações. And you?</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker b">Marco</div>
+      <div class="dialogue-text">Eu sou professor de inglês. Dou aulas numa escola secundária no Saldanha. Acordo muito cedo — às seis e meia!</div>
+      <div class="dialogue-translation">I'm an English teacher. I teach at a secondary school in Saldanha. I wake up very early — at half past six!</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker a">Ana</div>
+      <div class="dialogue-text">Ui, é cedo! Eu acordo às oito, tomo o pequeno-almoço tranquilamente e vou trabalhar de metro. E a que horas jantas normalmente?</div>
+      <div class="dialogue-translation">Wow, that's early! I wake up at eight, have breakfast calmly, and go to work by metro. And what time do you usually have dinner?</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker b">Marco</div>
+      <div class="dialogue-text">Normalmente janto às oito, oito e meia. Depois leio um bocado ou vejo uma série. Aos fins de semana, vou correr de manhã — é o meu momento favorito.</div>
+      <div class="dialogue-translation">Usually I have dinner at eight, half past eight. Then I read a bit or watch a series. On weekends, I go running in the morning — it's my favourite moment.</div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker a">Ana</div>
+      <div class="dialogue-text">Eu também gosto de correr! Vamos combinar um dia destes?</div>
+      <div class="dialogue-translation">I also like running! Shall we arrange one of these days?</div>
+    </div>
+  </div>
+
+  <div class="cultural">
+    <div class="cultural-title">🇵🇹 Nota cultural — "Prazer" e apresentações</div>
+    <p>Em Portugal, quando te apresentas, é natural dizer: <strong>"Sou a/o [nome]"</strong> — com o artigo antes do nome. Os portugueses dizem "Eu sou <em>a</em> Ana", não apenas "Eu sou Ana". E <strong>"Prazer"</strong> (Pleasure) ou <strong>"Muito prazer"</strong> é o equivalente a "Nice to meet you" — simples e funciona sempre.</p>
+  </div>
+</div>
+
+<!-- ========== EXERCISES ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon exercise">✏️</div>
+    <h2>Exercícios</h2>
+  </div>
+
+  <!-- EXERCISE 1: FILL IN THE BLANK -->
+  <div class="exercise-group" id="ex1">
+    <h3>Exercício 1: Completa com o verbo no presente</h3>
+    <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escreve a forma correta do verbo entre parênteses.</p>
+
+    <div class="exercise-item" data-answer="falo">
+      <label>1. Eu _______ (falar) português todos os dias.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="és">
+      <label>2. Tu _______ (ser) de Lisboa?</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="tem">
+      <label>3. A Maria _______ (ter) dois filhos.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="vamos">
+      <label>4. Nós _______ (ir) ao cinema às sextas-feiras.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="estão">
+      <label>5. Eles _______ (estar) cansados hoje.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="comemos">
+      <label>6. Nós _______ (comer) sempre às oito.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="partes">
+      <label>7. Tu _______ (partir) amanhã de manhã?</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-item" data-answer="vou">
+      <label>8. Eu _______ (ir) trabalhar de autocarro.</label>
+      <input type="text" placeholder="escreve aqui..." autocomplete="off">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="checkFillBlanks('ex1')">Verificar ✓</button>
+      <button class="btn btn-secondary" onclick="showAnswers('ex1')">Ver respostas</button>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2: VOCABULARY MATCHING -->
+  <div class="exercise-group" id="ex2">
+    <h3>Exercício 2: Liga o português ao inglês</h3>
+    <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Clica numa palavra portuguesa, depois clica na tradução correta.</p>
+
+    <div class="match-container" id="matchContainer">
+      <div class="match-column" id="matchLeft">
+        <h4>Português</h4>
+      </div>
+      <div class="match-column" id="matchRight">
+        <h4>English</h4>
+      </div>
+    </div>
+
+    <div class="feedback" id="matchFeedback" style="text-align: center; font-size: 1rem;"></div>
+
+    <div class="btn-group" style="justify-content: center;">
+      <button class="btn btn-secondary" onclick="resetMatch()">Recomeçar</button>
+    </div>
+  </div>
+
+  <!-- EXERCISE 3: CONJUGATION DRILL -->
+  <div class="exercise-group" id="ex3">
+    <h3>Exercício 3: Conjuga os verbos</h3>
+    <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escreve a conjugação correta para cada pessoa.</p>
+
+    <div class="card" style="margin-bottom: 1rem;">
+      <h4 style="color: var(--green); margin-bottom: 0.75rem;">Verbo: TRABALHAR</h4>
+      <div class="exercise-item" data-answer="trabalho">
+        <label>eu _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="trabalhas">
+        <label>tu _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="trabalha">
+        <label>ele/ela _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="trabalhamos">
+        <label>nós _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="trabalham">
+        <label>eles/elas _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="color: var(--green); margin-bottom: 0.75rem;">Verbo: TER</h4>
+      <div class="exercise-item" data-answer="tenho">
+        <label>eu _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="tens">
+        <label>tu _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="tem">
+        <label>ele/ela _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="temos">
+        <label>nós _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+      <div class="exercise-item" data-answer="têm">
+        <label>eles/elas _______</label>
+        <input type="text" placeholder="..." autocomplete="off">
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="checkFillBlanks('ex3')">Verificar ✓</button>
+      <button class="btn btn-secondary" onclick="showAnswers('ex3')">Ver respostas</button>
+    </div>
+  </div>
+
+  <!-- EXERCISE 4: MULTIPLE CHOICE (SER vs ESTAR) -->
+  <div class="exercise-group" id="ex4">
+    <h3>Exercício 4: SER ou ESTAR?</h3>
+    <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">Escolhe a opção correta para cada frase.</p>
+
+    <div class="card mc-question" data-correct="sou">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">1. Eu _______ portuguesa.</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="sou">sou</li>
+        <li class="mc-option" data-value="estou">estou</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="card mc-question" data-correct="está">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">2. O café _______ quente.</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="é">é</li>
+        <li class="mc-option" data-value="está">está</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="card mc-question" data-correct="é">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">3. A Joana _______ médica.</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="é">é</li>
+        <li class="mc-option" data-value="está">está</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="card mc-question" data-correct="estamos">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">4. Nós _______ muito felizes hoje!</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="somos">somos</li>
+        <li class="mc-option" data-value="estamos">estamos</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="card mc-question" data-correct="são">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">5. Eles _______ brasileiros.</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="são">são</li>
+        <li class="mc-option" data-value="estão">estão</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="card mc-question" data-correct="está">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">6. O Pedro não _______ em casa, _______ no escritório.</p>
+      <ul class="mc-options">
+        <li class="mc-option" data-value="está">está ... está</li>
+        <li class="mc-option" data-value="é">é ... é</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- EXERCISE 5: FREE WRITING -->
+  <div class="exercise-group" id="ex5">
+    <h3>Exercício 5: Escreve sobre ti!</h3>
+    <p style="font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem;">
+      Escreve um pequeno texto (5-8 frases) sobre ti. Inclui:
+    </p>
+    <ul style="margin: 0 0 1rem 1.5rem; font-size: 0.9rem; color: var(--text-sec);">
+      <li>O teu nome e de onde és</li>
+      <li>A tua profissão</li>
+      <li>A tua rotina diária (a que horas acordas, o que fazes...)</li>
+      <li>Algo que gostas de fazer no tempo livre</li>
+    </ul>
+    <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; font-style: italic;">
+      Exemplo: "Olá! Eu sou a Maria. Sou engenheira e trabalho em Lisboa. Acordo às sete e meia..."
+    </p>
+    <textarea class="writing-area" id="freeWrite" placeholder="Escreve aqui o teu texto..."></textarea>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-small" onclick="saveWriting()">Guardar texto 💾</button>
+    </div>
+    <div class="feedback" id="writeFeedback"></div>
+  </div>
+</div>
+
+<!-- ========== SUMMARY ========== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon summary">📋</div>
+    <h2>Resumo da Aula 1</h2>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom: 0.75rem;">O que aprendemos:</h4>
+    <ul class="summary-list">
+      <li>O presente do indicativo tem 3 conjugações regulares (-AR, -ER, -IR) com terminações previsíveis</li>
+      <li><strong>Ser, estar, ter, ir</strong> são irregulares e devem ser memorizados — são os verbos mais usados</li>
+      <li><strong>SER</strong> = permanente/identidade; <strong>ESTAR</strong> = temporário/localização</li>
+      <li>Para falar da rotina, usamos o presente: <em>Acordo às sete, trabalho em Lisboa, jantar às oito</em></li>
+    </ul>
+
+    <h4 style="margin: 1.25rem 0 0.75rem;">Consigo...?</h4>
+    <ul class="summary-list self-check">
+      <li>Conjugar verbos regulares no presente (-AR, -ER, -IR)?</li>
+      <li>Conjugar <em>ser, estar, ter, ir</em> sem hesitar?</li>
+      <li>Apresentar-me e dizer o que faço (profissão)?</li>
+      <li>Descrever a minha rotina diária em português?</li>
+      <li>Saber quando usar <em>ser</em> e quando usar <em>estar</em>?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== NAVIGATION ========== -->
+<div class="nav-footer">
+  <a href="#" style="opacity:.4;pointer-events:none">← Aula anterior</a>
+  <a href="../index.html">🏠 Página principal</a>
+  <a href="#" style="opacity:.4;pointer-events:none">Próxima aula →</a>
+</div>
+
+</div><!-- /container -->
+
+<script>
+(function() {
+  'use strict';
+
+  // ---- STATE ----
+  const LESSON = 1;
+  const STORAGE_KEY = 'pt-lesson-' + LESSON;
+  let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  if (!state.score) state.score = 0;
+  if (!state.total) state.total = 0;
+  if (!state.completed) state.completed = false;
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+  // ---- SCORE ----
+  function updateScore() {
+    document.getElementById('scoreFill').style.transform = 'scaleX(' + (state.total > 0 ? state.score / state.total : 0) + ')';
+    document.getElementById('scoreText').textContent = state.score + ' / ' + state.total;
+  }
+
+  // ---- FILL IN THE BLANK ----
+  window.checkFillBlanks = function(groupId) {
+    const group = document.getElementById(groupId);
+    const items = group.querySelectorAll('.exercise-item[data-answer]');
+    items.forEach(function(item) {
+      const input = item.querySelector('input');
+      const fb = item.querySelector('.feedback');
+      const answer = item.dataset.answer;
+      const userVal = input.value.trim().toLowerCase();
+      const correct = answer.toLowerCase();
+
+      if (!input.dataset.scored) {
+        state.total++;
+        input.dataset.scored = '1';
+      }
+
+      if (userVal === correct) {
+        item.classList.remove('incorrect');
+        item.classList.add('correct');
+        fb.textContent = 'Muito bem! ✓';
+        fb.className = 'feedback correct';
+        if (!input.dataset.gotRight) {
+          state.score++;
+          input.dataset.gotRight = '1';
+        }
+      } else if (userVal === '') {
+        item.classList.remove('correct', 'incorrect');
+        fb.textContent = 'Escreve a tua resposta primeiro.';
+        fb.className = 'feedback incorrect';
+      } else {
+        item.classList.remove('correct');
+        item.classList.add('incorrect');
+        fb.textContent = 'Quase! Tenta outra vez. Dica: o verbo é "' + answer.charAt(0) + '..."';
+        fb.className = 'feedback incorrect';
+        input.dataset.gotRight = '';
+      }
+    });
+    save();
+    updateScore();
+  };
+
+  window.showAnswers = function(groupId) {
+    const group = document.getElementById(groupId);
+    const items = group.querySelectorAll('.exercise-item[data-answer]');
+    items.forEach(function(item) {
+      const fb = item.querySelector('.feedback');
+      const input = item.querySelector('input');
+      fb.textContent = 'Resposta: ' + item.dataset.answer;
+      fb.className = 'feedback correct';
+      input.value = item.dataset.answer;
+      item.classList.remove('incorrect');
+      item.classList.add('correct');
+    });
+  };
+
+  // ---- MATCHING EXERCISE ----
+  var matchPairs = [
+    { pt: 'acordar', en: 'to wake up' },
+    { pt: 'pequeno-almoço', en: 'breakfast' },
+    { pt: 'almoçar', en: 'to have lunch' },
+    { pt: 'deitar-se', en: 'to go to bed' },
+    { pt: 'tomar banho', en: 'to shower' },
+    { pt: 'professor', en: 'teacher' },
+    { pt: 'advogado', en: 'lawyer' },
+    { pt: 'enfermeiro', en: 'nurse' }
+  ];
+
+  var matchState = { selected: null, matched: 0 };
+
+  function shuffleArray(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function buildMatch() {
+    var left = document.getElementById('matchLeft');
+    var right = document.getElementById('matchRight');
+    left.innerHTML = '<h4>Português</h4>';
+    right.innerHTML = '<h4>English</h4>';
+
+    var ptOrder = shuffleArray(matchPairs.map(function(p, i) { return i; }));
+    var enOrder = shuffleArray(matchPairs.map(function(p, i) { return i; }));
+
+    ptOrder.forEach(function(i) {
+      var div = document.createElement('div');
+      div.className = 'match-item';
+      div.textContent = matchPairs[i].pt;
+      div.dataset.idx = i;
+      div.dataset.side = 'pt';
+      div.addEventListener('click', handleMatchClick);
+      left.appendChild(div);
+    });
+    enOrder.forEach(function(i) {
+      var div = document.createElement('div');
+      div.className = 'match-item';
+      div.textContent = matchPairs[i].en;
+      div.dataset.idx = i;
+      div.dataset.side = 'en';
+      div.addEventListener('click', handleMatchClick);
+      right.appendChild(div);
+    });
+    matchState = { selected: null, matched: 0 };
+    document.getElementById('matchFeedback').textContent = '';
+  }
+
+  function handleMatchClick(e) {
+    var item = e.currentTarget;
+    if (item.classList.contains('matched')) return;
+
+    if (!matchState.selected) {
+      document.querySelectorAll('#matchContainer .match-item').forEach(function(el) {
+        el.classList.remove('selected', 'wrong');
+      });
+      item.classList.add('selected');
+      matchState.selected = item;
+    } else {
+      if (item.dataset.side === matchState.selected.dataset.side) {
+        matchState.selected.classList.remove('selected');
+        item.classList.add('selected');
+        matchState.selected = item;
+        return;
+      }
+
+      if (item.dataset.idx === matchState.selected.dataset.idx) {
+        item.classList.add('matched');
+        matchState.selected.classList.remove('selected');
+        matchState.selected.classList.add('matched');
+        matchState.matched++;
+        state.score++;
+        state.total++;
+        if (matchState.matched === matchPairs.length) {
+          document.getElementById('matchFeedback').textContent = 'Perfeito! Acertaste tudo! 🎉';
+          document.getElementById('matchFeedback').className = 'feedback correct';
+        }
+      } else {
+        item.classList.add('wrong');
+        matchState.selected.classList.add('wrong');
+        state.total++;
+        setTimeout(function() {
+          item.classList.remove('wrong');
+          matchState.selected.classList.remove('wrong', 'selected');
+          matchState.selected = null;
+        }, 800);
+        save();
+        updateScore();
+        return;
+      }
+      matchState.selected = null;
+    }
+    save();
+    updateScore();
+  }
+
+  window.resetMatch = function() { buildMatch(); };
+
+  // ---- MULTIPLE CHOICE ----
+  document.querySelectorAll('.mc-question').forEach(function(q) {
+    var correct = q.dataset.correct;
+    var options = q.querySelectorAll('.mc-option');
+    var fb = q.querySelector('.feedback');
+    var answered = false;
+
+    options.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (answered) return;
+        answered = true;
+        state.total++;
+
+        options.forEach(function(o) { o.classList.remove('selected'); });
+
+        if (opt.dataset.value === correct) {
+          opt.classList.add('correct-answer');
+          fb.textContent = 'Correto! ✓';
+          fb.className = 'feedback correct';
+          state.score++;
+        } else {
+          opt.classList.add('wrong-answer');
+          options.forEach(function(o) {
+            if (o.dataset.value === correct) o.classList.add('correct-answer');
+          });
+          var explanation = '';
+          if (correct === 'está' && opt.dataset.value === 'é') {
+            explanation = ' Neste caso é temporário/localização — usa ESTAR.';
+          } else if (correct === 'é' && opt.dataset.value === 'está') {
+            explanation = ' Neste caso é permanente/identidade — usa SER.';
+          } else if (correct === 'estamos') {
+            explanation = ' "Felizes hoje" — é um estado temporário, usa ESTAR.';
+          } else if (correct === 'são') {
+            explanation = ' Nacionalidade é permanente — usa SER.';
+          } else if (correct === 'sou') {
+            explanation = ' Nacionalidade é permanente — usa SER.';
+          }
+          fb.textContent = 'Não é essa.' + explanation;
+          fb.className = 'feedback incorrect';
+        }
+        save();
+        updateScore();
+      });
+    });
+  });
+
+  // ---- FREE WRITING ----
+  var freeWrite = document.getElementById('freeWrite');
+  if (state.freeWrite) freeWrite.value = state.freeWrite;
+  freeWrite.addEventListener('input', function() {
+    state.freeWrite = freeWrite.value;
+    save();
+  });
+
+  window.saveWriting = function() {
+    state.freeWrite = freeWrite.value;
+    save();
+    var fb = document.getElementById('writeFeedback');
+    fb.textContent = 'Texto guardado! 💾 Podes voltar e editar quando quiseres.';
+    fb.className = 'feedback correct';
+  };
+
+  // ---- INIT ----
+  buildMatch();
+  updateScore();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "portuguese-lessons",
+  "version": "1.0.0",
+  "description": "Interactive European-Portuguese study companions, built from real classes with Mariana.",
+  "private": true,
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

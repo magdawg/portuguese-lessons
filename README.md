@@ -1,64 +1,66 @@
 # As Minhas Aulas de Português 🇵🇹
 
-Interactive European-Portuguese (PT-PT) study companions, built from real
-classes with my teacher **Mariana**. Each lesson is a self-contained HTML page
-with grammar tables, vocabulary, a reconstructed dialogue, and interactive
-exercises (fill-in-the-blank, matching, multiple choice, conjugation drills and
-a free-writing prompt) that track your score in the browser via `localStorage`.
+Interactive European-Portuguese (PT-PT) study pages, built from my real classes
+with my teacher **Mariana**. Each lesson has grammar, vocabulary, a reconstructed
+dialogue, and exercises that score themselves in the browser.
 
-## 🌐 Live site
+It's an [Eleventy](https://www.11ty.dev/) static site: lessons are written as
+content files in `src/lessons/`, and the shared layout adds all the page chrome,
+navigation, styles, and the scoring engine. GitHub Actions builds and deploys to
+GitHub Pages on every push to `main`.
 
-Once GitHub Pages is enabled (see below), the site is available at:
-
-```
-https://<your-username>.github.io/<repo-name>/
-```
-
-Start from **`index.html`** — the hub that links to every lesson.
-
-## 📂 Structure
-
-```
-.
-├── index.html                         # Home page (lesson hub) — stays at root
-└── aulas/                             # All lesson pages
-    ├── LESSON_DESIGN.md               # Design contract for new lessons
-    ├── _template.html                 # Working lesson skeleton with placeholders
-    ├── aula-1.html                    # Structured A2→B1 course — Lesson 1
-    └── aulas_mariana_YYYY-MM-DD.html  # Lessons generated from real classes
+```bash
+npm install      # once
+npm run serve    # preview at http://localhost:8080/portuguese-lessons/
 ```
 
-> When generating a new lesson (e.g. via the `/portuguese-lesson` skill), start
-> from `aulas/_template.html` and follow `aulas/LESSON_DESIGN.md`.
+## Generating a new lesson
 
-- Every page is **fully self-contained** — inline CSS + vanilla JS, no build
-  step and no local assets. The only external dependency is Google Fonts (over
-  HTTPS), so everything works on static hosting as-is.
-- All internal links are **relative**, so the site works correctly when served
-  from a project subpath (e.g. `username.github.io/repo/`).
-- Each lesson has top **and** bottom navigation: previous lesson · home · next
-  lesson.
+Lessons are created from a recording of the actual class with Claude Code, using
+the `/portuguese-lesson` skill:
 
-> `progression.json` (a local lesson-tracker file) is intentionally **not**
-> committed — it holds private Granola class links and isn't needed by the site.
+```
+/portuguese-lesson <Granola meeting URL>
+```
 
-## 🚀 Publish with GitHub Pages
+**A transcription tool is required.** This relies on [Granola](https://www.granola.ai/)
+to transcribe the class and expose it over MCP — the skill reads the meeting's
+transcript and notes, works out what grammar and vocabulary were covered, and
+writes a study page from it. Without Granola (or another transcription source
+wired up the same way) there's no class content to build a lesson from.
 
-1. Create a new repository on GitHub and push this folder to it:
-   ```bash
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-2. On GitHub, go to **Settings → Pages**.
-3. Under **Build and deployment**, set **Source = Deploy from a branch**,
-   **Branch = `main`**, **Folder = `/ (root)`**, then **Save**.
-4. Wait ~1 minute and open the URL shown at the top of the Pages settings.
+The skill writes one file, `src/lessons/aulas_mariana_YYYY-MM-DD.html` (the class
+date). The home page card and the prev/next navigation are generated
+automatically — no other file needs editing. Run `npm run serve` to preview.
 
-A `.nojekyll` file is included so GitHub Pages serves the files as plain static
-HTML without Jekyll processing.
+> You can also generate a lesson by topic or curriculum step instead of a class
+> recording — see the skill for the full A2→B1 progression plan.
 
-## ✏️ Editing / adding lessons
+## Adding homework (trabalho de casa)
 
-Lessons are plain HTML — open any file to edit. To add a new one, copy an
-existing `aulas_mariana_*.html`, update the content and the nav links, and add a
-matching card to `index.html`.
+After a class, the teacher's homework (scanned worksheet pages + listening
+tracks) gets added to that lesson's page with the `/portuguese-homework` skill:
+
+1. Drop the raw files (photos, scans, MP3s) into `trabalho_de_casa/`.
+2. Run `/portuguese-homework <class date>`.
+
+The skill looks at each page, optimizes and renames the files, and adds a
+"Trabalho de casa" section to the lesson with audio players and a zoomable
+gallery of the worksheets. It then deletes the bulky originals, keeping only the
+optimized files the page uses.
+
+## Project layout
+
+```
+src/
+├── index.njk              # home page (lesson cards, generated from front-matter)
+├── _includes/base.njk     # the shared layout (header, nav, lightbox, footer)
+├── assets/                # shared CSS + the exercise/scoring engine
+└── lessons/               # one content file per lesson
+trabalho_de_casa/          # homework assets, one folder per lesson
+aulas/LESSON_DESIGN.md     # the lesson design contract + front-matter schema
+```
+
+`_site/` is the generated output and is gitignored — the repo is source only.
+</content>
+</invoke>

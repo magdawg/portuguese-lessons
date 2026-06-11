@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Verbos & Conjugações · Cheat sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-light: #e8f1e9;
+    --red: #B71C1C;
+    --red-light: #fbeaea;
+    --gold: #F9A825;
+    --gold-text: #8a5e00;
+    --gold-light: #fdf3dc;
+    --blue: #1565C0;
+    --blue-light: #e7f0fa;
+    --ink: #20302a;
+    --muted: #5b6b63;
+    --paper: #fcfbf7;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --shadow: 0 1px 2px rgba(27,94,32,.05);
+    --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+    --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    color: var(--ink); background: var(--paper); line-height: 1.6;
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Header */
+  header {
+    background: var(--green); color: #fff;
+    padding: clamp(40px, 6vw, 64px) 0 clamp(28px, 4vw, 40px);
+  }
+  .header-inner { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #fff; opacity: .85; text-decoration: none; font-size: 14px;
+    font-weight: 600; margin-bottom: var(--space-3);
+  }
+  .back:hover { opacity: 1; }
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif; font-weight: 600;
+    font-size: clamp(28px, 4.6vw, 42px); line-height: 1.15;
+    margin: 0 0 var(--space-3); text-wrap: balance; letter-spacing: -0.01em;
+  }
+  .subtitle { font-size: 1rem; opacity: .92; max-width: 60ch; margin: 0; text-wrap: pretty; }
+
+  /* Controls — sticky search + filters */
+  .controls {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(252,251,247,.94);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    padding: var(--space-4) 0 var(--space-3);
+    margin: var(--space-5) 0 var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+  .search-wrap { position: relative; }
+  .search-wrap::before {
+    content: "🔍"; position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%); font-size: 14px; opacity: .55;
+    pointer-events: none;
+  }
+  #search {
+    width: 100%; padding: 12px 14px 12px 40px;
+    border: 1px solid var(--border); border-radius: 12px;
+    background: #fff; font-family: inherit; font-size: 16px;
+    color: var(--ink); box-shadow: var(--shadow);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  #search:focus {
+    outline: none; border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(27,94,32,.12);
+  }
+  .filters {
+    display: flex; flex-wrap: wrap; gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .filter {
+    border: 1px solid var(--border); background: #fff;
+    padding: 6px 14px; border-radius: 999px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    color: var(--muted); cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .filter:hover { color: var(--green); border-color: var(--green); }
+  .filter.active {
+    background: var(--green); color: #fff; border-color: var(--green);
+  }
+  .filter .count {
+    font-weight: 500; opacity: .7; margin-left: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Pills grid */
+  .pills {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-3);
+  }
+  .pill {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    cursor: pointer; text-align: left;
+    font-family: inherit; color: inherit;
+    box-shadow: var(--shadow);
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .pill:hover {
+    border-color: var(--green);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(27,94,32,.10);
+  }
+  .pill:focus-visible {
+    outline: 2px solid var(--green); outline-offset: 3px;
+  }
+  .pill .verb {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 600; font-size: 22px; line-height: 1.1;
+    color: var(--ink); display: block; margin-bottom: 4px;
+  }
+  .pill .gloss {
+    color: var(--blue); font-style: italic; font-size: 13px;
+    line-height: 1.3; display: block;
+  }
+  .pill .tag {
+    display: inline-block; margin-top: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: .02em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 999px;
+  }
+  .pill .tag.ar { background: var(--green-light); color: var(--green); }
+  .pill .tag.er { background: var(--blue-light); color: var(--blue); }
+  .pill .tag.ir { background: var(--gold-light); color: var(--gold-text); }
+  .pill .tag.irregular { background: var(--red-light); color: var(--red); }
+
+  .empty {
+    text-align: center; color: var(--muted);
+    margin: var(--space-7) 0; font-style: italic;
+  }
+
+  /* Modal */
+  .modal[hidden] { display: none; }
+  .modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 24px 16px;
+    overflow-y: auto;
+    animation: fadeIn .18s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(32,48,42,.5);
+    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+  }
+  .modal-panel {
+    position: relative; z-index: 1;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: 0 24px 60px rgba(0,0,0,.18);
+    max-width: 820px; width: 100%;
+    padding: clamp(20px, 4vw, 36px) clamp(20px, 4vw, 40px);
+    margin: auto 0;
+    animation: panelIn .2s cubic-bezier(.16,1,.3,1);
+  }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(10px) scale(.985); }
+    to   { opacity: 1; transform: none; }
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 1px solid var(--border); background: #fff;
+    cursor: pointer; font-size: 16px; color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: color .15s, border-color .15s;
+  }
+  .modal-close:hover { color: var(--red); border-color: var(--red); }
+
+  .modal h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(28px, 4vw, 36px); font-weight: 600;
+    color: var(--ink); margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .modal .gloss-large {
+    color: var(--blue); font-style: italic; font-size: 16px;
+    margin: 0 0 var(--space-3);
+  }
+  .modal .modal-head .tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .02em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
+  }
+  .modal .modal-head .tag.ar { background: var(--green-light); color: var(--green); }
+  .modal .modal-head .tag.er { background: var(--blue-light); color: var(--blue); }
+  .modal .modal-head .tag.ir { background: var(--gold-light); color: var(--gold-text); }
+  .modal .modal-head .tag.irregular { background: var(--red-light); color: var(--red); }
+
+  .tenses-grid {
+    display: grid; gap: var(--space-5);
+  }
+  @media (min-width: 600px) {
+    .tenses-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      gap: var(--space-5) var(--space-6);
+    }
+  }
+  .tense-block { margin: 0; min-width: 0; }
+  .tense-label {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 19px; font-weight: 600; color: var(--green);
+    margin: 0 0 2px;
+  }
+  .tense-hint {
+    font-size: 13px; color: var(--muted); font-style: italic;
+    margin: 0 0 var(--space-3);
+  }
+  .conj-table {
+    width: 100%; border-collapse: collapse;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .conj-table td {
+    padding: 9px 14px; font-size: 15px;
+    border-top: 1px solid var(--border);
+  }
+  .conj-table tr:first-child td { border-top: none; }
+  .conj-table .pron {
+    color: var(--muted); font-weight: 600;
+    width: 38%; font-size: 13px;
+  }
+  .conj-table .form {
+    font-variant-numeric: tabular-nums;
+  }
+  .conj-table .form .stem { color: var(--ink); }
+  .conj-table .form .end { color: var(--red); font-weight: 600; }
+
+  .note-callout {
+    background: var(--gold-light); border: 1px solid #f0dca8;
+    border-radius: 10px; padding: 10px 14px;
+    margin-top: var(--space-4);
+    font-size: 14px; color: #6b4d00;
+  }
+  .note-callout strong { color: #9a6b00; }
+
+  .ir-future-banner {
+    background: var(--blue-light); border: 1px solid #c8ddef;
+    border-radius: 10px; padding: 12px 14px;
+    margin: var(--space-5) 0 0;
+    font-size: 14.5px; color: #0d3a6b;
+  }
+  .ir-future-banner strong { color: var(--blue); }
+
+  /* Modal sub-header: meta + legend + prev/next nav */
+  .modal .modal-head {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3);
+    justify-content: space-between;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    padding-right: 44px; /* clear the absolute close button */
+    border-bottom: 1px solid var(--border);
+  }
+  .modal .modal-head .meta-left {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3);
+  }
+  .verb-nav { display: flex; gap: 6px; }
+  .verb-nav button {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--border); background: #fff;
+    border-radius: 10px; padding: 6px 12px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .verb-nav button .nav-verb { color: var(--ink); }
+  .verb-nav button:hover { border-color: var(--green); }
+  .verb-nav button:hover .nav-verb { color: var(--green); }
+  .verb-nav button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+  .verb-nav button .arrow { opacity: .6; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: var(--space-7); }
+
+  @media (max-width: 520px) {
+    .pills { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .pill .verb { font-size: 20px; }
+    .conj-table td { padding: 8px 10px; font-size: 14.5px; }
+    .conj-table .pron { width: 42%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill, .modal-close, .modal, .modal-panel, .filter, #search { transition: none; animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="back" href="index.html">← Voltar ao início</a>
+    <h1>Verbos & Conjugações</h1>
+    <p class="subtitle">Os verbos mais úteis nos tempos que já aprendeste — presente, perfeito, imperfeito, futuro e condicional. Clica num verbo para ver as conjugações.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Procurar verbo (ex: ser, comer, gostar)…" autocomplete="off" />
+    </div>
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="all" type="button">Todos <span class="count" id="count-all"></span></button>
+      <button class="filter" data-filter="irregular" type="button">Irregulares <span class="count" id="count-irregular"></span></button>
+      <button class="filter" data-filter="ar" type="button">-AR <span class="count" id="count-ar"></span></button>
+      <button class="filter" data-filter="er" type="button">-ER <span class="count" id="count-er"></span></button>
+      <button class="filter" data-filter="ir" type="button">-IR <span class="count" id="count-ir"></span></button>
+    </div>
+  </div>
+
+  <div class="pills" id="pills"></div>
+  <p class="empty" id="empty" hidden>Nenhum verbo encontrado.</p>
+
+  <footer>
+    A regra-do-polegar: o <em>presente</em> diz o que é, o <em>perfeito</em> conta o que aconteceu, o <em>imperfeito</em> pinta o cenário.
+  </footer>
+</div>
+
+<div class="modal" id="modal" hidden aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <button class="modal-close" data-close type="button" aria-label="Fechar (Esc)">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  // 5 forms per tense: eu, tu, ele/ela/você, nós, eles/elas/vocês
+  const PRONOUNS = ['eu', 'tu', 'ele / ela / você', 'nós', 'eles / elas / vocês'];
+
+  // Order drives a column-first 2-col grid in the modal:
+  //   Presente / Futuro / Condicional   |   Pret. Perfeito / Pret. Imperfeito
+  const TENSES = [
+    { key: 'presente',    label: 'Presente do Indicativo', hint: 'o que é, agora ou em geral' },
+    { key: 'futuro',      label: 'Futuro do Indicativo',   hint: 'farei, comerei — formal / escrito' },
+    { key: 'condicional', label: 'Condicional',            hint: 'gostaria, queria — pedidos e hipóteses' },
+    { key: 'perfeito',    label: 'Pretérito Perfeito',     hint: 'o que aconteceu — facto único e concluído' },
+    { key: 'imperfeito',  label: 'Pretérito Imperfeito',   hint: 'cenário e hábitos no passado — "antes eu fazia…"' }
+  ];
+
+  const VERBS = [
+    // ── Irregulares essenciais ──
+    {
+      inf: 'ser', en: 'to be — identity / characteristic', group: 'irregular',
+      conj: {
+        presente:    ['sou', 'és', 'é', 'somos', 'são'],
+        perfeito:    ['fui', 'foste', 'foi', 'fomos', 'foram'],
+        imperfeito:  ['era', 'eras', 'era', 'éramos', 'eram'],
+        futuro:      ['serei', 'serás', 'será', 'seremos', 'serão'],
+        condicional: ['seria', 'serias', 'seria', 'seríamos', 'seriam']
+      },
+      note: '<strong>Ser</strong> e <em>ir</em> partilham exactamente a mesma forma no pretérito perfeito (<em>fui, foste, foi…</em>). O contexto resolve.'
+    },
+    {
+      inf: 'estar', en: 'to be — state / location', group: 'irregular',
+      conj: {
+        presente:    ['estou', 'estás', 'está', 'estamos', 'estão'],
+        perfeito:    ['estive', 'estiveste', 'esteve', 'estivemos', 'estiveram'],
+        imperfeito:  ['estava', 'estavas', 'estava', 'estávamos', 'estavam'],
+        futuro:      ['estarei', 'estarás', 'estará', 'estaremos', 'estarão'],
+        condicional: ['estaria', 'estarias', 'estaria', 'estaríamos', 'estariam']
+      },
+      note: 'Base do presente contínuo PT-PT: <strong>estar a + infinitivo</strong> (<em>estou a fazer</em>).'
+    },
+    {
+      inf: 'ter', en: 'to have', group: 'irregular',
+      conj: {
+        presente:    ['tenho', 'tens', 'tem', 'temos', 'têm'],
+        perfeito:    ['tive', 'tiveste', 'teve', 'tivemos', 'tiveram'],
+        imperfeito:  ['tinha', 'tinhas', 'tinha', 'tínhamos', 'tinham'],
+        futuro:      ['terei', 'terás', 'terá', 'teremos', 'terão'],
+        condicional: ['teria', 'terias', 'teria', 'teríamos', 'teriam']
+      },
+      note: 'Idade vai com <strong>ter</strong>: <em>tenho 32 anos</em>. Nunca <em>sou 32</em>.'
+    },
+    {
+      inf: 'ir', en: 'to go', group: 'irregular',
+      conj: {
+        presente:    ['vou', 'vais', 'vai', 'vamos', 'vão'],
+        perfeito:    ['fui', 'foste', 'foi', 'fomos', 'foram'],
+        imperfeito:  ['ia', 'ias', 'ia', 'íamos', 'iam'],
+        futuro:      ['irei', 'irás', 'irá', 'iremos', 'irão'],
+        condicional: ['iria', 'irias', 'iria', 'iríamos', 'iriam']
+      },
+      note: 'Futuro próximo: <strong>ir + infinitivo</strong> (<em>vou comer, vais sair</em>). Nunca <em>vou ir</em> nem <em>vou vir</em>.'
+    },
+    {
+      inf: 'fazer', en: 'to do / to make', group: 'irregular',
+      conj: {
+        presente:    ['faço', 'fazes', 'faz', 'fazemos', 'fazem'],
+        perfeito:    ['fiz', 'fizeste', 'fez', 'fizemos', 'fizeram'],
+        imperfeito:  ['fazia', 'fazias', 'fazia', 'fazíamos', 'faziam'],
+        futuro:      ['farei', 'farás', 'fará', 'faremos', 'farão'],
+        condicional: ['faria', 'farias', 'faria', 'faríamos', 'fariam']
+      },
+      note: 'Futuro e condicional perdem o <em>-ze-</em>: <strong>farei, faria</strong> (não <em>fazerei</em>).'
+    },
+    {
+      inf: 'dizer', en: 'to say / to tell', group: 'irregular',
+      conj: {
+        presente:    ['digo', 'dizes', 'diz', 'dizemos', 'dizem'],
+        perfeito:    ['disse', 'disseste', 'disse', 'dissemos', 'disseram'],
+        imperfeito:  ['dizia', 'dizias', 'dizia', 'dizíamos', 'diziam'],
+        futuro:      ['direi', 'dirás', 'dirá', 'diremos', 'dirão'],
+        condicional: ['diria', 'dirias', 'diria', 'diríamos', 'diriam']
+      },
+      note: 'Mesma encolha no futuro: <strong>direi, diria</strong>.'
+    },
+    {
+      inf: 'dar', en: 'to give', group: 'irregular',
+      conj: {
+        presente:    ['dou', 'dás', 'dá', 'damos', 'dão'],
+        perfeito:    ['dei', 'deste', 'deu', 'demos', 'deram'],
+        imperfeito:  ['dava', 'davas', 'dava', 'dávamos', 'davam'],
+        futuro:      ['darei', 'darás', 'dará', 'daremos', 'darão'],
+        condicional: ['daria', 'darias', 'daria', 'daríamos', 'dariam']
+      }
+    },
+    {
+      inf: 'ver', en: 'to see', group: 'irregular',
+      conj: {
+        presente:    ['vejo', 'vês', 'vê', 'vemos', 'veem'],
+        perfeito:    ['vi', 'viste', 'viu', 'vimos', 'viram'],
+        imperfeito:  ['via', 'vias', 'via', 'víamos', 'viam'],
+        futuro:      ['verei', 'verás', 'verá', 'veremos', 'verão'],
+        condicional: ['veria', 'verias', 'veria', 'veríamos', 'veriam']
+      }
+    },
+    {
+      inf: 'vir', en: 'to come', group: 'irregular',
+      conj: {
+        presente:    ['venho', 'vens', 'vem', 'vimos', 'vêm'],
+        perfeito:    ['vim', 'vieste', 'veio', 'viemos', 'vieram'],
+        imperfeito:  ['vinha', 'vinhas', 'vinha', 'vínhamos', 'vinham'],
+        futuro:      ['virei', 'virás', 'virá', 'viremos', 'virão'],
+        condicional: ['viria', 'virias', 'viria', 'viríamos', 'viriam']
+      },
+      note: 'Atenção: <em>nós vimos</em> serve para presente (<em>to come</em>) <strong>e</strong> para perfeito de <em>ver</em> (<em>we saw</em>). O contexto distingue.'
+    },
+    {
+      inf: 'pôr', en: 'to put', group: 'irregular',
+      conj: {
+        presente:    ['ponho', 'pões', 'põe', 'pomos', 'põem'],
+        perfeito:    ['pus', 'puseste', 'pôs', 'pusemos', 'puseram'],
+        imperfeito:  ['punha', 'punhas', 'punha', 'púnhamos', 'punham'],
+        futuro:      ['porei', 'porás', 'porá', 'poremos', 'porão'],
+        condicional: ['poria', 'porias', 'poria', 'poríamos', 'poriam']
+      },
+      note: 'Único verbo em <em>-or</em>. Compostos seguem o mesmo padrão (<em>compor, supor, repor</em>).'
+    },
+    {
+      inf: 'poder', en: 'can / to be able to', group: 'irregular',
+      conj: {
+        presente:    ['posso', 'podes', 'pode', 'podemos', 'podem'],
+        perfeito:    ['pude', 'pudeste', 'pôde', 'pudemos', 'puderam'],
+        imperfeito:  ['podia', 'podias', 'podia', 'podíamos', 'podiam'],
+        futuro:      ['poderei', 'poderás', 'poderá', 'poderemos', 'poderão'],
+        condicional: ['poderia', 'poderias', 'poderia', 'poderíamos', 'poderiam']
+      }
+    },
+    {
+      inf: 'querer', en: 'to want', group: 'irregular',
+      conj: {
+        presente:    ['quero', 'queres', 'quer', 'queremos', 'querem'],
+        perfeito:    ['quis', 'quiseste', 'quis', 'quisemos', 'quiseram'],
+        imperfeito:  ['queria', 'querias', 'queria', 'queríamos', 'queriam'],
+        futuro:      ['quererei', 'quererás', 'quererá', 'quereremos', 'quererão'],
+        condicional: ['quereria', 'quererias', 'quereria', 'quereríamos', 'quereriam']
+      },
+      note: 'No café usa-se o <strong>imperfeito</strong> como pedido educado: <em>queria uma bica, se faz favor</em>.'
+    },
+    {
+      inf: 'saber', en: 'to know — fact / how to', group: 'irregular',
+      conj: {
+        presente:    ['sei', 'sabes', 'sabe', 'sabemos', 'sabem'],
+        perfeito:    ['soube', 'soubeste', 'soube', 'soubemos', 'souberam'],
+        imperfeito:  ['sabia', 'sabias', 'sabia', 'sabíamos', 'sabiam'],
+        futuro:      ['saberei', 'saberás', 'saberá', 'saberemos', 'saberão'],
+        condicional: ['saberia', 'saberias', 'saberia', 'saberíamos', 'saberiam']
+      },
+      note: '<em>Saber</em> = factos / saber fazer. Para pessoas e lugares usa-se <em>conhecer</em>.'
+    },
+    {
+      inf: 'conhecer', en: 'to know — people / places', group: 'er',
+      conj: {
+        presente:    ['conheço', 'conheces', 'conhece', 'conhecemos', 'conhecem'],
+        perfeito:    ['conheci', 'conheceste', 'conheceu', 'conhecemos', 'conheceram'],
+        imperfeito:  ['conhecia', 'conhecias', 'conhecia', 'conhecíamos', 'conheciam'],
+        futuro:      ['conhecerei', 'conhecerás', 'conhecerá', 'conheceremos', 'conhecerão'],
+        condicional: ['conheceria', 'conhecerias', 'conheceria', 'conheceríamos', 'conheceriam']
+      },
+      note: 'Pequena irregularidade só na 1.ª pessoa do presente: <strong>conheço</strong> (com <em>ç</em>, não <em>c</em>).'
+    },
+    {
+      inf: 'ler', en: 'to read', group: 'irregular',
+      conj: {
+        presente:    ['leio', 'lês', 'lê', 'lemos', 'leem'],
+        perfeito:    ['li', 'leste', 'leu', 'lemos', 'leram'],
+        imperfeito:  ['lia', 'lias', 'lia', 'líamos', 'liam'],
+        futuro:      ['lerei', 'lerás', 'lerá', 'leremos', 'lerão'],
+        condicional: ['leria', 'lerias', 'leria', 'leríamos', 'leriam']
+      }
+    },
+    {
+      inf: 'ouvir', en: 'to hear', group: 'irregular',
+      conj: {
+        presente:    ['ouço', 'ouves', 'ouve', 'ouvimos', 'ouvem'],
+        perfeito:    ['ouvi', 'ouviste', 'ouviu', 'ouvimos', 'ouviram'],
+        imperfeito:  ['ouvia', 'ouvias', 'ouvia', 'ouvíamos', 'ouviam'],
+        futuro:      ['ouvirei', 'ouvirás', 'ouvirá', 'ouviremos', 'ouvirão'],
+        condicional: ['ouviria', 'ouvirias', 'ouviria', 'ouviríamos', 'ouviriam']
+      },
+      note: '1.ª pessoa do presente é <strong>ouço</strong> (não <em>ouvo</em>).'
+    },
+    {
+      inf: 'sair', en: 'to leave / go out', group: 'irregular',
+      conj: {
+        presente:    ['saio', 'sais', 'sai', 'saímos', 'saem'],
+        perfeito:    ['saí', 'saíste', 'saiu', 'saímos', 'saíram'],
+        imperfeito:  ['saía', 'saías', 'saía', 'saíamos', 'saíam'],
+        futuro:      ['sairei', 'sairás', 'sairá', 'sairemos', 'sairão'],
+        condicional: ['sairia', 'sairias', 'sairia', 'sairíamos', 'sairiam']
+      }
+    },
+    {
+      inf: 'trazer', en: 'to bring', group: 'irregular',
+      conj: {
+        presente:    ['trago', 'trazes', 'traz', 'trazemos', 'trazem'],
+        perfeito:    ['trouxe', 'trouxeste', 'trouxe', 'trouxemos', 'trouxeram'],
+        imperfeito:  ['trazia', 'trazias', 'trazia', 'trazíamos', 'traziam'],
+        futuro:      ['trarei', 'trarás', 'trará', 'traremos', 'trarão'],
+        condicional: ['traria', 'trarias', 'traria', 'traríamos', 'trariam']
+      },
+      note: 'Cuidado: <em>trazer</em> = bring (toward me); <em>levar</em> = take (with me, away).'
+    },
+    {
+      inf: 'haver', en: 'there is / there are (impersonal)', group: 'irregular',
+      conj: {
+        presente:    ['hei', 'hás', 'há', 'havemos', 'hão'],
+        perfeito:    ['houve', 'houveste', 'houve', 'houvemos', 'houveram'],
+        imperfeito:  ['havia', 'havias', 'havia', 'havíamos', 'haviam'],
+        futuro:      ['haverei', 'haverás', 'haverá', 'haveremos', 'haverão'],
+        condicional: ['haveria', 'haverias', 'haveria', 'haveríamos', 'haveriam']
+      },
+      note: 'Na prática só se usa a 3.ª pessoa do singular como impessoal: <strong>há</strong> (there is/are), <strong>havia</strong>, <strong>houve</strong>. Nunca <em>há muitos pessoas</em> com plural — fica sempre singular.'
+    },
+    {
+      inf: 'rir', en: 'to laugh (usually -se)', group: 'irregular',
+      conj: {
+        presente:    ['rio', 'ris', 'ri', 'rimos', 'riem'],
+        perfeito:    ['ri', 'riste', 'riu', 'rimos', 'riram'],
+        imperfeito:  ['ria', 'rias', 'ria', 'ríamos', 'riam'],
+        futuro:      ['rirei', 'rirás', 'rirá', 'riremos', 'rirão'],
+        condicional: ['riria', 'ririas', 'riria', 'riríamos', 'ririam']
+      },
+      note: 'Quase sempre reflexivo: <strong>rio-me</strong>, <em>rimo-nos</em>. <em>Rir-se de</em> = laugh at. <em>Sorrir</em> (to smile) segue o mesmo padrão.'
+    },
+
+    // ── Regulares -AR (modelo: falar) ──
+    {
+      inf: 'falar', en: 'to speak (model -AR)', group: 'ar',
+      conj: {
+        presente:    ['falo', 'falas', 'fala', 'falamos', 'falam'],
+        perfeito:    ['falei', 'falaste', 'falou', 'falámos', 'falaram'],
+        imperfeito:  ['falava', 'falavas', 'falava', 'falávamos', 'falavam'],
+        futuro:      ['falarei', 'falarás', 'falará', 'falaremos', 'falarão'],
+        condicional: ['falaria', 'falarias', 'falaria', 'falaríamos', 'falariam']
+      },
+      note: 'Modelo de todos os <strong>-AR</strong> regulares. Atenção PT-PT: <em>nós falámos</em> no perfeito leva acento (vs. <em>falamos</em> no presente).'
+    },
+    {
+      inf: 'trabalhar', en: 'to work', group: 'ar',
+      conj: {
+        presente:    ['trabalho', 'trabalhas', 'trabalha', 'trabalhamos', 'trabalham'],
+        perfeito:    ['trabalhei', 'trabalhaste', 'trabalhou', 'trabalhámos', 'trabalharam'],
+        imperfeito:  ['trabalhava', 'trabalhavas', 'trabalhava', 'trabalhávamos', 'trabalhavam'],
+        futuro:      ['trabalharei', 'trabalharás', 'trabalhará', 'trabalharemos', 'trabalharão'],
+        condicional: ['trabalharia', 'trabalharias', 'trabalharia', 'trabalharíamos', 'trabalhariam']
+      }
+    },
+    {
+      inf: 'gostar', en: 'to like (+ de)', group: 'ar',
+      conj: {
+        presente:    ['gosto', 'gostas', 'gosta', 'gostamos', 'gostam'],
+        perfeito:    ['gostei', 'gostaste', 'gostou', 'gostámos', 'gostaram'],
+        imperfeito:  ['gostava', 'gostavas', 'gostava', 'gostávamos', 'gostavam'],
+        futuro:      ['gostarei', 'gostarás', 'gostará', 'gostaremos', 'gostarão'],
+        condicional: ['gostaria', 'gostarias', 'gostaria', 'gostaríamos', 'gostariam']
+      },
+      note: 'Pede sempre <strong>de</strong>: <em>gosto de café</em>. O condicional <em>gostaria</em> e o imperfeito <em>gostava</em> são pedidos educados (<em>gostava de um galão</em>).'
+    },
+    {
+      inf: 'chegar', en: 'to arrive', group: 'ar',
+      conj: {
+        presente:    ['chego', 'chegas', 'chega', 'chegamos', 'chegam'],
+        perfeito:    ['cheguei', 'chegaste', 'chegou', 'chegámos', 'chegaram'],
+        imperfeito:  ['chegava', 'chegavas', 'chegava', 'chegávamos', 'chegavam'],
+        futuro:      ['chegarei', 'chegarás', 'chegará', 'chegaremos', 'chegarão'],
+        condicional: ['chegaria', 'chegarias', 'chegaria', 'chegaríamos', 'chegariam']
+      },
+      note: '1.ª pessoa do perfeito: <strong>cheguei</strong> (com <em>u</em> para manter o som /g/).'
+    },
+    {
+      inf: 'ficar', en: 'to stay / to become', group: 'ar',
+      conj: {
+        presente:    ['fico', 'ficas', 'fica', 'ficamos', 'ficam'],
+        perfeito:    ['fiquei', 'ficaste', 'ficou', 'ficámos', 'ficaram'],
+        imperfeito:  ['ficava', 'ficavas', 'ficava', 'ficávamos', 'ficavam'],
+        futuro:      ['ficarei', 'ficarás', 'ficará', 'ficaremos', 'ficarão'],
+        condicional: ['ficaria', 'ficarias', 'ficaria', 'ficaríamos', 'ficariam']
+      },
+      note: '1.ª pessoa do perfeito: <strong>fiquei</strong> (mesma troca para manter o som /k/).'
+    },
+    {
+      inf: 'tomar', en: 'to take / to have (drink, decision…)', group: 'ar',
+      conj: {
+        presente:    ['tomo', 'tomas', 'toma', 'tomamos', 'tomam'],
+        perfeito:    ['tomei', 'tomaste', 'tomou', 'tomámos', 'tomaram'],
+        imperfeito:  ['tomava', 'tomavas', 'tomava', 'tomávamos', 'tomavam'],
+        futuro:      ['tomarei', 'tomarás', 'tomará', 'tomaremos', 'tomarão'],
+        condicional: ['tomaria', 'tomarias', 'tomaria', 'tomaríamos', 'tomariam']
+      },
+      note: '<em>Tomar</em> = café/banho/comprimido/conta de/decisão. Mas <em>tomar almoço</em> → diz-se <strong>almoçar</strong>.'
+    },
+    {
+      inf: 'apanhar', en: 'to catch / take (transport, sun, cold)', group: 'ar',
+      conj: {
+        presente:    ['apanho', 'apanhas', 'apanha', 'apanhamos', 'apanham'],
+        perfeito:    ['apanhei', 'apanhaste', 'apanhou', 'apanhámos', 'apanharam'],
+        imperfeito:  ['apanhava', 'apanhavas', 'apanhava', 'apanhávamos', 'apanhavam'],
+        futuro:      ['apanharei', 'apanharás', 'apanhará', 'apanharemos', 'apanharão'],
+        condicional: ['apanharia', 'apanharias', 'apanharia', 'apanharíamos', 'apanhariam']
+      },
+      note: 'Vai bem com <em>autocarro, sol, escaldão, gripe, ondas</em>.'
+    },
+    {
+      inf: 'levar', en: 'to take (with you) / to wear', group: 'ar',
+      conj: {
+        presente:    ['levo', 'levas', 'leva', 'levamos', 'levam'],
+        perfeito:    ['levei', 'levaste', 'levou', 'levámos', 'levaram'],
+        imperfeito:  ['levava', 'levavas', 'levava', 'levávamos', 'levavam'],
+        futuro:      ['levarei', 'levarás', 'levará', 'levaremos', 'levarão'],
+        condicional: ['levaria', 'levarias', 'levaria', 'levaríamos', 'levariam']
+      },
+      note: 'Atenção à pronúncia: <em>levar</em> ≠ <em>lavar</em>. <em>Para levar</em> = takeaway.'
+    },
+    {
+      inf: 'andar', en: 'to walk / to be doing (lately)', group: 'ar',
+      conj: {
+        presente:    ['ando', 'andas', 'anda', 'andamos', 'andam'],
+        perfeito:    ['andei', 'andaste', 'andou', 'andámos', 'andaram'],
+        imperfeito:  ['andava', 'andavas', 'andava', 'andávamos', 'andavam'],
+        futuro:      ['andarei', 'andarás', 'andará', 'andaremos', 'andarão'],
+        condicional: ['andaria', 'andarias', 'andaria', 'andaríamos', 'andariam']
+      },
+      note: '<strong>Andar a + infinitivo</strong> = uma fase, <em>"have been doing"</em>: <em>ando a estudar para o B1</em>.'
+    },
+    {
+      inf: 'morar', en: 'to live / to reside', group: 'ar',
+      conj: {
+        presente:    ['moro', 'moras', 'mora', 'moramos', 'moram'],
+        perfeito:    ['morei', 'moraste', 'morou', 'morámos', 'moraram'],
+        imperfeito:  ['morava', 'moravas', 'morava', 'morávamos', 'moravam'],
+        futuro:      ['morarei', 'morarás', 'morará', 'moraremos', 'morarão'],
+        condicional: ['moraria', 'morarias', 'moraria', 'moraríamos', 'morariam']
+      },
+      note: '<em>Morar</em> é mais "ter morada"; <em>viver</em> serve para vida em geral. Ambos funcionam para onde se mora.'
+    },
+    {
+      inf: 'comprar', en: 'to buy', group: 'ar',
+      conj: {
+        presente:    ['compro', 'compras', 'compra', 'compramos', 'compram'],
+        perfeito:    ['comprei', 'compraste', 'comprou', 'comprámos', 'compraram'],
+        imperfeito:  ['comprava', 'compravas', 'comprava', 'comprávamos', 'compravam'],
+        futuro:      ['comprarei', 'comprarás', 'comprará', 'compraremos', 'comprarão'],
+        condicional: ['compraria', 'comprarias', 'compraria', 'compraríamos', 'comprariam']
+      }
+    },
+    {
+      inf: 'pagar', en: 'to pay', group: 'ar',
+      conj: {
+        presente:    ['pago', 'pagas', 'paga', 'pagamos', 'pagam'],
+        perfeito:    ['paguei', 'pagaste', 'pagou', 'pagámos', 'pagaram'],
+        imperfeito:  ['pagava', 'pagavas', 'pagava', 'pagávamos', 'pagavam'],
+        futuro:      ['pagarei', 'pagarás', 'pagará', 'pagaremos', 'pagarão'],
+        condicional: ['pagaria', 'pagarias', 'pagaria', 'pagaríamos', 'pagariam']
+      },
+      note: '<em>Pagar a conta, pagar com cartão</em>. 1.ª pessoa perfeito: <strong>paguei</strong>.'
+    },
+    {
+      inf: 'acordar', en: 'to wake up', group: 'ar',
+      conj: {
+        presente:    ['acordo', 'acordas', 'acorda', 'acordamos', 'acordam'],
+        perfeito:    ['acordei', 'acordaste', 'acordou', 'acordámos', 'acordaram'],
+        imperfeito:  ['acordava', 'acordavas', 'acordava', 'acordávamos', 'acordavam'],
+        futuro:      ['acordarei', 'acordarás', 'acordará', 'acordaremos', 'acordarão'],
+        condicional: ['acordaria', 'acordarias', 'acordaria', 'acordaríamos', 'acordariam']
+      },
+      note: '"Levantar-se" é o gesto de sair da cama; <em>acordar</em> é abrir os olhos.'
+    },
+    {
+      inf: 'estudar', en: 'to study', group: 'ar',
+      conj: {
+        presente:    ['estudo', 'estudas', 'estuda', 'estudamos', 'estudam'],
+        perfeito:    ['estudei', 'estudaste', 'estudou', 'estudámos', 'estudaram'],
+        imperfeito:  ['estudava', 'estudavas', 'estudava', 'estudávamos', 'estudavam'],
+        futuro:      ['estudarei', 'estudarás', 'estudará', 'estudaremos', 'estudarão'],
+        condicional: ['estudaria', 'estudarias', 'estudaria', 'estudaríamos', 'estudariam']
+      }
+    },
+    {
+      inf: 'precisar', en: 'to need (+ de)', group: 'ar',
+      conj: {
+        presente:    ['preciso', 'precisas', 'precisa', 'precisamos', 'precisam'],
+        perfeito:    ['precisei', 'precisaste', 'precisou', 'precisámos', 'precisaram'],
+        imperfeito:  ['precisava', 'precisavas', 'precisava', 'precisávamos', 'precisavam'],
+        futuro:      ['precisarei', 'precisarás', 'precisará', 'precisaremos', 'precisarão'],
+        condicional: ['precisaria', 'precisarias', 'precisaria', 'precisaríamos', 'precisariam']
+      },
+      note: 'Pede <strong>de</strong>: <em>preciso de ajuda</em>, <em>preciso de ir</em>.'
+    },
+    {
+      inf: 'ajudar', en: 'to help', group: 'ar',
+      conj: {
+        presente:    ['ajudo', 'ajudas', 'ajuda', 'ajudamos', 'ajudam'],
+        perfeito:    ['ajudei', 'ajudaste', 'ajudou', 'ajudámos', 'ajudaram'],
+        imperfeito:  ['ajudava', 'ajudavas', 'ajudava', 'ajudávamos', 'ajudavam'],
+        futuro:      ['ajudarei', 'ajudarás', 'ajudará', 'ajudaremos', 'ajudarão'],
+        condicional: ['ajudaria', 'ajudarias', 'ajudaria', 'ajudaríamos', 'ajudariam']
+      },
+      note: '<em>Ajudar a + infinitivo</em>: <em>ajudo-te a fazer</em>.'
+    },
+    {
+      inf: 'começar', en: 'to begin / to start', group: 'ar',
+      conj: {
+        presente:    ['começo', 'começas', 'começa', 'começamos', 'começam'],
+        perfeito:    ['comecei', 'começaste', 'começou', 'começámos', 'começaram'],
+        imperfeito:  ['começava', 'começavas', 'começava', 'começávamos', 'começavam'],
+        futuro:      ['começarei', 'começarás', 'começará', 'começaremos', 'começarão'],
+        condicional: ['começaria', 'começarias', 'começaria', 'começaríamos', 'começariam']
+      },
+      note: '<em>ç</em> antes de a/o/u, <em>c</em> antes de e: <strong>começo</strong> mas <strong>comecei</strong>. <em>Começar a + infinitivo</em>.'
+    },
+    {
+      inf: 'almoçar', en: 'to have lunch', group: 'ar',
+      conj: {
+        presente:    ['almoço', 'almoças', 'almoça', 'almoçamos', 'almoçam'],
+        perfeito:    ['almocei', 'almoçaste', 'almoçou', 'almoçámos', 'almoçaram'],
+        imperfeito:  ['almoçava', 'almoçavas', 'almoçava', 'almoçávamos', 'almoçavam'],
+        futuro:      ['almoçarei', 'almoçarás', 'almoçará', 'almoçaremos', 'almoçarão'],
+        condicional: ['almoçaria', 'almoçarias', 'almoçaria', 'almoçaríamos', 'almoçariam']
+      },
+      note: '1.ª pessoa do perfeito: <strong>almocei</strong> (<em>c</em> antes de e). Ao fim do dia, <em>jantar</em>.'
+    },
+    {
+      inf: 'jantar', en: 'to have dinner', group: 'ar',
+      conj: {
+        presente:    ['janto', 'jantas', 'janta', 'jantamos', 'jantam'],
+        perfeito:    ['jantei', 'jantaste', 'jantou', 'jantámos', 'jantaram'],
+        imperfeito:  ['jantava', 'jantavas', 'jantava', 'jantávamos', 'jantavam'],
+        futuro:      ['jantarei', 'jantarás', 'jantará', 'jantaremos', 'jantarão'],
+        condicional: ['jantaria', 'jantarias', 'jantaria', 'jantaríamos', 'jantariam']
+      }
+    },
+    {
+      inf: 'esperar', en: 'to wait / to hope', group: 'ar',
+      conj: {
+        presente:    ['espero', 'esperas', 'espera', 'esperamos', 'esperam'],
+        perfeito:    ['esperei', 'esperaste', 'esperou', 'esperámos', 'esperaram'],
+        imperfeito:  ['esperava', 'esperavas', 'esperava', 'esperávamos', 'esperavam'],
+        futuro:      ['esperarei', 'esperarás', 'esperará', 'esperaremos', 'esperarão'],
+        condicional: ['esperaria', 'esperarias', 'esperaria', 'esperaríamos', 'esperariam']
+      },
+      note: 'Serve para <em>wait</em> e <em>hope</em>: <em>espero o autocarro</em> / <em>espero que sim</em>.'
+    },
+    {
+      inf: 'chamar', en: 'to call / to be called (-se)', group: 'ar',
+      conj: {
+        presente:    ['chamo', 'chamas', 'chama', 'chamamos', 'chamam'],
+        perfeito:    ['chamei', 'chamaste', 'chamou', 'chamámos', 'chamaram'],
+        imperfeito:  ['chamava', 'chamavas', 'chamava', 'chamávamos', 'chamavam'],
+        futuro:      ['chamarei', 'chamarás', 'chamará', 'chamaremos', 'chamarão'],
+        condicional: ['chamaria', 'chamarias', 'chamaria', 'chamaríamos', 'chamariam']
+      },
+      note: 'Reflexivo para o nome: <strong>chamo-me</strong> Ana; <em>como te chamas?</em>'
+    },
+    {
+      inf: 'encontrar', en: 'to find / to meet', group: 'ar',
+      conj: {
+        presente:    ['encontro', 'encontras', 'encontra', 'encontramos', 'encontram'],
+        perfeito:    ['encontrei', 'encontraste', 'encontrou', 'encontrámos', 'encontraram'],
+        imperfeito:  ['encontrava', 'encontravas', 'encontrava', 'encontrávamos', 'encontravam'],
+        futuro:      ['encontrarei', 'encontrarás', 'encontrará', 'encontraremos', 'encontrarão'],
+        condicional: ['encontraria', 'encontrarias', 'encontraria', 'encontraríamos', 'encontrariam']
+      },
+      note: 'Reflexivo <em>encontrar-se com</em> = combinar / juntar-se: <em>encontro-me com a Mariana às 5</em>.'
+    },
+    {
+      inf: 'procurar', en: 'to look for / to search', group: 'ar',
+      conj: {
+        presente:    ['procuro', 'procuras', 'procura', 'procuramos', 'procuram'],
+        perfeito:    ['procurei', 'procuraste', 'procurou', 'procurámos', 'procuraram'],
+        imperfeito:  ['procurava', 'procuravas', 'procurava', 'procurávamos', 'procuravam'],
+        futuro:      ['procurarei', 'procurarás', 'procurará', 'procuraremos', 'procurarão'],
+        condicional: ['procuraria', 'procurarias', 'procuraria', 'procuraríamos', 'procurariam']
+      },
+      note: 'Não precisa de preposição: <em>procuro as chaves</em> (não <em>procuro por…</em>).'
+    },
+    {
+      inf: 'passar', en: 'to pass / to spend (time)', group: 'ar',
+      conj: {
+        presente:    ['passo', 'passas', 'passa', 'passamos', 'passam'],
+        perfeito:    ['passei', 'passaste', 'passou', 'passámos', 'passaram'],
+        imperfeito:  ['passava', 'passavas', 'passava', 'passávamos', 'passavam'],
+        futuro:      ['passarei', 'passarás', 'passará', 'passaremos', 'passarão'],
+        condicional: ['passaria', 'passarias', 'passaria', 'passaríamos', 'passariam']
+      },
+      note: 'Saudação: <em>como passou o fim de semana?</em> Também <em>passar tempo</em>.'
+    },
+    {
+      inf: 'deixar', en: 'to leave (behind) / to let', group: 'ar',
+      conj: {
+        presente:    ['deixo', 'deixas', 'deixa', 'deixamos', 'deixam'],
+        perfeito:    ['deixei', 'deixaste', 'deixou', 'deixámos', 'deixaram'],
+        imperfeito:  ['deixava', 'deixavas', 'deixava', 'deixávamos', 'deixavam'],
+        futuro:      ['deixarei', 'deixarás', 'deixará', 'deixaremos', 'deixarão'],
+        condicional: ['deixaria', 'deixarias', 'deixaria', 'deixaríamos', 'deixariam']
+      },
+      note: '<em>Deixar + infinitivo</em> = permitir: <em>deixa-me ver</em>. Também <em>deixei o livro em casa</em>.'
+    },
+    {
+      inf: 'surfar', en: 'to surf', group: 'ar',
+      conj: {
+        presente:    ['surfo', 'surfas', 'surfa', 'surfamos', 'surfam'],
+        perfeito:    ['surfei', 'surfaste', 'surfou', 'surfámos', 'surfaram'],
+        imperfeito:  ['surfava', 'surfavas', 'surfava', 'surfávamos', 'surfavam'],
+        futuro:      ['surfarei', 'surfarás', 'surfará', 'surfaremos', 'surfarão'],
+        condicional: ['surfaria', 'surfarias', 'surfaria', 'surfaríamos', 'surfariam']
+      },
+      note: 'Regular como <em>falar</em>. Também <em>fazer surf</em>. <em>Apanhar uma onda</em> = catch a wave.'
+    },
+
+    // ── Regulares -ER (modelo: comer) ──
+    {
+      inf: 'comer', en: 'to eat (model -ER)', group: 'er',
+      conj: {
+        presente:    ['como', 'comes', 'come', 'comemos', 'comem'],
+        perfeito:    ['comi', 'comeste', 'comeu', 'comemos', 'comeram'],
+        imperfeito:  ['comia', 'comias', 'comia', 'comíamos', 'comiam'],
+        futuro:      ['comerei', 'comerás', 'comerá', 'comeremos', 'comerão'],
+        condicional: ['comeria', 'comerias', 'comeria', 'comeríamos', 'comeriam']
+      },
+      note: 'Modelo de todos os <strong>-ER</strong> regulares. Cuidado: <em>nós comemos</em> serve para presente <strong>e</strong> perfeito; o contexto resolve.'
+    },
+    {
+      inf: 'beber', en: 'to drink', group: 'er',
+      conj: {
+        presente:    ['bebo', 'bebes', 'bebe', 'bebemos', 'bebem'],
+        perfeito:    ['bebi', 'bebeste', 'bebeu', 'bebemos', 'beberam'],
+        imperfeito:  ['bebia', 'bebias', 'bebia', 'bebíamos', 'bebiam'],
+        futuro:      ['beberei', 'beberás', 'beberá', 'beberemos', 'beberão'],
+        condicional: ['beberia', 'beberias', 'beberia', 'beberíamos', 'beberiam']
+      }
+    },
+    {
+      inf: 'viver', en: 'to live', group: 'er',
+      conj: {
+        presente:    ['vivo', 'vives', 'vive', 'vivemos', 'vivem'],
+        perfeito:    ['vivi', 'viveste', 'viveu', 'vivemos', 'viveram'],
+        imperfeito:  ['vivia', 'vivias', 'vivia', 'vivíamos', 'viviam'],
+        futuro:      ['viverei', 'viverás', 'viverá', 'viveremos', 'viverão'],
+        condicional: ['viveria', 'viverias', 'viveria', 'viveríamos', 'viveriam']
+      }
+    },
+    {
+      inf: 'aprender', en: 'to learn', group: 'er',
+      conj: {
+        presente:    ['aprendo', 'aprendes', 'aprende', 'aprendemos', 'aprendem'],
+        perfeito:    ['aprendi', 'aprendeste', 'aprendeu', 'aprendemos', 'aprenderam'],
+        imperfeito:  ['aprendia', 'aprendias', 'aprendia', 'aprendíamos', 'aprendiam'],
+        futuro:      ['aprenderei', 'aprenderás', 'aprenderá', 'aprenderemos', 'aprenderão'],
+        condicional: ['aprenderia', 'aprenderias', 'aprenderia', 'aprenderíamos', 'aprenderiam']
+      }
+    },
+    {
+      inf: 'escrever', en: 'to write', group: 'er',
+      conj: {
+        presente:    ['escrevo', 'escreves', 'escreve', 'escrevemos', 'escrevem'],
+        perfeito:    ['escrevi', 'escreveste', 'escreveu', 'escrevemos', 'escreveram'],
+        imperfeito:  ['escrevia', 'escrevias', 'escrevia', 'escrevíamos', 'escreviam'],
+        futuro:      ['escreverei', 'escreverás', 'escreverá', 'escreveremos', 'escreverão'],
+        condicional: ['escreveria', 'escreverias', 'escreveria', 'escreveríamos', 'escreveriam']
+      }
+    },
+    {
+      inf: 'perceber', en: 'to understand (PT-PT)', group: 'er',
+      conj: {
+        presente:    ['percebo', 'percebes', 'percebe', 'percebemos', 'percebem'],
+        perfeito:    ['percebi', 'percebeste', 'percebeu', 'percebemos', 'perceberam'],
+        imperfeito:  ['percebia', 'percebias', 'percebia', 'percebíamos', 'percebiam'],
+        futuro:      ['perceberei', 'perceberás', 'perceberá', 'perceberemos', 'perceberão'],
+        condicional: ['perceberia', 'perceberias', 'perceberia', 'perceberíamos', 'perceberiam']
+      },
+      note: 'Em PT-PT, <strong>perceber</strong> é o verbo normal para <em>understand</em>: <em>não percebo</em>, <em>percebeste?</em>'
+    },
+    {
+      inf: 'responder', en: 'to answer / to reply', group: 'er',
+      conj: {
+        presente:    ['respondo', 'respondes', 'responde', 'respondemos', 'respondem'],
+        perfeito:    ['respondi', 'respondeste', 'respondeu', 'respondemos', 'responderam'],
+        imperfeito:  ['respondia', 'respondias', 'respondia', 'respondíamos', 'respondiam'],
+        futuro:      ['responderei', 'responderás', 'responderá', 'responderemos', 'responderão'],
+        condicional: ['responderia', 'responderias', 'responderia', 'responderíamos', 'responderiam']
+      },
+      note: '<em>Responder a</em> alguém / a uma pergunta.'
+    },
+    {
+      inf: 'receber', en: 'to receive / to get', group: 'er',
+      conj: {
+        presente:    ['recebo', 'recebes', 'recebe', 'recebemos', 'recebem'],
+        perfeito:    ['recebi', 'recebeste', 'recebeu', 'recebemos', 'receberam'],
+        imperfeito:  ['recebia', 'recebias', 'recebia', 'recebíamos', 'recebiam'],
+        futuro:      ['receberei', 'receberás', 'receberá', 'receberemos', 'receberão'],
+        condicional: ['receberia', 'receberias', 'receberia', 'receberíamos', 'receberiam']
+      }
+    },
+    {
+      inf: 'vender', en: 'to sell', group: 'er',
+      conj: {
+        presente:    ['vendo', 'vendes', 'vende', 'vendemos', 'vendem'],
+        perfeito:    ['vendi', 'vendeste', 'vendeu', 'vendemos', 'venderam'],
+        imperfeito:  ['vendia', 'vendias', 'vendia', 'vendíamos', 'vendiam'],
+        futuro:      ['venderei', 'venderás', 'venderá', 'venderemos', 'venderão'],
+        condicional: ['venderia', 'venderias', 'venderia', 'venderíamos', 'venderiam']
+      },
+      note: 'Cuidado: <em>vendo</em> = "I sell" e também a 1.ª pessoa de <em>vender</em> — não confundir com <em>venda</em> (a sale).'
+    },
+    {
+      inf: 'correr', en: 'to run', group: 'er',
+      conj: {
+        presente:    ['corro', 'corres', 'corre', 'corremos', 'correm'],
+        perfeito:    ['corri', 'correste', 'correu', 'corremos', 'correram'],
+        imperfeito:  ['corria', 'corrias', 'corria', 'corríamos', 'corriam'],
+        futuro:      ['correrei', 'correrás', 'correrá', 'correremos', 'correrão'],
+        condicional: ['correria', 'correrias', 'correria', 'correríamos', 'correriam']
+      }
+    },
+    {
+      inf: 'esquecer', en: 'to forget (usually -se)', group: 'er',
+      conj: {
+        presente:    ['esqueço', 'esqueces', 'esquece', 'esquecemos', 'esquecem'],
+        perfeito:    ['esqueci', 'esqueceste', 'esqueceu', 'esquecemos', 'esqueceram'],
+        imperfeito:  ['esquecia', 'esquecias', 'esquecia', 'esquecíamos', 'esqueciam'],
+        futuro:      ['esquecerei', 'esquecerás', 'esquecerá', 'esqueceremos', 'esquecerão'],
+        condicional: ['esqueceria', 'esquecerias', 'esqueceria', 'esqueceríamos', 'esqueceriam']
+      },
+      note: '1.ª pessoa do presente: <strong>esqueço</strong> (com <em>ç</em>). Quase sempre reflexivo: <em>esqueci-me das chaves</em>.'
+    },
+    {
+      inf: 'perder', en: 'to lose / to miss', group: 'er',
+      conj: {
+        presente:    ['perco', 'perdes', 'perde', 'perdemos', 'perdem'],
+        perfeito:    ['perdi', 'perdeste', 'perdeu', 'perdemos', 'perderam'],
+        imperfeito:  ['perdia', 'perdias', 'perdia', 'perdíamos', 'perdiam'],
+        futuro:      ['perderei', 'perderás', 'perderá', 'perderemos', 'perderão'],
+        condicional: ['perderia', 'perderias', 'perderia', 'perderíamos', 'perderiam']
+      },
+      note: '1.ª pessoa do presente: <strong>perco</strong> (não <em>perdo</em>). Também <em>perder o autocarro</em> = miss the bus.'
+    },
+
+    // ── Regulares -IR (modelo: partir) ──
+    {
+      inf: 'partir', en: 'to leave / to depart (model -IR)', group: 'ir',
+      conj: {
+        presente:    ['parto', 'partes', 'parte', 'partimos', 'partem'],
+        perfeito:    ['parti', 'partiste', 'partiu', 'partimos', 'partiram'],
+        imperfeito:  ['partia', 'partias', 'partia', 'partíamos', 'partiam'],
+        futuro:      ['partirei', 'partirás', 'partirá', 'partiremos', 'partirão'],
+        condicional: ['partiria', 'partirias', 'partiria', 'partiríamos', 'partiriam']
+      },
+      note: 'Modelo de todos os <strong>-IR</strong> regulares.'
+    },
+    {
+      inf: 'abrir', en: 'to open', group: 'ir',
+      conj: {
+        presente:    ['abro', 'abres', 'abre', 'abrimos', 'abrem'],
+        perfeito:    ['abri', 'abriste', 'abriu', 'abrimos', 'abriram'],
+        imperfeito:  ['abria', 'abrias', 'abria', 'abríamos', 'abriam'],
+        futuro:      ['abrirei', 'abrirás', 'abrirá', 'abriremos', 'abrirão'],
+        condicional: ['abriria', 'abririas', 'abriria', 'abriríamos', 'abririam']
+      }
+    },
+    {
+      inf: 'decidir', en: 'to decide', group: 'ir',
+      conj: {
+        presente:    ['decido', 'decides', 'decide', 'decidimos', 'decidem'],
+        perfeito:    ['decidi', 'decidiste', 'decidiu', 'decidimos', 'decidiram'],
+        imperfeito:  ['decidia', 'decidias', 'decidia', 'decidíamos', 'decidiam'],
+        futuro:      ['decidirei', 'decidirás', 'decidirá', 'decidiremos', 'decidirão'],
+        condicional: ['decidiria', 'decidirias', 'decidiria', 'decidiríamos', 'decidiriam']
+      }
+    },
+    {
+      inf: 'dormir', en: 'to sleep', group: 'ir',
+      conj: {
+        presente:    ['durmo', 'dormes', 'dorme', 'dormimos', 'dormem'],
+        perfeito:    ['dormi', 'dormiste', 'dormiu', 'dormimos', 'dormiram'],
+        imperfeito:  ['dormia', 'dormias', 'dormia', 'dormíamos', 'dormiam'],
+        futuro:      ['dormirei', 'dormirás', 'dormirá', 'dormiremos', 'dormirão'],
+        condicional: ['dormiria', 'dormirias', 'dormiria', 'dormiríamos', 'dormiriam']
+      },
+      note: '1.ª pessoa do presente muda a vogal: <strong>durmo</strong> (não <em>dormo</em>). O resto é regular.'
+    },
+    {
+      inf: 'pedir', en: 'to ask for / to order', group: 'ir',
+      conj: {
+        presente:    ['peço', 'pedes', 'pede', 'pedimos', 'pedem'],
+        perfeito:    ['pedi', 'pediste', 'pediu', 'pedimos', 'pediram'],
+        imperfeito:  ['pedia', 'pedias', 'pedia', 'pedíamos', 'pediam'],
+        futuro:      ['pedirei', 'pedirás', 'pedirá', 'pediremos', 'pedirão'],
+        condicional: ['pediria', 'pedirias', 'pediria', 'pediríamos', 'pediriam']
+      },
+      note: '1.ª pessoa do presente: <strong>peço</strong> (com <em>ç</em>). No restaurante: <em>peço um café</em>. Não confundir com <em>perguntar</em> (= to ask a question).'
+    },
+    {
+      inf: 'sentir', en: 'to feel (usually -se)', group: 'ir',
+      conj: {
+        presente:    ['sinto', 'sentes', 'sente', 'sentimos', 'sentem'],
+        perfeito:    ['senti', 'sentiste', 'sentiu', 'sentimos', 'sentiram'],
+        imperfeito:  ['sentia', 'sentias', 'sentia', 'sentíamos', 'sentiam'],
+        futuro:      ['sentirei', 'sentirás', 'sentirá', 'sentiremos', 'sentirão'],
+        condicional: ['sentiria', 'sentirias', 'sentiria', 'sentiríamos', 'sentiriam']
+      },
+      note: '1.ª pessoa: <strong>sinto</strong> (e → i). Reflexivo para estados: <em>sinto-me bem / cansado</em>.'
+    },
+    {
+      inf: 'preferir', en: 'to prefer', group: 'ir',
+      conj: {
+        presente:    ['prefiro', 'preferes', 'prefere', 'preferimos', 'preferem'],
+        perfeito:    ['preferi', 'preferiste', 'preferiu', 'preferimos', 'preferiram'],
+        imperfeito:  ['preferia', 'preferias', 'preferia', 'preferíamos', 'preferiam'],
+        futuro:      ['preferirei', 'preferirás', 'preferirá', 'preferiremos', 'preferirão'],
+        condicional: ['preferiria', 'preferirias', 'preferiria', 'preferiríamos', 'prefeririam']
+      },
+      note: '1.ª pessoa: <strong>prefiro</strong> (e → i). <em>Prefiro café a chá</em>.'
+    },
+    {
+      inf: 'conseguir', en: 'to manage / to be able to', group: 'ir',
+      conj: {
+        presente:    ['consigo', 'consegues', 'consegue', 'conseguimos', 'conseguem'],
+        perfeito:    ['consegui', 'conseguiste', 'conseguiu', 'conseguimos', 'conseguiram'],
+        imperfeito:  ['conseguia', 'conseguias', 'conseguia', 'conseguíamos', 'conseguiam'],
+        futuro:      ['conseguirei', 'conseguirás', 'conseguirá', 'conseguiremos', 'conseguirão'],
+        condicional: ['conseguiria', 'conseguirias', 'conseguiria', 'conseguiríamos', 'conseguiriam']
+      },
+      note: '1.ª pessoa: <strong>consigo</strong> (e → i). <em>Conseguir + infinitivo</em> = "manage to": <em>não consigo abrir</em>.'
+    },
+    {
+      inf: 'seguir', en: 'to follow / to continue', group: 'ir',
+      conj: {
+        presente:    ['sigo', 'segues', 'segue', 'seguimos', 'seguem'],
+        perfeito:    ['segui', 'seguiste', 'seguiu', 'seguimos', 'seguiram'],
+        imperfeito:  ['seguia', 'seguias', 'seguia', 'seguíamos', 'seguiam'],
+        futuro:      ['seguirei', 'seguirás', 'seguirá', 'seguiremos', 'seguirão'],
+        condicional: ['seguiria', 'seguirias', 'seguiria', 'seguiríamos', 'seguiriam']
+      },
+      note: '1.ª pessoa: <strong>sigo</strong> (e → i, e perde-se o <em>u</em> mudo). <em>Siga em frente</em> = go straight on.'
+    },
+    {
+      inf: 'servir', en: 'to serve / to fit', group: 'ir',
+      conj: {
+        presente:    ['sirvo', 'serves', 'serve', 'servimos', 'servem'],
+        perfeito:    ['servi', 'serviste', 'serviu', 'servimos', 'serviram'],
+        imperfeito:  ['servia', 'servias', 'servia', 'servíamos', 'serviam'],
+        futuro:      ['servirei', 'servirás', 'servirá', 'serviremos', 'servirão'],
+        condicional: ['serviria', 'servirias', 'serviria', 'serviríamos', 'serviriam']
+      },
+      note: '1.ª pessoa: <strong>sirvo</strong> (e → i). Também "caber/encaixar": <em>esta camisola serve-me</em>.'
+    },
+    {
+      inf: 'vestir', en: 'to dress / to put on (-se)', group: 'ir',
+      conj: {
+        presente:    ['visto', 'vestes', 'veste', 'vestimos', 'vestem'],
+        perfeito:    ['vesti', 'vestiste', 'vestiu', 'vestimos', 'vestiram'],
+        imperfeito:  ['vestia', 'vestias', 'vestia', 'vestíamos', 'vestiam'],
+        futuro:      ['vestirei', 'vestirás', 'vestirá', 'vestiremos', 'vestirão'],
+        condicional: ['vestiria', 'vestirias', 'vestiria', 'vestiríamos', 'vestiriam']
+      },
+      note: '1.ª pessoa: <strong>visto</strong> (e → i). Reflexivo: <em>visto-me</em> = I get dressed.'
+    },
+    {
+      inf: 'subir', en: 'to go up / to climb', group: 'ir',
+      conj: {
+        presente:    ['subo', 'sobes', 'sobe', 'subimos', 'sobem'],
+        perfeito:    ['subi', 'subiste', 'subiu', 'subimos', 'subiram'],
+        imperfeito:  ['subia', 'subias', 'subia', 'subíamos', 'subiam'],
+        futuro:      ['subirei', 'subirás', 'subirá', 'subiremos', 'subirão'],
+        condicional: ['subiria', 'subirias', 'subiria', 'subiríamos', 'subiriam']
+      },
+      note: 'No presente, o <em>u</em> abre para <em>o</em> nas formas tónicas: <strong>sobes, sobe, sobem</strong>. O oposto é <em>descer</em>.'
+    }
+  ];
+
+  // ── Render pills ──
+  const pillsEl = document.getElementById('pills');
+  const emptyEl = document.getElementById('empty');
+  const searchEl = document.getElementById('search');
+  const filtersEl = document.getElementById('filters');
+
+  let activeFilter = 'all';
+
+  function groupLabel(g) {
+    return g === 'irregular' ? 'irregular'
+         : g === 'ar' ? '-AR'
+         : g === 'er' ? '-ER'
+         : g === 'ir' ? '-IR' : g;
+  }
+
+  function makePill(verb, idx) {
+    const btn = document.createElement('button');
+    btn.className = 'pill';
+    btn.type = 'button';
+    btn.dataset.group = verb.group;
+    btn.dataset.inf = verb.inf;
+    btn.setAttribute('aria-label', verb.inf + ' — ' + verb.en);
+    btn.innerHTML =
+      '<span class="verb">' + verb.inf + '</span>' +
+      '<span class="gloss">' + verb.en + '</span>' +
+      '<span class="tag ' + verb.group + '">' + groupLabel(verb.group) + '</span>';
+    btn.addEventListener('click', () => openModal(idx));
+    return btn;
+  }
+
+  // Sort: irregulares first (most useful), then alphabetic within each group
+  const groupOrder = { irregular: 0, ar: 1, er: 2, ir: 3 };
+  const sortedVerbs = VERBS.map((v, i) => ({ v, i }))
+    .sort((a, b) => {
+      const g = groupOrder[a.v.group] - groupOrder[b.v.group];
+      return g !== 0 ? g : a.v.inf.localeCompare(b.v.inf);
+    });
+
+  sortedVerbs.forEach(({ v, i }) => pillsEl.appendChild(makePill(v, i)));
+
+  // Counts per filter
+  const counts = { all: VERBS.length, irregular: 0, ar: 0, er: 0, ir: 0 };
+  VERBS.forEach(v => counts[v.group]++);
+  Object.keys(counts).forEach(k => {
+    const el = document.getElementById('count-' + k);
+    if (el) el.textContent = counts[k];
+  });
+
+  // Strip combining diacritics so searching for "po" matches "pôr", "feito" matches "feíto", etc.
+  const DIACRITICS_RE = new RegExp('[̀-ͯ]', 'g');
+  function norm(s) {
+    return (s || '').toString().toLowerCase()
+      .normalize('NFD').replace(DIACRITICS_RE, '');
+  }
+
+  function applyFilters() {
+    const q = norm(searchEl.value.trim());
+    let visible = 0;
+    pillsEl.querySelectorAll('.pill').forEach(pill => {
+      const g = pill.dataset.group;
+      const inf = norm(pill.dataset.inf);
+      const gloss = norm(pill.querySelector('.gloss').textContent);
+      const groupOk = activeFilter === 'all' || activeFilter === g;
+      const searchOk = !q || inf.includes(q) || gloss.includes(q);
+      const show = groupOk && searchOk;
+      pill.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyEl.hidden = visible > 0;
+  }
+
+  searchEl.addEventListener('input', applyFilters);
+
+  filtersEl.querySelectorAll('.filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filtersEl.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // ── Modal ──
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const modalPanel = modal.querySelector('.modal-panel');
+  let lastFocus = null;
+
+  // Longest common prefix of the 5 forms = the shared stem for that tense.
+  // The rest (the part that changes by person) is the personal ending → highlighted.
+  function commonStem(forms) {
+    if (!forms.length) return '';
+    let stem = forms[0];
+    for (let i = 1; i < forms.length; i++) {
+      let j = 0;
+      const a = stem, b = forms[i];
+      while (j < a.length && j < b.length && a[j] === b[j]) j++;
+      stem = a.slice(0, j);
+      if (!stem) break;
+    }
+    return stem;
+  }
+
+  function renderForm(form, stem) {
+    // Only split when there's a real shared stem AND a real ending to colour.
+    if (stem && form.startsWith(stem) && form.length > stem.length) {
+      return '<span class="stem">' + stem + '</span>' +
+             '<span class="end">' + form.slice(stem.length) + '</span>';
+    }
+    return form;
+  }
+
+  function renderConjTable(forms) {
+    const stem = commonStem(forms);
+    const rows = forms.map((f, i) =>
+      '<tr><td class="pron">' + PRONOUNS[i] + '</td><td class="form">' + renderForm(f, stem) + '</td></tr>'
+    ).join('');
+    return '<table class="conj-table"><tbody>' + rows + '</tbody></table>';
+  }
+
+  // Browse order in the modal follows the on-screen (sorted) order.
+  const displayOrder = sortedVerbs.map(s => s.i);
+  let currentIdx = -1;
+
+  function openModal(idx) {
+    const v = VERBS[idx];
+    currentIdx = idx;
+    if (modal.hidden) lastFocus = document.activeElement;
+
+    const pos = displayOrder.indexOf(idx);
+    const prevIdx = pos > 0 ? displayOrder[pos - 1] : -1;
+    const nextIdx = pos < displayOrder.length - 1 ? displayOrder[pos + 1] : -1;
+
+    let html =
+      '<div class="modal-head">' +
+        '<div class="meta-left">' +
+          '<span class="tag ' + v.group + '">' + groupLabel(v.group) + '</span>' +
+        '</div>' +
+        '<div class="verb-nav">' +
+          (prevIdx >= 0
+            ? '<button type="button" data-nav="prev" aria-label="Verbo anterior: ' + VERBS[prevIdx].inf + '">' +
+                '<span class="arrow">←</span> <span class="nav-verb">' + VERBS[prevIdx].inf + '</span></button>'
+            : '') +
+          (nextIdx >= 0
+            ? '<button type="button" data-nav="next" aria-label="Verbo seguinte: ' + VERBS[nextIdx].inf + '">' +
+                '<span class="nav-verb">' + VERBS[nextIdx].inf + '</span> <span class="arrow">→</span></button>'
+            : '') +
+        '</div>' +
+      '</div>' +
+      '<h2 id="modalTitle">' + v.inf + '</h2>' +
+      '<p class="gloss-large">' + v.en + '</p>' +
+      '<div class="tenses-grid">';
+
+    TENSES.forEach(t => {
+      html +=
+        '<div class="tense-block">' +
+          '<p class="tense-label">' + t.label + '</p>' +
+          '<p class="tense-hint">' + t.hint + '</p>' +
+          renderConjTable(v.conj[t.key]) +
+        '</div>';
+    });
+
+    html += '</div>';
+
+    html +=
+      '<div class="ir-future-banner">' +
+        '<strong>Futuro próximo:</strong> no dia a dia usa-se <em>ir + infinitivo</em> em vez do futuro simples. ' +
+        '<em>Vou ' + v.inf + ', vais ' + v.inf + ', vai ' + v.inf + ', vamos ' + v.inf + ', vão ' + v.inf + '</em>.' +
+      '</div>';
+
+    if (v.note) {
+      html += '<div class="note-callout"><strong>Nota:</strong> ' + v.note + '</div>';
+    }
+
+    modalContent.innerHTML = html;
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // Wire the prev/next controls
+    const prevBtn = modalContent.querySelector('[data-nav="prev"]');
+    const nextBtn = modalContent.querySelector('[data-nav="next"]');
+    if (prevBtn && prevIdx >= 0) prevBtn.addEventListener('click', () => openModal(prevIdx));
+    if (nextBtn && nextIdx >= 0) nextBtn.addEventListener('click', () => openModal(nextIdx));
+    // Move focus into modal (scroll back to top when switching verbs)
+    modalPanel.scrollTop = 0;
+    modalPanel.focus();
+    // Update URL hash so the verb is deep-linkable
+    history.replaceState(null, '', '#' + v.inf);
+  }
+
+  function closeModal() {
+    if (modal.hidden) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    modalContent.innerHTML = '';
+    currentIdx = -1;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  }
+
+  modal.addEventListener('click', e => {
+    if (e.target.matches('[data-close]')) closeModal();
+  });
+
+  function navRelative(step) {
+    const pos = displayOrder.indexOf(currentIdx);
+    const next = pos + step;
+    if (next >= 0 && next < displayOrder.length) openModal(displayOrder[next]);
+  }
+
+  function trapFocus(e) {
+    const focusable = modalPanel.querySelectorAll(
+      'button:not([disabled]), [href], input, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!modal.hidden) {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key === 'Tab') { trapFocus(e); return; }
+      // Arrow keys browse between verbs (unless typing in a field)
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+      if (!typing && e.key === 'ArrowLeft')  { e.preventDefault(); navRelative(-1); }
+      if (!typing && e.key === 'ArrowRight') { e.preventDefault(); navRelative(1); }
+      return;
+    }
+    // "/" to focus search
+    if (e.key === '/' && document.activeElement !== searchEl) {
+      e.preventDefault();
+      searchEl.focus();
+    }
+  });
+
+  // Open from URL hash on load (e.g. verbos.html#ser)
+  const hash = decodeURIComponent((location.hash || '').slice(1)).toLowerCase();
+  if (hash) {
+    const idx = VERBS.findIndex(v => v.inf.toLowerCase() === hash);
+    if (idx >= 0) openModal(idx);
+  }
+</script>
+</body>
+</html>

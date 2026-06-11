@@ -1,15 +1,54 @@
 # Lesson page design contract
 
-This document is the canonical spec for a Portuguese-lesson page in this repo. It pairs with `_template.html` (the working skeleton with placeholders).
+This document is the canonical spec for a Portuguese-lesson page in this repo. It pairs with the Eleventy layout `src/_includes/base.njk` (which supplies all chrome) and the per-lesson **front-matter schema** (below). A lesson is no longer a standalone HTML file — it is a **content file** of front-matter + section markup.
 
 A skill that generates new lessons should:
 1. Read this doc to understand the design system and conventions.
-2. Start from `_template.html`, replace `{{PLACEHOLDERS}}` and `[REPEATABLE: ...]` blocks with real lesson content.
-3. Make sure the new lesson's `LS_KEY` matches the `data-keys` attribute on the corresponding `index.html` card.
+2. Read the worked examples `src/lessons/aulas_mariana_2026-06-03.html` (with homework) and `src/lessons/aulas_mariana_2026-04-15.html` (without) to see the exact shape.
+3. Create one content file `src/lessons/aulas_mariana_YYYY-MM-DD.html` with the front-matter block + sections 1–7 (and optional section 8). Run the build to preview; the chrome, navigation, CSS/JS, score engine, and index card all come for free.
 
 ## What this site is
 
-A personal European-Portuguese (PT-PT) study companion. One student (Magda), one teacher (Mariana). Each lesson is a self-contained HTML file with grammar tables, vocabulary, a reconstructed dialogue, and interactive exercises whose state lives in `localStorage`. No build step, no shared assets beyond Google Fonts. The site is hosted on GitHub Pages.
+A personal European-Portuguese (PT-PT) study companion. One student (Magda), one teacher (Mariana). It is an **Eleventy (11ty) static site**: input `src/`, output `_site/`. Each lesson is a content file (YAML front-matter + the lesson `<section>` blocks) with grammar tables, vocabulary, a reconstructed dialogue, and interactive exercises whose state lives in `localStorage`. All chrome (head, header, both pagers, lightbox, footer) is defined once in the layout `src/_includes/base.njk`; CSS and JS are **shared assets** (`src/assets/lesson.css`, `src/assets/lesson.js`) linked by the layout. There is **no inline `<style>`/`<script>` in lesson files** and no per-file `LS_KEY`. The site is built by GitHub Actions and deployed to GitHub Pages on every push to `main`; it runs under the path prefix `/portuguese-lessons/`.
+
+Build commands: `npm install` once, then `npm run build` (one-off) or `npm run serve` (dev server at `http://localhost:8080/portuguese-lessons/`). `_site/` is gitignored — the repo is source-only.
+
+## Front-matter schema
+
+Every lesson content file opens with a YAML front-matter block. The layout reads these fields; **never hand-type dates** anywhere in the body — the `date` field drives the displayed dates, the sort order, prev/next navigation, the index card, and the `localStorage` key.
+
+| Field | Required | Meaning |
+|-------|----------|---------|
+| `title` | yes | The h1 / page title. Raw HTML (may contain entities like `&amp;`). |
+| `subtitle` | yes | One-sentence lesson summary under the h1. Raw HTML. |
+| `date` | yes | `YYYY-MM-DD`, the real class date. Drives sort, prev/next, all displayed dates, and the storage key. |
+| `level` | yes | e.g. `"Nível A2 → B1"`. |
+| `origin` | yes | Badge text, e.g. `"Baseada na aula real"`. |
+| `teacher` | yes | e.g. `"Professora Mariana"`. |
+| `cardTitle` | yes | Title shown on the index card. Raw HTML (may contain `<em>`). |
+| `topics` | yes | Topic summary for the index card. Raw HTML. |
+| `accent` | yes | Index-card accent colour, e.g. `var(--gold-text)`. |
+| `nextNote` | no | Footer "Próxima aula:" note. Raw HTML. Omit if unknown. |
+| `footerProvenance` | no | Footer provenance text; defaults to `"Lição gerada a partir da aula real com a Mariana"`. |
+
+Example block:
+
+```yaml
+---
+title: "Aula com a Mariana: Saúde, Casa &amp; Viagens à Madeira"
+subtitle: "Uma aula de conversa real, transformada num guia de estudo completo."
+date: 2026-06-03
+level: "Nível A2 → B1"
+origin: "Baseada na aula real"
+teacher: "Professora Mariana"
+cardTitle: "Saúde, Casa &amp; Viagens à Madeira"
+topics: "Pretérito imperfeito vs. perfeito, quantificadores (<em>tão/tanto</em>)."
+accent: "var(--gold-text)"
+nextNote: "quarta-feira, 17 de junho"
+---
+```
+
+The `.eleventy.js` config provides the filters the layout uses: `ptDateLong`, `ptDateShort`, `ptDateISO`, `ptStorageKey`, and a `lesson` collection (tag `lesson`, sorted oldest → newest). Directory data `src/lessons/lessons.11tydata.js` applies `layout: base.njk`, `tags: lesson`, and the `permalink` so the built page keeps the old URL `aulas/aulas_mariana_YYYY-MM-DD.html`.
 
 ## Visual identity
 
@@ -46,7 +85,7 @@ A personal European-Portuguese (PT-PT) study companion. One student (Magda), one
 
 ## Page structure (the seven sections)
 
-Every lesson follows this outline. The numbered chip in `<h2><span class="num">N</span> ...</h2>` makes the order visible to the reader.
+A content file holds **only** the lesson sections — the numbered `<section>` blocks below. The header, both pagers, the worksheet lightbox, the footer, and the CSS/JS links all live in the layout (`src/_includes/base.njk`); do not put them in the content file. Every lesson follows this outline. The numbered chip in `<h2><span class="num">N</span> ...</h2>` makes the order visible to the reader.
 
 1. **Resumo da aula** — what the student talked about / heard / read. Short narrative paragraph(s).
 2. **O que vamos aprender hoje** — 3-5 concrete objectives in `<ul class="goals">`. Each item is `<li>{PT statement}<span class="t">{EN gloss}</span></li>`.
@@ -55,27 +94,30 @@ Every lesson follows this outline. The numbered chip in `<h2><span class="num">N
 5. **Diálogo reconstruído** — a reconstructed conversation. `<div class="dialogue">` wraps `<div class="turn m">` (teacher, red) and `<div class="turn a">` (student/Aluna, blue). Each turn includes `<span class="who">` and `<span class="line">` with optional `<span class="tr">` for English gloss.
 6. **Exercícios** — interactive practice. The sticky `<div class="scorebar">` lives inside this card and only sticks while the user is in this section. Supports four exercise types (see below).
 7. **Resumo e autoavaliação** — take-home points + `<ul class="selfcheck">` of can-do statements + closing tip callout.
+8. **Trabalho de casa** (OPTIONAL) — the homework the teacher actually assigned: listening tracks and/or scanned worksheet pages. Only present when the lesson has assets (see below). When omitted, the lesson ends at section 7.
 
-Top nav (← previous · home · next →) appears once between the header and section 1, and once between section 7 and the footer. Disabled links carry `class="disabled"`.
+Navigation is **automatic**: the layout computes prev/next (← Anterior · Voltar ao início · Próxima →) from the `lesson` collection. The oldest lesson gets a disabled "—" previous; the newest gets a disabled "Em breve" next. Adding a lesson updates its neighbours' pagers on its own — content files contain no nav, header, or footer.
 
 ## Header
+
+The header is rendered by the layout from front-matter — you do **not** write header markup in the content file. For reference, the layout produces:
 
 ```html
 <header>
   <div class="header-inner">
     <div class="badges">
-      <span class="badge real">📝 Baseada na aula real</span>
-      <span class="badge">Nível A2 → B1</span>
-      <span class="badge">🗓️ 3 de junho de 2026</span>
-      <span class="badge">👩‍🏫 Professora Mariana</span>
+      <span class="badge real">📝 {{ origin }}</span>
+      <span class="badge">{{ level }}</span>
+      <span class="badge">🗓️ {{ date | ptDateLong }}</span>
+      <span class="badge">👩‍🏫 {{ teacher }}</span>
     </div>
-    <h1>{Lesson title}</h1>
-    <p class="subtitle">{One-sentence lesson summary}</p>
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
   </div>
 </header>
 ```
 
-- The `.badge.real` gold badge marks lessons reconstructed from a real class. Course lessons (not from a recorded class) drop it.
+- The `.badge.real` gold badge marks lessons reconstructed from a real class (it carries the `origin` value).
 - Other badges carry metadata. **Emojis are encouraged** in badges and in body content — they're functional learning cues here, not decoration.
 
 ## Visual cue conventions
@@ -116,7 +158,7 @@ Don't mix: one callout type per concept (warning vs. tip vs. cultural aside).
 
 ## Exercises
 
-The page supports four exercise types. The JS in `_template.html` handles each end-to-end (scoring, persistence, restore, reset). For each new lesson, the skill writes the markup; the JS just works.
+The page supports four exercise types. The shared engine in `src/assets/lesson.js` handles each end-to-end (scoring, persistence, restore, reset). For each new lesson, the skill writes only the markup; the JS just works.
 
 | Type | Markup pattern | Scoring key |
 |------|---------------|-------------|
@@ -133,17 +175,29 @@ The scorebar shows progress against total points (sum of all the above). The res
 `data-a="trabalhava|trabalhavas"` — multiple accepted, pipe-separated.
 Comparison is accent-insensitive and case-insensitive (the `norm()` function).
 
+## Trabalho de casa (optional section 8)
+
+When the teacher assigns homework, the real assets live in `trabalho_de_casa/<lesson-folder>/` at the repo root (the folder name mirrors the lesson file's stem, e.g. `aulas_mariana_2026-06-03/`). This folder is passthrough-copied by Eleventy, so it ships as-is alongside the built pages. Assets are referenced as plain relative URLs.
+
+The lightbox container, the homework CSS, and the lightbox JS are **shared** — they already exist globally (the `.lightbox` div in `src/_includes/base.njk`, plus rules and the self-guarding IIFE in `src/assets/lesson.css` / `src/assets/lesson.js`). A content file therefore adds **only the section 8 markup** — never a lightbox div, CSS, or JS.
+
+Render section 8 only when assets exist. It has two optional sub-blocks (include either or both):
+
+- **Faixas para ouvir** — one `.hw-track` per audio file (gold card matching `--gold-light`/`--gold-border`). Use `<audio controls preload="none">` so nothing downloads until the student presses play. Always include a download-link fallback inside the `<audio>` for unsupported browsers.
+- **Fichas de trabalho** — a `.hw-gallery` of `<button class="hw-page">` thumbnails, each opening the full scan in the shared `.lightbox` (click, ←/→, Esc, click-outside; focus is trapped to the close button and restored on close). The shared lightbox JS is a no-op when a lesson has no gallery.
+
+Asset conventions:
+
+- **Reference path**: `../trabalho_de_casa/<lesson-folder>/<file>` (the built lesson lives at `aulas/aulas_mariana_YYYY-MM-DD.html`).
+- **Filenames must be URL-safe** — no spaces or parentheses. Rename scans/audio to clean kebab-case (`manual-p76.jpg`, `caderno-p34.jpg`, `faixa-60.mp3`). Keep the originals in the same folder as archival source; reference only the clean web copies.
+- **Optimise scans before committing.** Raw scanner output is multi-MB PNG. Convert to JPEG ~1100px wide (`sips -s format jpeg -s formatOptions 72 -Z 1500 in.png --out out.jpg` drops 5 MB → ~300 KB). Set the real pixel `width`/`height` on each `<img>` and add `loading="lazy"`. The `aspect-ratio` is **lesson-specific**: `lesson.css` carries only a shared default, so set it **inline per image** from the real dimensions (`style="aspect-ratio: 1090 / 1500"`) rather than editing the shared CSS.
+- **Alt text + caption**: every page `<img>` gets a descriptive `alt` (what exercises are on the page), a short visible caption (`Manual · p. 76`), and a full `data-cap` used by the lightbox.
+
 ## State persistence
 
-Each lesson uses a single `localStorage` key declared at the top of the inline script:
+The `localStorage` key is **derived from `date`** by the layout — content files never declare it. The layout runs the `ptStorageKey` filter on `date` and writes it onto `<body data-storage-key="pt_marianna_YYYY_MM_DD">`; the shared engine in `lesson.js` reads `document.body.dataset.storageKey`. The index card uses the same filter, so the card's `data-keys` always matches automatically. Nothing to wire by hand.
 
-```js
-const LS_KEY = 'pt_marianna_YYYY_MM_DD';
-```
-
-The key shape **must match** the `data-keys` attribute on the corresponding card in `/index.html`. The home page reads `localStorage` with a `startsWith()` fallback to mark cards as `started` and to populate the "Continuar onde paraste" block. If you add a new lesson, also add a `<a class="lesson">` card to `index.html` with `data-keys="<your LS_KEY>"`.
-
-Two legacy key shapes also exist (`marianna_YYYY-MM-DD` from older lessons, `pt-lesson-N` for the structured course). For new lessons, use `pt_marianna_YYYY_MM_DD` (double-n, all underscores). The fallback handles legacy keys but new ones should follow the convention.
+The home page reads `localStorage` with a `startsWith()` fallback to mark cards as `começada`. Two legacy key shapes still exist in the wild (`marianna_YYYY-MM-DD` from older lessons, `pt-lesson-N` for the structured course); the fallback handles them, but new lessons always get the `pt_marianna_YYYY_MM_DD` shape from the filter.
 
 ## Copy rules
 
@@ -163,16 +217,16 @@ Two legacy key shapes also exist (`marianna_YYYY-MM-DD` from older lessons, `pt-
 
 ## When generating a new lesson
 
-The skill should:
-1. Copy `_template.html` to `aulas_mariana_YYYY-MM-DD.html` (matching the date convention).
-2. Replace `{{PLACEHOLDERS}}` in order: head/header → sections 1-7 → footer → script.
-3. Set `LS_KEY` in the inline script.
-4. Open `/index.html`, add a new `<a class="lesson">` card at the top of the Mariana grid with matching `data-keys`, and update the Continuar block's server-side default (`<a class="continue">` href + h2 + topics) to point to this newest lesson.
-5. Update the previous lesson's "Próxima aula →" link, which was previously disabled, to point to the new file.
+The flow is minimal — the layout and the collection do the rest:
+
+1. Create one content file `src/lessons/aulas_mariana_YYYY-MM-DD.html`: the front-matter block (schema above) + sections 1–7, plus optional section 8 if there's homework.
+2. Run `npm run build` (or `npm run serve` to preview at `http://localhost:8080/portuguese-lessons/`).
+
+That's it. The header, both pagers (auto prev/next), lightbox, footer, CSS/JS, score engine, and the index card are all supplied automatically. **No editing of other lesson files, no `src/index.njk` edit, no nav links, no `LS_KEY`.**
 
 ## What NOT to do
 
-- Don't rewrap the page in a different layout family (Tailwind classes, BEM scopes, etc). The system is intentionally token-driven with inline `<style>`.
+- Don't rewrap the page in a different layout family (Tailwind classes, BEM scopes, etc). The system is intentionally token-driven, with all styles in the shared `src/assets/lesson.css`. Don't add inline `<style>`/`<script>` to a content file — the layout owns the chrome.
 - Don't introduce new fonts. EB Garamond + Hanken Grotesk only.
 - Don't replace the colored callouts with grey neutral boxes. The colors are functional.
 - Don't strip the emojis "for restraint." This is the lesson page, not the homepage.

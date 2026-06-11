@@ -1,6 +1,6 @@
 ---
 name: portuguese-lesson
-description: European Portuguese language teacher for A2/B1 students. Generates structured lessons with interactive HTML pages containing exercises, vocabulary, conjugation tables, and grammar explanations. Follows a progression plan where each lesson builds on the previous. Optionally accepts a Granola meeting URL to create a lesson based on a real class with teacher Marianna. Use when the user wants a Portuguese lesson, practice, or language learning session.
+description: European Portuguese language teacher for A2/B1 students. Generates structured lessons as Eleventy content files (front-matter + sections) with interactive exercises, vocabulary, conjugation tables, and grammar explanations; the shared layout supplies all chrome, navigation, styles, and the score engine. Follows a progression plan where each lesson builds on the previous. Optionally accepts a Granola meeting URL to create a lesson based on a real class with teacher Mariana. Use when the user wants a Portuguese lesson, practice, or language learning session.
 argument-hint: "[LESSON_NUMBER or TOPIC or GRANOLA_URL or leave empty for next lesson]"
 user-invocable: true
 ---
@@ -96,9 +96,9 @@ Below is the full A2→B1 curriculum. Each lesson has a number, grammar focus, c
 
 ---
 
-## Granola-Based Lesson (Aulas da Marianna)
+## Granola-Based Lesson (Aulas da Mariana)
 
-When `$ARGUMENTS` contains a Granola meeting URL, you create a lesson based on a real Portuguese class the student attended with their teacher Marianna. This produces a comprehensive study companion for that specific class.
+When `$ARGUMENTS` contains a Granola meeting URL, you create a lesson based on a real Portuguese class the student attended with their teacher Mariana. This produces a comprehensive study companion for that specific class.
 
 ### Step 1 — Extract the meeting ID
 
@@ -137,35 +137,38 @@ Create a full lesson following the same **Lesson Delivery Structure** below, but
 - The **Exercises** should test exactly what was covered — reinforcing the real class, not generic drills.
 - If the teacher corrected specific mistakes, create targeted exercises around those mistakes.
 
-### Step 5 — Save with the Marianna naming convention
+### Step 5 — Write the lesson content file
 
-Save the HTML file as:
+Create one Eleventy **content file**:
 ```
-portuguese-lessons/aulas_marianna_YYYY-MM-DD.html
+src/lessons/aulas_mariana_YYYY-MM-DD.html
 ```
 
-Where `YYYY-MM-DD` is the date of the Granola meeting (the actual class date).
+Where `YYYY-MM-DD` is the date of the Granola meeting (the actual class date). Note the naming: `mariana` (single n), in `src/lessons/`.
 
-- The lesson title inside the HTML should read: **"Aula com a Marianna — [topic summary] — [date]"**
-- Include a small header badge: "📝 Baseada na aula real" (Based on real class)
+The file is **YAML front-matter + the lesson `<section>` blocks** — nothing else. Follow `aulas/LESSON_DESIGN.md` (the front-matter schema + the seven sections) and copy the shape from the worked examples `src/lessons/aulas_mariana_2026-06-03.html` and `src/lessons/aulas_mariana_2026-04-15.html`.
+
+- Set front-matter: `title` ("Aula com a Mariana: [topic summary]"), `subtitle`, `date` (the class date — never hand-type any other date, it drives everything), `level`, `origin: "Baseada na aula real"`, `teacher`, `cardTitle`, `topics`, `accent`, and optional `nextNote`.
+- Then write only sections 1–7 (+ optional 8). Do **not** add `<html>/<head>/<header>/<nav>/<footer>`, inline `<style>`/`<script>`, an `LS_KEY`, prev/next links, or an index card — the layout (`src/_includes/base.njk`) and the `lesson` collection supply all of that. The gold "📝 Baseada na aula real" header badge is rendered from the `origin` field automatically.
+- Preview with `npm run build` (or `npm run serve` → `http://localhost:8080/portuguese-lessons/`). Navigation, the index card, the score engine, and all chrome come for free.
 
 ### Step 6 — Update progression
 
-Update `portuguese-lessons/progression.json`:
-- Add an entry to a `"marianna_lessons"` array (create it if it doesn't exist):
+Update `portuguese-lessons/progression.json` (a local, gitignored tracker):
+- Add an entry to a `"mariana_lessons"` array (create it if it doesn't exist):
 ```json
 {
-  "marianna_lessons": [
+  "mariana_lessons": [
     {
       "date": "2026-04-15",
       "granola_url": "https://app.granola.ai/notes/...",
       "topics": ["pretérito imperfeito", "vocabulário de viagens"],
-      "file": "aulas_marianna_2026-04-15.html"
+      "file": "src/lessons/aulas_mariana_2026-04-15.html"
     }
   ]
 }
 ```
-- Do NOT increment `current_lesson` — Marianna lessons are supplementary, not part of the numbered progression.
+- Do NOT increment `current_lesson` — Mariana lessons are supplementary, not part of the numbered progression.
 
 ### Step 7 — Report to the student
 
@@ -219,55 +222,49 @@ These go into the interactive HTML page. Include at minimum:
 
 ---
 
-## Interactive HTML Page Requirements
+## Output: the lesson content file
 
-For EVERY lesson, create an HTML file at `portuguese-lessons/aula-{NUMBER}.html` with:
+This site is an **Eleventy (11ty) static site**. You do **not** write a self-contained HTML file. For every lesson you create ONE content file:
 
-### Design Requirements
-- Clean, modern design with good typography (use system fonts or Google Fonts like Inter/Lora).
-- Portuguese-themed color palette: warm whites, deep greens (#1B5E20), reds (#B71C1C), golden yellows (#F9A825), and blues (#1565C0).
-- Responsive layout that works on desktop and mobile.
-- Smooth transitions and micro-interactions for a polished feel.
-- Print-friendly styles (exercises should print well).
+```
+src/lessons/aulas_mariana_YYYY-MM-DD.html
+```
 
-### Content Sections
-- Lesson title, number, and level badge.
-- All sections from the lesson structure above.
-- Grammar tables with clear formatting.
-- Vocabulary tables with hover effects.
-- Conjugation tables with color-coded endings.
+It is **YAML front-matter + the lesson `<section>` blocks only**. The shared layout `src/_includes/base.njk` and assets (`src/assets/lesson.css`, `src/assets/lesson.js`) supply everything else. Read `aulas/LESSON_DESIGN.md` for the full design contract and front-matter schema, and copy the shape from `src/lessons/aulas_mariana_2026-06-03.html` (with homework) and `src/lessons/aulas_mariana_2026-04-15.html` (without).
 
-### Interactive Features
-- **Fill-in-the-blank exercises** with instant feedback (green for correct, red with hint for incorrect).
-- **Vocabulary matching** — drag-and-drop or click-to-match.
-- **Conjugation drills** — type the correct form, get immediate feedback.
-- **Multiple choice** questions where appropriate.
-- **Score tracking** — show points earned and a progress bar.
-- **"Check answers" / "Verificar"** button for each exercise section.
-- **"Show answer" / "Ver resposta"** toggle for when students are stuck.
-- **Audio pronunciation hints** — use IPA notation or phonetic guides in Portuguese where helpful (since we can't embed actual audio).
-- **Navigation** — link to previous and next lesson at the bottom.
+### What you write
 
-### Technical Requirements
-- Single self-contained HTML file (inline CSS and JS, no external dependencies except optional Google Fonts CDN).
-- Valid HTML5.
-- Accessible (proper labels, focus states, ARIA attributes where needed).
-- All interactive JS must be vanilla — no frameworks.
-- All exercise answers stored in JS objects for easy checking.
-- Use `localStorage` to persist the student's score and completion status per lesson.
+- **Front-matter** per the schema in `LESSON_DESIGN.md` (`title`, `subtitle`, `date`, `level`, `origin`, `teacher`, `cardTitle`, `topics`, `accent`, optional `nextNote`). The `date` field drives every displayed date, the sort order, prev/next nav, the index card, and the storage key — never hand-type a date elsewhere.
+- **Sections 1–7** (+ optional 8) using the markup conventions in `LESSON_DESIGN.md`: section cards, grammar/vocabulary/conjugation tables (color-coded endings via `<span class="end">`), callouts, the reconstructed dialogue, IPA pills for pronunciation, and the four interactive exercise types.
+
+### What comes for free (do NOT add it)
+
+The layout and the shared assets already provide all of this — never inline or duplicate it:
+
+- The `<head>`, the green header (built from front-matter, including the "📝 Baseada na aula real" badge), the CSS link, and the JS link.
+- The top and bottom **pagers** with automatic previous/home/next, computed from the `lesson` collection. Do not add nav or prev/next links, and do not edit any other lesson file.
+- The worksheet lightbox div and footer.
+- The **score engine**: fill-in-the-blank, matching, multiple choice, and free-writing scoring, plus the progress bar, "Verificar"/"Ver respostas" buttons, restore, and reset — all in `src/assets/lesson.js`. It reads the `localStorage` key from `<body data-storage-key>`, which the layout derives from `date`. No `LS_KEY`, no JS answer objects.
+- The **index card** on the home page — `src/index.njk` generates it from the front-matter (`cardTitle`, `topics`, `accent`, date). Do not edit `index.njk`.
+
+So your exercises must use the existing `data-*` markup the shared engine reads (documented in `LESSON_DESIGN.md`): fill-in inputs with `data-a="answer|variant"`, matching pairs sharing `data-key`, MC questions with `data-mc`/`data-correct`, and a free-writing `<textarea id="writing">`. Keep all visible text in correct PT-PT with proper diacritics; keep answer-checking accent-insensitive (the engine's `norm()` already does this).
+
+### Preview
+
+Run `npm run build` for a one-off build, or `npm run serve` to preview at `http://localhost:8080/portuguese-lessons/aulas/aulas_mariana_YYYY-MM-DD.html`. The page, its navigation, and its index card all appear automatically.
 
 ---
 
 ## After Delivering the Lesson
 
-1. Update `portuguese-lessons/progression.json`:
+1. Update `portuguese-lessons/progression.json` (local, gitignored):
    - Increment `current_lesson`.
    - Add the lesson number to `completed_lessons`.
    - Update `level` if crossing a threshold (lesson 12→A2+, lesson 20→B1-, lesson 36→B1).
    - Add any notes about what the student found challenging.
 
 2. Tell the student:
-   - Where the HTML file is saved.
+   - Where the content file is saved (`src/lessons/…`) and how to preview it (`npm run serve`).
    - A brief preview of the next lesson.
    - One encouragement note in Portuguese.
 
