@@ -1,6 +1,6 @@
 // Eleventy config — builds the lesson site from `src/` into `_site/`.
 // Lessons live as content files (front-matter + <section>s); all chrome,
-// nav, CSS and JS are defined once and shared. See aulas/LESSON_DESIGN.md.
+// nav, CSS and JS are defined once and shared. See LESSON_DESIGN.md.
 
 const PT_MONTHS = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -44,9 +44,9 @@ module.exports = function (eleventyConfig) {
   // Self-contained pages copied verbatim, preserving their exact URLs (not in scope for the layout).
   // ignore them as templates so they aren't also rendered to pretty-URL folders.
   eleventyConfig.addPassthroughCopy({ "src/verbos.html": "verbos.html" });
-  eleventyConfig.addPassthroughCopy({ "src/aulas/aula-1.html": "aulas/aula-1.html" });
+  eleventyConfig.addPassthroughCopy({ "src/curriculo/aula-1.html": "aulas/aula-1.html" });
   eleventyConfig.ignores.add("src/verbos.html");
-  eleventyConfig.ignores.add("src/aulas/aula-1.html");
+  eleventyConfig.ignores.add("src/curriculo/aula-1.html");
   eleventyConfig.addPassthroughCopy("trabalho_de_casa");
   eleventyConfig.addPassthroughCopy(".nojekyll");
 

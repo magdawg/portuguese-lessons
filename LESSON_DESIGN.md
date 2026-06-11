@@ -4,8 +4,8 @@ This document is the canonical spec for a Portuguese-lesson page in this repo. I
 
 A skill that generates new lessons should:
 1. Read this doc to understand the design system and conventions.
-2. Read the worked examples `src/lessons/aulas_mariana_2026-06-03.html` (with homework) and `src/lessons/aulas_mariana_2026-04-15.html` (without) to see the exact shape.
-3. Create one content file `src/lessons/aulas_mariana_YYYY-MM-DD.html` with the front-matter block + sections 1–7 (and optional section 8). Run the build to preview; the chrome, navigation, CSS/JS, score engine, and index card all come for free.
+2. Read the worked examples `src/aulas/aulas_mariana_2026-06-03.html` (with homework) and `src/aulas/aulas_mariana_2026-04-15.html` (without) to see the exact shape.
+3. Create one content file `src/aulas/aulas_mariana_YYYY-MM-DD.html` with the front-matter block + sections 1–7 (and optional section 8). Run the build to preview; the chrome, navigation, CSS/JS, score engine, and index card all come for free.
 
 ## What this site is
 
@@ -48,7 +48,7 @@ nextNote: "quarta-feira, 17 de junho"
 ---
 ```
 
-The `.eleventy.js` config provides the filters the layout uses: `ptDateLong`, `ptDateShort`, `ptDateISO`, `ptStorageKey`, and a `lesson` collection (tag `lesson`, sorted oldest → newest). Directory data `src/lessons/lessons.11tydata.js` applies `layout: base.njk`, `tags: lesson`, and the `permalink` so the built page keeps the old URL `aulas/aulas_mariana_YYYY-MM-DD.html`.
+The `.eleventy.js` config provides the filters the layout uses: `ptDateLong`, `ptDateShort`, `ptDateISO`, `ptStorageKey`, and a `lesson` collection (tag `lesson`, sorted oldest → newest). Directory data `src/aulas/aulas.11tydata.js` applies `layout: base.njk`, `tags: lesson`, and the `permalink` so the built page keeps the old URL `aulas/aulas_mariana_YYYY-MM-DD.html`.
 
 ## Visual identity
 
@@ -219,7 +219,7 @@ The home page reads `localStorage` with a `startsWith()` fallback to mark cards 
 
 The flow is minimal — the layout and the collection do the rest:
 
-1. Create one content file `src/lessons/aulas_mariana_YYYY-MM-DD.html`: the front-matter block (schema above) + sections 1–7, plus optional section 8 if there's homework.
+1. Create one content file `src/aulas/aulas_mariana_YYYY-MM-DD.html`: the front-matter block (schema above) + sections 1–7, plus optional section 8 if there's homework.
 2. Run `npm run build` (or `npm run serve` to preview at `http://localhost:8080/portuguese-lessons/`).
 
 That's it. The header, both pagers (auto prev/next), lightbox, footer, CSS/JS, score engine, and the index card are all supplied automatically. **No editing of other lesson files, no `src/index.njk` edit, no nav links, no `LS_KEY`.**

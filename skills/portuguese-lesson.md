@@ -141,12 +141,12 @@ Create a full lesson following the same **Lesson Delivery Structure** below, but
 
 Create one Eleventy **content file**:
 ```
-src/lessons/aulas_mariana_YYYY-MM-DD.html
+src/aulas/aulas_mariana_YYYY-MM-DD.html
 ```
 
-Where `YYYY-MM-DD` is the date of the Granola meeting (the actual class date). Note the naming: `mariana` (single n), in `src/lessons/`.
+Where `YYYY-MM-DD` is the date of the Granola meeting (the actual class date). Note the naming: `mariana` (single n), in `src/aulas/`.
 
-The file is **YAML front-matter + the lesson `<section>` blocks** — nothing else. Follow `aulas/LESSON_DESIGN.md` (the front-matter schema + the seven sections) and copy the shape from the worked examples `src/lessons/aulas_mariana_2026-06-03.html` and `src/lessons/aulas_mariana_2026-04-15.html`.
+The file is **YAML front-matter + the lesson `<section>` blocks** — nothing else. Follow `LESSON_DESIGN.md` (the front-matter schema + the seven sections) and copy the shape from the worked examples `src/aulas/aulas_mariana_2026-06-03.html` and `src/aulas/aulas_mariana_2026-04-15.html`.
 
 - Set front-matter: `title` ("Aula com a Mariana: [topic summary]"), `subtitle`, `date` (the class date — never hand-type any other date, it drives everything), `level`, `origin: "Baseada na aula real"`, `teacher`, `cardTitle`, `topics`, `accent`, and optional `nextNote`.
 - Then write only sections 1–7 (+ optional 8). Do **not** add `<html>/<head>/<header>/<nav>/<footer>`, inline `<style>`/`<script>`, an `LS_KEY`, prev/next links, or an index card — the layout (`src/_includes/base.njk`) and the `lesson` collection supply all of that. The gold "📝 Baseada na aula real" header badge is rendered from the `origin` field automatically.
@@ -163,7 +163,7 @@ Update `portuguese-lessons/progression.json` (a local, gitignored tracker):
       "date": "2026-04-15",
       "granola_url": "https://app.granola.ai/notes/...",
       "topics": ["pretérito imperfeito", "vocabulário de viagens"],
-      "file": "src/lessons/aulas_mariana_2026-04-15.html"
+      "file": "src/aulas/aulas_mariana_2026-04-15.html"
     }
   ]
 }
@@ -227,10 +227,10 @@ These go into the interactive HTML page. Include at minimum:
 This site is an **Eleventy (11ty) static site**. You do **not** write a self-contained HTML file. For every lesson you create ONE content file:
 
 ```
-src/lessons/aulas_mariana_YYYY-MM-DD.html
+src/aulas/aulas_mariana_YYYY-MM-DD.html
 ```
 
-It is **YAML front-matter + the lesson `<section>` blocks only**. The shared layout `src/_includes/base.njk` and assets (`src/assets/lesson.css`, `src/assets/lesson.js`) supply everything else. Read `aulas/LESSON_DESIGN.md` for the full design contract and front-matter schema, and copy the shape from `src/lessons/aulas_mariana_2026-06-03.html` (with homework) and `src/lessons/aulas_mariana_2026-04-15.html` (without).
+It is **YAML front-matter + the lesson `<section>` blocks only**. The shared layout `src/_includes/base.njk` and assets (`src/assets/lesson.css`, `src/assets/lesson.js`) supply everything else. Read `LESSON_DESIGN.md` for the full design contract and front-matter schema, and copy the shape from `src/aulas/aulas_mariana_2026-06-03.html` (with homework) and `src/aulas/aulas_mariana_2026-04-15.html` (without).
 
 ### What you write
 
@@ -264,7 +264,7 @@ Run `npm run build` for a one-off build, or `npm run serve` to preview at `http:
    - Add any notes about what the student found challenging.
 
 2. Tell the student:
-   - Where the content file is saved (`src/lessons/…`) and how to preview it (`npm run serve`).
+   - Where the content file is saved (`src/aulas/…`) and how to preview it (`npm run serve`).
    - A brief preview of the next lesson.
    - One encouragement note in Portuguese.
 

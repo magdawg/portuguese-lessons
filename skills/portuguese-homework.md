@@ -1,6 +1,6 @@
 ---
 name: portuguese-homework
-description: Incorporate the homework (trabalho de casa) for a Portuguese class into its lesson page. Give it the class date; it finds the dumped originals in trabalho_de_casa/, analyzes them, optimizes and renames the files, adds or updates the "Trabalho de casa" section (section 8) in the matching src/lessons/ lesson content file with audio players + a scanned-worksheet lightbox gallery, verifies it renders with the Eleventy dev server, then deletes the originals and keeps only the files the page references. Use when the user has dumped homework files and wants them added to a lesson.
+description: Incorporate the homework (trabalho de casa) for a Portuguese class into its lesson page. Give it the class date; it finds the dumped originals in trabalho_de_casa/, analyzes them, optimizes and renames the files, adds or updates the "Trabalho de casa" section (section 8) in the matching src/aulas/ lesson content file with audio players + a scanned-worksheet lightbox gallery, verifies it renders with the Eleventy dev server, then deletes the originals and keeps only the files the page references. Use when the user has dumped homework files and wants them added to a lesson.
 argument-hint: "[class date, e.g. 2026-06-03 or '3 June']"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ user-invocable: true
 
 You turn the raw homework a teacher assigned (scanned worksheet pages + listening tracks dumped into `trabalho_de_casa/`) into a polished, on-brand **section 8 "Trabalho de casa"** inside the matching lesson content file, then clean up the leftover originals.
 
-This skill operates on **this repo** (the Portuguese-lessons Eleventy site). Read `aulas/LESSON_DESIGN.md` (section "Trabalho de casa (optional section 8)") first — it is the design contract and the source of truth for the markup and asset rules. The lightbox container, the homework CSS, and the lightbox JS are **shared infrastructure that already exists globally** (the `.lightbox` div in `src/_includes/base.njk`; rules and the self-guarding lightbox IIFE in `src/assets/lesson.css` / `src/assets/lesson.js`). You do **NOT** copy or inject any CSS, JS, or lightbox div — that step is gone. You only write the section 8 `<section>` markup into the lesson **content file**. The worked example is `src/lessons/aulas_mariana_2026-06-03.html`.
+This skill operates on **this repo** (the Portuguese-lessons Eleventy site). Read `LESSON_DESIGN.md` (section "Trabalho de casa (optional section 8)") first — it is the design contract and the source of truth for the markup and asset rules. The lightbox container, the homework CSS, and the lightbox JS are **shared infrastructure that already exists globally** (the `.lightbox` div in `src/_includes/base.njk`; rules and the self-guarding lightbox IIFE in `src/assets/lesson.css` / `src/assets/lesson.js`). You do **NOT** copy or inject any CSS, JS, or lightbox div — that step is gone. You only write the section 8 `<section>` markup into the lesson **content file**. The worked example is `src/aulas/aulas_mariana_2026-06-03.html`.
 
-`$ARGUMENTS` is the **class date**. Normalize it to `YYYY-MM-DD`. If it is vague ("last Wednesday", "3 June"), resolve it against the lesson files that exist (`ls src/lessons/aulas_mariana_*.html`) and, if ambiguous, ask the user which date.
+`$ARGUMENTS` is the **class date**. Normalize it to `YYYY-MM-DD`. If it is vague ("last Wednesday", "3 June"), resolve it against the lesson files that exist (`ls src/aulas/aulas_mariana_*.html`) and, if ambiguous, ask the user which date.
 
 ## Repo conventions (memorize these)
 
-- **Lesson content file**: `src/lessons/aulas_mariana_YYYY-MM-DD.html` (note: `mariana`, single r/n in the *filename*). It is front-matter + sections only; the build outputs it to `aulas/aulas_mariana_YYYY-MM-DD.html`.
+- **Lesson content file**: `src/aulas/aulas_mariana_YYYY-MM-DD.html` (note: `mariana`, single r/n in the *filename*). It is front-matter + sections only; the build outputs it to `aulas/aulas_mariana_YYYY-MM-DD.html`.
 - **Homework folder**: `trabalho_de_casa/aulas_mariana_YYYY-MM-DD/` — mirrors the lesson file's stem. Passthrough-copied by Eleventy.
 - **Reference path from the lesson** (the built page lives at `aulas/…`): `../trabalho_de_casa/aulas_mariana_YYYY-MM-DD/<file>`.
 - **Asset filenames must be URL-safe** — kebab-case, no spaces or parentheses.
@@ -57,13 +57,13 @@ Raw scans are multi-MB; optimize before they ship.
 
 ## Step 4 — Open the lesson content file
 
-Open `src/lessons/aulas_mariana_YYYY-MM-DD.html`. If the file doesn't exist, stop and tell the user to generate the lesson first (via `/portuguese-lesson`).
+Open `src/aulas/aulas_mariana_YYYY-MM-DD.html`. If the file doesn't exist, stop and tell the user to generate the lesson first (via `/portuguese-lesson`).
 
 There is **no infrastructure to inject**. The lightbox div, the homework CSS, the print rules, and the lightbox JS are all shared (layout + `lesson.css` + `lesson.js`) and apply to every lesson automatically. The content file gets section 8 markup and nothing else. Just check whether a section 8 already exists (grep for `<span class="num">8</span>` or `hw-gallery`); if so, you are re-running and will replace it in Step 5.
 
 ## Step 5 — Build the section 8 content
 
-Construct the `<!-- 8. HOMEWORK -->` `<section>` from the shape in `src/lessons/aulas_mariana_2026-06-03.html`, filled with the real analyzed content. Do **not** add a lightbox div, CSS, or JS — those are shared.
+Construct the `<!-- 8. HOMEWORK -->` `<section>` from the shape in `src/aulas/aulas_mariana_2026-06-03.html`, filled with the real analyzed content. Do **not** add a lightbox div, CSS, or JS — those are shared.
 
 - Section heading `<h2><span class="num">8</span> Trabalho de casa</h2>` (if the lesson's last section is numbered 7, this is 8; keep the chip sequence correct).
 - A `.lead` naming the unit/theme.
@@ -129,7 +129,7 @@ Tell the user concisely:
 
 ## Guardrails
 
-- **Never** add CSS, JS, or a lightbox div to the content file — that infra is shared (layout + `lesson.css` + `lesson.js`). Don't rewrap the lesson in a different layout, add fonts, or hardcode colors. Follow `aulas/LESSON_DESIGN.md` exactly.
+- **Never** add CSS, JS, or a lightbox div to the content file — that infra is shared (layout + `lesson.css` + `lesson.js`). Don't rewrap the lesson in a different layout, add fonts, or hardcode colors. Follow `LESSON_DESIGN.md` exactly.
 - **Idempotent**: re-running for the same date replaces section 8 and re-optimizes; it must not create a second homework section.
 - **Don't touch the index** (`src/index.njk`) — homework lives on the lesson page, and the index card is generated automatically.
 - **Don't delete before verifying.** If verification fails, keep everything and report the problem.

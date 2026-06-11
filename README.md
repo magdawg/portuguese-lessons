@@ -5,7 +5,7 @@ with my teacher **Mariana**. Each lesson has grammar, vocabulary, a reconstructe
 dialogue, and exercises that score themselves in the browser.
 
 It's an [Eleventy](https://www.11ty.dev/) static site: lessons are written as
-content files in `src/lessons/`, and the shared layout adds all the page chrome,
+content files in `src/aulas/`, and the shared layout adds all the page chrome,
 navigation, styles, and the scoring engine. GitHub Actions builds and deploys to
 GitHub Pages on every push to `main`.
 
@@ -29,7 +29,7 @@ transcript and notes, works out what grammar and vocabulary were covered, and
 writes a study page from it. Without Granola (or another transcription source
 wired up the same way) there's no class content to build a lesson from.
 
-The skill writes one file, `src/lessons/aulas_mariana_YYYY-MM-DD.html` (the class
+The skill writes one file, `src/aulas/aulas_mariana_YYYY-MM-DD.html` (the class
 date). The home page card and the prev/next navigation are generated
 automatically — no other file needs editing. Run `npm run serve` to preview.
 
@@ -58,7 +58,7 @@ src/
 ├── assets/                # shared CSS + the exercise/scoring engine
 └── lessons/               # one content file per lesson
 trabalho_de_casa/          # homework assets, one folder per lesson
-aulas/LESSON_DESIGN.md     # the lesson design contract + front-matter schema
+LESSON_DESIGN.md     # the lesson design contract + front-matter schema
 ```
 
 `_site/` is the generated output and is gitignored — the repo is source only.
