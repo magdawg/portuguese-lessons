@@ -49,8 +49,39 @@
     background: var(--green);
     color: #fff;
     padding: clamp(40px, 6vw, 64px) 0 clamp(36px, 5vw, 56px);
+    position: relative;
+    overflow: hidden;
   }
-  .header-inner { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  header::after {
+    content: "🇵🇹";
+    position: absolute;
+    right: -10px; bottom: -34px;
+    font-size: 170px; line-height: 1; opacity: .14;
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+  .header-pastel {
+    position: absolute;
+    right: 175px; bottom: 8px;
+    width: 150px; height: auto;
+    opacity: .22;
+    transform: rotate(-6deg);
+    pointer-events: none;
+  }
+  .header-sardine {
+    position: absolute;
+    right: 335px; bottom: 22px;
+    width: 150px; height: auto;
+    opacity: .2;
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+  @media (max-width: 640px) {
+    header::after { font-size: 120px; bottom: -22px; }
+    .header-pastel { width: 105px; right: 120px; bottom: 6px; }
+    .header-sardine { display: none; }
+  }
+  .header-inner { max-width: 880px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
   .badges { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
   .badge {
     display: inline-flex; align-items: center; gap: 7px;
