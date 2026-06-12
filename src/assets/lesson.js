@@ -171,6 +171,8 @@
       // Use the heading text without the leading number badge for the label.
       let label = h2.textContent.trim();
       if (num) label = label.replace(num.textContent.trim(), '').trim();
+      // Keep the pill short: drop anything after a colon ("Gramática: …" → "Gramática").
+      label = label.split(':')[0].trim();
       const a = document.createElement('a');
       a.className = 'section-nav-link';
       a.href = '#' + id;

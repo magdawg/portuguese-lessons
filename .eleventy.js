@@ -33,10 +33,19 @@ module.exports = function (eleventyConfig) {
     const { day, month, year } = parts(date);
     return `pt_marianna_${year}_${pad(month + 1)}_${pad(day)}`;
   });
+  // Curriculum lessons are ordered by number, not date; their storage key is `pt-lesson-N`.
+  eleventyConfig.addFilter("ptLessonKey", (n) => `pt-lesson-${n}`);
 
   // --- collection: all Mariana lessons, oldest → newest ---
   eleventyConfig.addCollection("lesson", (collectionApi) =>
     collectionApi.getFilteredByTag("lesson").sort((a, b) => a.date - b.date)
+  );
+  // --- collection: structured-course lessons, by lesson number ---
+  // (the legacy standalone aula-1.html is passthrough-copied, not in this collection.)
+  eleventyConfig.addCollection("curriculo", (collectionApi) =>
+    collectionApi
+      .getFilteredByTag("curriculo")
+      .sort((a, b) => a.data.lessonNumber - b.data.lessonNumber)
   );
 
   // --- static passthrough ---
@@ -44,9 +53,7 @@ module.exports = function (eleventyConfig) {
   // Self-contained pages copied verbatim, preserving their exact URLs (not in scope for the layout).
   // ignore them as templates so they aren't also rendered to pretty-URL folders.
   eleventyConfig.addPassthroughCopy({ "src/verbos.html": "verbos.html" });
-  eleventyConfig.addPassthroughCopy({ "src/curriculo/aula-1.html": "aulas/aula-1.html" });
   eleventyConfig.ignores.add("src/verbos.html");
-  eleventyConfig.ignores.add("src/curriculo/aula-1.html");
   eleventyConfig.addPassthroughCopy("trabalho_de_casa");
   eleventyConfig.addPassthroughCopy(".nojekyll");
 

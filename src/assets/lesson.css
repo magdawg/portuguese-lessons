@@ -327,7 +327,8 @@
   .pager-link:hover { border-color: var(--green); box-shadow: 0 4px 14px rgba(27,94,32,.1); transform: translateY(-1px); }
   .pager-link.next { text-align: right; }
   .pager-dir { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
-  .pager-title { font-size: 15px; font-weight: 600; color: var(--green); font-family: 'EB Garamond', Georgia, serif; }
+  .pager-title { font-size: 15px; font-weight: 600; color: var(--green); font-family: 'EB Garamond', Georgia, serif;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .pager-link.disabled { opacity: .45; pointer-events: none; box-shadow: none; }
 
   .ipa { font-family: 'EB Garamond', Georgia, serif; color: var(--blue); font-style: normal; background: var(--blue-light); padding: 1px 6px; border-radius: 5px; font-size: 14px; }

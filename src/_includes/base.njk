@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{{ title | safe }} · {{ date | ptDateISO }}</title>
+<title>{{ title | safe }} · {% if lessonNumber %}Lição {{ lessonNumber }}{% else %}{{ date | ptDateISO }}{% endif %}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="{{ '/assets/lesson.css' | url }}" />
 </head>
-<body data-storage-key="{{ date | ptStorageKey }}">
+<body data-storage-key="{% if lessonNumber %}{{ lessonNumber | ptLessonKey }}{% else %}{{ date | ptStorageKey }}{% endif %}">
 <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
 <header>
@@ -54,7 +54,7 @@
   </svg>
   <div class="header-inner">
     <a class="back" href="{{ '/' | url }}">← Voltar ao início</a>
-    <p class="lesson-date">{{ date | ptDateLong }}</p>
+    <p class="lesson-date">{% if lessonNumber %}Lição {{ lessonNumber }} · {{ level }}{% else %}{{ date | ptDateLong }}{% endif %}</p>
     <h1>{{ title | safe }}</h1>
     <p class="subtitle">{{ subtitle | safe }}</p>
   </div>
@@ -65,15 +65,16 @@
 
 <main class="wrap" id="conteudo">
 
-  {# Auto prev/next from the lesson collection (oldest → newest). Adding a lesson updates neighbours automatically. #}
-  {% set prevItem = collections.lesson | getPreviousCollectionItem(page) %}
-  {% set nextItem = collections.lesson | getNextCollectionItem(page) %}
+  {# Auto prev/next from the lesson's own series — `curriculo` (by number) for course lessons, `lesson` (by date) for Mariana lessons. Adding a lesson updates neighbours automatically. #}
+  {% set series = collections.curriculo if lessonNumber else collections.lesson %}
+  {% set prevItem = series | getPreviousCollectionItem(page) %}
+  {% set nextItem = series | getNextCollectionItem(page) %}
 
   <nav class="pager" aria-label="Navegação entre aulas">
     {% if prevItem %}
     <a class="pager-link prev" href="{{ prevItem.url | url }}">
       <span class="pager-dir">← Anterior</span>
-      <span class="pager-title">{{ prevItem.date | ptDateShort }}</span>
+      <span class="pager-title">{% if lessonNumber %}Lição {{ prevItem.data.lessonNumber }}: {{ prevItem.data.cardTitle or prevItem.data.title }}{% else %}{{ prevItem.date | ptDateShort }}{% endif %}</span>
     </a>
     {% else %}
     <span class="pager-link prev disabled">
@@ -84,7 +85,7 @@
     {% if nextItem %}
     <a class="pager-link next" href="{{ nextItem.url | url }}">
       <span class="pager-dir">Próxima →</span>
-      <span class="pager-title">{{ nextItem.date | ptDateShort }}</span>
+      <span class="pager-title">{% if lessonNumber %}Lição {{ nextItem.data.lessonNumber }}: {{ nextItem.data.cardTitle or nextItem.data.title }}{% else %}{{ nextItem.date | ptDateShort }}{% endif %}</span>
     </a>
     {% else %}
     <span class="pager-link next disabled">
@@ -100,7 +101,7 @@
     {% if prevItem %}
     <a class="pager-link prev" href="{{ prevItem.url | url }}">
       <span class="pager-dir">← Anterior</span>
-      <span class="pager-title">{{ prevItem.date | ptDateShort }}</span>
+      <span class="pager-title">{% if lessonNumber %}Lição {{ prevItem.data.lessonNumber }}: {{ prevItem.data.cardTitle or prevItem.data.title }}{% else %}{{ prevItem.date | ptDateShort }}{% endif %}</span>
     </a>
     {% else %}
     <span class="pager-link prev disabled">
@@ -111,7 +112,7 @@
     {% if nextItem %}
     <a class="pager-link next" href="{{ nextItem.url | url }}">
       <span class="pager-dir">Próxima →</span>
-      <span class="pager-title">{{ nextItem.date | ptDateShort }}</span>
+      <span class="pager-title">{% if lessonNumber %}Lição {{ nextItem.data.lessonNumber }}: {{ nextItem.data.cardTitle or nextItem.data.title }}{% else %}{{ nextItem.date | ptDateShort }}{% endif %}</span>
     </a>
     {% else %}
     <span class="pager-link next disabled">
@@ -131,7 +132,7 @@
   </div>
 
   <footer>
-    📝 {{ footerProvenance or "Lição gerada a partir da aula real com a Mariana" }} · {{ date | ptDateLong }}
+    📝 {{ footerProvenance or "Lição gerada a partir da aula real com a Mariana" }}{% if lessonNumber %} · Lição {{ lessonNumber }}{% else %} · {{ date | ptDateLong }}{% endif %}
     <p class="made-with">Feito com ❤️ em Portugal<span class="sep">·</span>© Magda Kowalska</p>
   </footer>
 </main>

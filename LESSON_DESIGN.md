@@ -50,6 +50,52 @@ nextNote: "quarta-feira, 17 de junho"
 
 The `.eleventy.js` config provides the filters the layout uses: `ptDateLong`, `ptDateShort`, `ptDateISO`, `ptStorageKey`, and a `lesson` collection (tag `lesson`, sorted oldest → newest). Directory data `src/aulas/aulas.11tydata.js` applies `layout: base.njk`, `tags: lesson`, and the `permalink` so the built page keeps the old URL `aulas/aulas_mariana_YYYY-MM-DD.html`.
 
+## Two lesson families
+
+The site has two parallel families of lesson, both rendered by the same `base.njk` layout and the same seven-section structure. They differ only in front-matter and ordering:
+
+| | **Mariana lesson** | **Curriculum lesson** |
+|---|---|---|
+| Directory | `src/aulas/aulas_mariana_YYYY-MM-DD.html` | `src/curriculo/aula-N.html` |
+| Collection | `lesson` (tag `lesson`), sorted by `date` | `curriculo` (tag `curriculo`), sorted by `lessonNumber` |
+| Ordered / keyed by | `date` (→ `ptStorageKey` → `pt_marianna_YYYY_MM_DD`) | `lessonNumber` (→ `ptLessonKey` → `pt-lesson-N`) |
+| Directory data | `src/aulas/aulas.11tydata.js` | `src/curriculo/curriculo.11tydata.js` |
+| Home page | index card from the `lesson` collection | course callout from the `curriculo` collection |
+
+`src/curriculo/aula-1.html` (`lessonNumber: 1`, Presente do Indicativo) is the **worked example** for curriculum lessons — read it to copy the section markup. New curriculum lessons start at `lessonNumber: 2`.
+
+### Curriculum-lesson front-matter
+
+Curriculum lessons use the same schema as above **minus `date`, `teacher`, and `origin`** (those are supplied by the directory data file), **plus `lessonNumber`**:
+
+| Field | Required | Meaning |
+|-------|----------|---------|
+| `title` | yes | The h1 / page title, e.g. `"Lição 2: Pretérito Perfeito Simples (Regulares)"`. Raw HTML. |
+| `subtitle` | yes | One-sentence summary under the h1. Raw HTML. |
+| `lessonNumber` | yes | Integer 2–36. Drives the order, prev/next nav, the course callout, and the `pt-lesson-N` storage key. No `date`. |
+| `level` | yes | e.g. `"Nível A2"`, `"Nível A2 → B1"`, `"Nível B1"`. |
+| `cardTitle` | yes | Title shown on the home-page course callout. Raw HTML. |
+| `topics` | yes | Topic summary for the callout. Raw HTML. |
+| `accent` | yes | Callout accent colour, e.g. `var(--green)`. |
+| `nextNote` | no | Footer "Próxima lição" note. Omit if unknown. |
+
+`origin` (`"Curso estruturado A2 → B1"`) and `footerProvenance` come from `src/curriculo/curriculo.11tydata.js`, so don't set them per file. The layout derives the storage key from `lessonNumber` automatically — never declare `LS_KEY` or a `date`. Everything else (sections, exercises, callouts, tables) is identical to a Mariana lesson; curriculum lessons simply have no section 8 (homework).
+
+Example block:
+
+```yaml
+---
+title: "Lição 2: Pretérito Perfeito Simples (Regulares)"
+subtitle: "Contar o que aconteceu: o passado dos verbos regulares em <em>-ar</em>, <em>-er</em>, <em>-ir</em>."
+lessonNumber: 2
+level: "Nível A2"
+cardTitle: "Pretérito Perfeito Simples: Regulares"
+topics: "O passado dos verbos regulares, contar o fim de semana, vocabulário de lazer."
+accent: "var(--green)"
+nextNote: "Lição 3: pretérito perfeito — irregulares"
+---
+```
+
 ## Visual identity
 
 - **Palette**: forest green primary (Portuguese flag), gold accent for "real" / personal moments, deep blue for translations / info, deep red for warnings and key highlights. Each saturated color has a `-light` background variant. The page background is a warm-near-white (`--paper: #fcfbf7`).
@@ -219,10 +265,12 @@ The home page reads `localStorage` with a `startsWith()` fallback to mark cards 
 
 The flow is minimal — the layout and the collection do the rest:
 
-1. Create one content file `src/aulas/aulas_mariana_YYYY-MM-DD.html`: the front-matter block (schema above) + sections 1–7, plus optional section 8 if there's homework.
+1. Create one content file:
+   - **Mariana lesson** → `src/aulas/aulas_mariana_YYYY-MM-DD.html` (front-matter with `date` + sections 1–7, plus optional section 8 if there's homework).
+   - **Curriculum lesson** → `src/curriculo/aula-N.html` (front-matter with `lessonNumber`, no `date` + sections 1–7; no homework section).
 2. Run `npm run build` (or `npm run serve` to preview at `http://localhost:8080/portuguese-lessons/`).
 
-That's it. The header, both pagers (auto prev/next), lightbox, footer, CSS/JS, score engine, and the index card are all supplied automatically. **No editing of other lesson files, no `src/index.njk` edit, no nav links, no `LS_KEY`.**
+That's it. The header, both pagers (auto prev/next within the right series), lightbox, footer, CSS/JS, score engine, and the home-page card/callout are all supplied automatically. **No editing of other lesson files, no `src/index.njk` edit, no nav links, no `LS_KEY`.**
 
 ## What NOT to do
 

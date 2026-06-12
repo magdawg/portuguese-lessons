@@ -344,21 +344,25 @@
 {% endfor %}
   </div>
 
-  <!-- CURSO ESTRUTURADO — singleton callout, not a grid -->
+  <!-- CURSO ESTRUTURADO — driven by the curriculo collection (ordered by lessonNumber) -->
   <div class="section-head">
     <h2>Curso estruturado A2 → B1</h2>
-    <span class="count">lição 1 · mais a chegar</span>
+    <span class="count">{{ collections.curriculo.length }} {% if collections.curriculo.length == 1 %}lição{% else %}lições{% endif %} · mais a chegar</span>
   </div>
-  <p class="section-sub">O começo do plano, para construíres bases sólidas desde a raiz.</p>
+  <p class="section-sub">O plano completo, lição a lição, para construíres bases sólidas desde a raiz.</p>
 
-  <a class="course-callout" href="aulas/aula-1.html" data-keys="pt-lesson-1,pt-lesson-">
-    <div>
-      <p class="meta">Lição 1 · Nível A2</p>
-      <h3>Presente do Indicativo: Revisão</h3>
-      <p class="topics">Verbos regulares e irregulares comuns (<em>ser, estar, ter, ir</em>), apresentar-se e falar da rotina diária.</p>
-    </div>
-    <span class="go">Abrir <span class="arrow">→</span></span>
-  </a>
+  <div class="lessons-list">
+{%- for l in collections.curriculo %}
+    <a class="course-callout" style="--accent: {{ l.data.accent }}" href="{{ l.url | url }}" data-keys="{{ l.data.lessonNumber | ptLessonKey }}">
+      <div>
+        <p class="meta">Lição {{ l.data.lessonNumber }} · {{ l.data.level }}</p>
+        <h3>{{ l.data.cardTitle | safe }}</h3>
+        <p class="topics">{{ l.data.topics | safe }}</p>
+      </div>
+      <span class="go">Abrir <span class="arrow">→</span></span>
+    </a>
+{%- endfor %}
+  </div>
 
   <footer>
     <p class="made-with">Feito com ❤️ em Portugal<span class="sep">·</span>© Magda Kowalska</p>
@@ -392,9 +396,10 @@
       if (title) card.setAttribute('aria-label', title.textContent.trim() + ', aula começada');
     });
 
-    // Mark the course callout if started, and shift its CTA verb.
-    const courseCallout = document.querySelector('.course-callout[data-keys]');
-    if (courseCallout && isStarted(courseCallout)) {
+    // Mark each started course callout, and shift its CTA verb.
+    const courseCallouts = Array.from(document.querySelectorAll('.course-callout[data-keys]'));
+    courseCallouts.forEach(courseCallout => {
+      if (!isStarted(courseCallout)) return;
       const cta = courseCallout.querySelector('.go');
       if (cta) cta.firstChild.textContent = 'Continuar ';
       const meta = courseCallout.querySelector('.meta');
@@ -406,7 +411,7 @@
       }
       const title = courseCallout.querySelector('h3');
       if (title) courseCallout.setAttribute('aria-label', title.textContent.trim() + ', começada');
-    }
+    });
   })();
 </script>
 </body>
